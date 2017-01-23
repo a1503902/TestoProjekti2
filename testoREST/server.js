@@ -9,24 +9,17 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 var router = express.Router();
 
-// Cars controller
-var carsController = require('./app/controllers/cars');
-router.use('/cars', carsController);
-
-// Routes controller
-var routesController = require('./app/controllers/routes');
-router.use('/routes', routesController);
-
-// Employees controller
-var employeesController = require('./app/controllers/employees');
-router.use('/employees', employeesController);
-
-// Workdays controller
-var workdaysController = require('./app/controllers/workdays');
-router.use('/workdays', workdaysController);
-
-// Deliveries controller
+// Controllers
+var carsController       = require('./app/controllers/cars');
+var routesController     = require('./app/controllers/routes');
+var employeesController  = require('./app/controllers/employees');
+var workdaysController   = require('./app/controllers/workdays');
 var deliveriesController = require('./app/controllers/deliveries');
+
+router.use('/cars', carsController);
+router.use('/routes', routesController);
+router.use('/employees', employeesController);
+router.use('/workdays', workdaysController);
 router.use('/deliveries', deliveriesController);
 
 // Sets routes prefix
