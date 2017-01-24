@@ -4,15 +4,10 @@ var Car     = require('../models/car');
 
 // Get all cars
 router.get('/', function(req, res){
-	console.log('getting cars');
 	Car.find(function(err, cars) {
         if (err){
-        	console.log('errori saatana');
             res.send(err);
         }
-
-        console.log('autot löyty jee');
-
         res.json(cars);
     });
 });
@@ -20,21 +15,36 @@ router.get('/', function(req, res){
 // Insert new car
 router.post('/', function(req, res){
 
+	var message = "";
+	var success = false;
 	// New car object
 	var car  = new Car();
 	
-	// Set params
-	car.name = req.body.name;
-	
-	//TODO: Validation
+	if(!req.body.name){
+		message = "Car name is missing";
+	}else{
+		
 
-	// Insert car to DB
-	car.save(function(err){
-		if(err){
-			res.send(err);
+		// Set params
+		car.name = req.body.name;
+		
+		//TODO: Validation
+
+		// Insert car to DB
+		var success = car.save(function(err){
+			if(err){
+				message = "Failed to insert car to db " + err;
+			}
+			return true;
+		});
+
+		if(success){
+			success = true;
+			message = "Car added";
 		}
-		res.json({message: "Car created"});
-	});
+	}
+
+	res.json({success: success, message: message});
 
 });
 

@@ -10,6 +10,7 @@ var port = process.env.PORT || 8080;
 var router = express.Router();
 
 var mongoose   = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429/ohjelmistoprojektidb');
 
 var Car     = require('./app/models/car');
