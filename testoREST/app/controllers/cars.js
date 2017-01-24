@@ -23,7 +23,6 @@ router.post('/', function(req, res){
 	if(!req.body.name){
 		message = "Car name is missing";
 	}else{
-		
 
 		// Set params
 		car.name = req.body.name;
