@@ -9,12 +9,18 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 var router = express.Router();
 
+var mongoose   = require('mongoose');
+mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429/ohjelmistoprojektidb');
+
+var Car     = require('./app/models/car');
+
 // Controllers
 var carsController       = require('./app/controllers/cars');
 var routesController     = require('./app/controllers/routes');
 var employeesController  = require('./app/controllers/employees');
 var workdaysController   = require('./app/controllers/workdays');
 var deliveriesController = require('./app/controllers/deliveries');
+
 
 router.use('/cars', carsController);
 router.use('/routes', routesController);
@@ -24,6 +30,8 @@ router.use('/deliveries', deliveriesController);
 
 // Sets routes prefix
 app.use('/api', router);
+
+
 
 // Start server
 app.listen(port);

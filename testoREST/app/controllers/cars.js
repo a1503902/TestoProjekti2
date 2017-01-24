@@ -1,11 +1,20 @@
 var express = require('express');
 var router  = express.Router();
-
 var Car     = require('../models/car');
 
 // Get all cars
 router.get('/', function(req, res){
-	res.send('Get all cars');
+	console.log('getting cars');
+	Car.find(function(err, cars) {
+        if (err){
+        	console.log('errori saatana');
+            res.send(err);
+        }
+
+        console.log('autot löyty jee');
+
+        res.json(cars);
+    });
 });
 
 // Insert new car
