@@ -1,17 +1,16 @@
-var express    = require('express');
+var express          = require('express');
 var expressValidator = require('express-validator');
-var app        = express();
-var bodyParser = require('body-parser');
+var app              = express();
+var bodyParser       = require('body-parser');
 
 var port = process.env.PORT || 8080;
 var router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(expressValidator());
 
-var options = {};
 
-router.use(expressValidator([options]));
 
 
 

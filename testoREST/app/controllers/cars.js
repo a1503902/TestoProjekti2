@@ -5,20 +5,21 @@ var Car     = require('../models/car');
 // Get all cars
 router.get('/', function(req, res){
 
-	req.checkParams({
+	req.checkBody({
 		'name': {
 			notEmpty: true,
 			errorMessage: 'Car name missing'
 		}
 	});
 
-	var error = req.getValidationResult().then(function(result) {
-		if(!result.isEmpty()){
-			var error = result.useFirstErrorOnly().array();
-			return error[0].msg;
-		}
-	});
-	
+	var errors = req.validationErrors();
+	if (errors) {
+		// get first error message
+		var msg = errors[0].msg;
+		res.send({success: false, message: msg});
+		return;
+	}
+
 	res.send('asdasdcfffffffffffffff');
 	return;
 
@@ -47,9 +48,13 @@ router.post('/', function(req, res){
 		}
 	});
 
-	req.getValidationResult().then(function(result) {
-		return res.send('asasdasdasd');
-	});
+	var errors = req.validationErrors();
+	if (errors) {
+		// get first error message
+		var msg = errors[0].msg;
+		res.send({success: false, message: msg});
+		return;
+	}
 
 
 	// Set params
