@@ -5,32 +5,13 @@ var Car     = require('../models/car');
 // Get all cars
 router.get('/', function(req, res){
 
-	req.checkBody({
-		'name': {
-			notEmpty: true,
-			errorMessage: 'Car name missing'
-		}
-	});
-
-	var errors = req.validationErrors();
-	if (errors) {
-		// get first error message
-		var msg = errors[0].msg;
-		res.send({success: false, message: msg});
-		return;
-	}
-
-	res.send('asdasdcfffffffffffffff');
-	return;
-
-	/*
 	Car.find(function(err, cars) {
         if (err){
             res.send(err);
         }
         res.json(cars);
     });
-    */
+
 });
 
 // Insert new car
@@ -38,9 +19,8 @@ router.post('/', function(req, res){
 
 	var message = "";
 	var success = false;
-	// New car object
-	var car  = new Car();
 
+	// Validation
 	req.checkBody({
 		'name': {
 			notEmpty: true,
@@ -50,13 +30,14 @@ router.post('/', function(req, res){
 
 	var errors = req.validationErrors();
 	if (errors) {
-		// get first error message
-		var msg = errors[0].msg;
-		res.send({success: false, message: msg});
+		message = errors[0].msg;
+		res.send({success: success, message: message});
 		return;
 	}
 
-
+	// New car object
+	var car  = new Car();
+	
 	// Set params
 	car.name = req.body.name;
 
@@ -67,8 +48,8 @@ router.post('/', function(req, res){
 		}
 		return true;
 	});
+
 	if(success){
-		success = true;
 		message = "Car added";
 	}
 	
