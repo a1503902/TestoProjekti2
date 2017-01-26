@@ -4,14 +4,22 @@ var Car     = require('../models/car');
 
 // Get all cars
 router.get('/', function(req, res){
-
-	Car.find(function(err, cars) {
+	Car.find({}, '_id name', function(err, cars) {
         if (err){
             res.send(err);
         }
         res.json(cars);
     });
+});
 
+// Get car by id
+router.get('/:carId', function(req, res){
+	Car.findById(req.params.carId, '-__v', function(err, car) {
+		if(err){
+			res.send({success: false, message: "Car not found"});
+		}
+		res.send({success: true, data: car});
+	});
 });
 
 // Insert new car
@@ -37,7 +45,7 @@ router.post('/', function(req, res){
 
 	// New car object
 	var car  = new Car();
-	
+
 	// Set params
 	car.name = req.body.name;
 
