@@ -8,4 +8,4 @@ var DeliverySchema   = new Schema({
     unknown: Number
 });
 
-module.exports = mongoose.model('Car', DeliverySchema   );
+module.exports = mongoose.model('Delivery', DeliverySchema   );
