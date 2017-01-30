@@ -12,7 +12,7 @@ router.get('/', function(req, res){
     });
 });
 
-// Find by ID ALL
+// Find by ID
 router.get('/:deliveryID',function(req, res) {
 	Delivery.findById(req.params.deliveryID, function(err, delivery) {
 		if (err)
@@ -25,7 +25,10 @@ router.get('/:deliveryID',function(req, res) {
 router.get('/:deliveryID/name',function(req, res) {
     Delivery.findById(req.params.deliveryID, '-_id name', function(err, delivery) {
         if (err)
-            res.send({success: false, error: err});
+            res.send({
+                success: false,
+                error: err
+            });
         res.json({
 			success: true,
 			data: delivery
@@ -37,7 +40,10 @@ router.get('/:deliveryID/name',function(req, res) {
 router.get('/:deliveryID/delivery',function(req, res) {
     Delivery.findById(req.params.deliveryID, '-_id delivery', function(err, delivery) {
         if (err)
-            res.send({success: false, error: err});
+            res.send({
+                success: false,
+                error: err
+            });
         res.json({
             success: true,
             data: delivery
@@ -49,7 +55,10 @@ router.get('/:deliveryID/delivery',function(req, res) {
 router.get('/:deliveryID/pickup',function(req, res) {
     Delivery.findById(req.params.deliveryID, '-_id pickup', function(err, delivery) {
         if (err)
-            res.send({success: false, error: err});
+            res.send({
+                success: false,
+                error: err
+            });
         res.json({
             success: true,
             data: delivery
@@ -61,7 +70,10 @@ router.get('/:deliveryID/pickup',function(req, res) {
 router.get('/:deliveryID/unknown',function(req, res) {
     Delivery.findById(req.params.deliveryID, '-_id unknown', function(err, delivery) {
         if (err)
-            res.send({success: false, error: err});
+            res.send({
+                success: false,
+                error: err
+            });
         res.json({
             success: true,
             data: delivery
@@ -71,6 +83,29 @@ router.get('/:deliveryID/unknown',function(req, res) {
 
 // Insert new delivery
 router.post('/', function(req, res){
+    // Validation
+    req.checkBody({
+        'name': {
+            notEmpty: true,
+            errorMessage: 'Name missing'
+        },
+        'delivery': {
+            notEmpty: true,
+            errorMessage: 'no Deliveries'
+        },
+        'pickup': {
+            notEmpty: true,
+            errorMessage: 'No Pickups'
+        }
+    });
+
+    var errors = req.validationErrors();
+    if (errors) {
+        message = errors[0].msg;
+        res.send({success: false, message: message});
+        return;
+    }
+
     // New delivery object
     var delivery  = new Delivery();
 
@@ -93,12 +128,13 @@ router.post('/', function(req, res){
 });
 
 // Update delivery details
-router.put('/:deliveryID', function(req, res){
+router.post('/:deliveryID', function(req, res){
     Delivery.findById(req.params.deliveryID, function (err, delivery) {
         if (err){
             res.send(err);
         }else if(req.body.name != null){
             delivery.name = req.body.name;
+            
         }else if(req.body.delivery != null){
             delivery.delivery = req.body.delivery;
         }else if(req.body.pickup != null){
@@ -117,7 +153,7 @@ router.put('/:deliveryID', function(req, res){
 router.delete('/:deliveryId', function(req, res){
     Delivery.remove({
         _id: req.params.carId
-    }, function(err, delivery) {
+    }, function(err) {
         if (err){
             res.send(err);
         }
