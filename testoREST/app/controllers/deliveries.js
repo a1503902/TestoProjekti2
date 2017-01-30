@@ -100,7 +100,7 @@ router.post('/', function(req, res){
 
 // Update delivery details
 router.put('/:deliveryId', function(req, res){
-	res.send(req.params);
+
 	res.send('Update delivery');
 });
 

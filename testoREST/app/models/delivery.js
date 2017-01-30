@@ -8,4 +8,8 @@ var DeliverySchema   = new Schema({
     unknown: Number
 });
 
-module.exports = mongoose.model('Delivery', DeliverySchema   );
+<<<<<<< HEAD
+module.exports = mongoose.model('Delivery', DeliverySchema);
+=======
+module.exports = mongoose.model('Delivery', DeliverySchema);
+>>>>>>> dfcc3a8761ef704f925bdf4ac0bd6bb8eaede28f
