@@ -58,7 +58,10 @@ router.post('/', function(req, res){
 	var employee  = new Employee();
 
 	// Set params
-	employee.name = req.body.name;
+	employee.firstname = req.body.firstname;
+	employee.lastname  = req.body.lastname;
+	employee.password  = req.body.password;
+	employee.username  = req.body.username;
 
 	// Insert employee to DB
 	var success = employee.save(function(err){
