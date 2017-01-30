@@ -4,7 +4,9 @@ var app              = express();
 var bodyParser       = require('body-parser');
 var port             = process.env.PORT || 8080;
 var router           = express.Router();
+var cors             = require('cors')
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
