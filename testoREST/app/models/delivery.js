@@ -7,5 +7,4 @@ var DeliverySchema   = new Schema({
     pickup: Number,
     unknown: Number
 });
-
 module.exports = mongoose.model('Delivery', DeliverySchema);
