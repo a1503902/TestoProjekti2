@@ -1,10 +1,18 @@
 $(document).ready(function() {
-
-
-	/*
-    $("#login").on( "submit", function(event) {
-        event.preventDefault()
-        $.post('localhost:8080/api/authenticate', $('#login').serialize())
-})
-	*/
+	$("#login").click(function(){
+	      var username = $("input[name=username]").val();
+	      var password = $("input[name=password]").val();
+	      $.ajax({
+	        method: 'POST',
+	        type: 'JSON',
+	        url: 'http://localhost:8080/api/authenticate',
+	        data: {username: username, password: password},
+	        success: function(data){
+	          alert(JSON.stringify(data));
+	        },
+	        error: function(err){
+	          alert(JSON.stringify(err));
+	        }
+	      })
+	    });
 })
