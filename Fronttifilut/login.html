@@ -8,16 +8,18 @@
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
+<script src="assets/js/login.js"></script>
   <div class="login-wrapper">
     <div class="login-container">
       <h5 class="ui top attached header">Kirjaudu sisään</h5>
       <div class="ui bottom attached segment">
         <div class="ui middle aligned grid">
           <div class="column">
+            <form id="login">
             <div class="ui form">
               <div class="field">
                 <label>Käyttäjänimi</label>
-                <div class="ui left icon input">
+                <div class="ui left icon input" id="login">
                   <input placeholder="Käyttäjänimi" name="username" type="text" value="">
                   <i class="user icon"></i>
                 </div>
@@ -35,6 +37,7 @@
 
               <a href="forgot.html">Unohtuiko salasana?</a>
             </div>
+            </form>
           </div>
         </div>
       </div>
