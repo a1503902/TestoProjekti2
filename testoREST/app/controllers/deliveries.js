@@ -71,10 +71,7 @@ router.get('/:deliveryID/unknown',function(req, res) {
 
 // Insert new delivery
 router.post('/', function(req, res){
-
-	var message = "";
-
-	// New delivery object
+    // New delivery object
     var delivery  = new Delivery();
 
     // Set params
@@ -84,30 +81,51 @@ router.post('/', function(req, res){
     delivery.unknown 	= req.body.unknown;
 
     // Insert delivery to DB
-    var success = delivery.save(function(err){
+    delivery.save(function(err){
         if(err){
-            message = "Failed to insert delivery to db " + err;
+            res.send(err);
         }
-        return true;
+        res.json({
+            success: true,
+            message: 'Delivery added'
+        });
     });
-
-    if(success){
-        message = "Employee added";
-    }
-
-	res.send('Insert delivery');
 });
 
 // Update delivery details
-router.put('/:deliveryId', function(req, res){
-
-	res.send('Update delivery');
+router.put('/:deliveryID', function(req, res){
+    Delivery.findById(req.params.deliveryID, function (err, delivery) {
+        if (err){
+            res.send(err);
+        }else if(req.body.name != null){
+            delivery.name = req.body.name;
+        }else if(req.body.delivery != null){
+            delivery.delivery = req.body.delivery;
+        }else if(req.body.pickup != null){
+            delivery.pickup = req.body.pickup;
+        }else if(req.body.unknown != null){
+            delivery.unknown = req.body.unknown;
+        }
+        res.json({
+            success: true,
+            data: delivery
+        });
+    });
 });
 
 // Delete delivery
 router.delete('/:deliveryId', function(req, res){
-	res.send(req.params);
-	res.send('Delete delivery');
+    Delivery.remove({
+        _id: req.params.carId
+    }, function(err, delivery) {
+        if (err){
+            res.send(err);
+        }
+        res.json({
+            success: true,
+            message: 'Delivery deleted'
+        });
+    });
 });
 
 module.exports = router;
