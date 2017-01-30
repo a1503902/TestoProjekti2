@@ -4,19 +4,22 @@
   <meta charset = "UTF-8">
   <title>Login</title>
   <link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
+<script src="assets/js/login.js"></script>
   <div class="login-wrapper">
     <div class="login-container">
       <h5 class="ui top attached header">Kirjaudu sisään</h5>
       <div class="ui bottom attached segment">
         <div class="ui middle aligned grid">
           <div class="column">
+            <form id="login">
             <div class="ui form">
               <div class="field">
                 <label>Käyttäjänimi</label>
-                <div class="ui left icon input">
+                <div class="ui left icon input" id="login">
                   <input placeholder="Käyttäjänimi" name="username" type="text" value="">
                   <i class="user icon"></i>
                 </div>
@@ -29,16 +32,17 @@
                 </div>
               </div>
 
-                            
+
               <input class="ui submit button" type="submit" value="Kirjaudu sisään">
-              
+
               <a href="forgot.html">Unohtuiko salasana?</a>
             </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
 </body>
 </html>
