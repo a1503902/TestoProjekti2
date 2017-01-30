@@ -1,6 +1,6 @@
 var express = require('express');
 var router  = express.Router();
-var Route 	= require('../models/routes');
+var Route 	= require('../models/route');
 
 // Get all routes
 router.get('/', function(req, res){
