@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+<div class="startForm">
+    <form>
+      <h2>Driver</h2>
+        <div class="ui input">
+          <input type="text" id="driver" placeholder="Name">
+        </div>
+        
+       
+        <h2>Vehicle</h2>
+        <select class="ui dropdown" id="carSelect">
+          <option value="">Select vehicle</option>
+          <option value="1">Car 1</option>
+          <option value="0">Car 2</option>
+        </select>
+
+        <h2>Route</h2>
+        <select class="ui dropdown" id="routeSelect">
+          <option value="">Select route</option>
+          <option value="1">FI/HEL</option>
+          <option value="0">FI/VAN</option>
+        </select>
+      
+        <h2>Kilometers</h2>
+          <div class="ui right labeled input">
+          <input type="text" placeholder="Kilometers on start">
+          <div class="ui basic label">km</div>
+        </div>
+
+        <h2>Starting time</h2>
+         <div class="ui input">
+          <input type="text" id="startTime" placeholder="08:00">
+        </div>
+        <br>
+        <br>
+        <a class="ui button" id="nextBtn" href="middlepage.html">Next page</a>
+    </form>
+</div>
+
+<script type="text/javascript">
+  function nextPage(){
+    
+  }
+
+</script>
+
+</body>
+</html>
