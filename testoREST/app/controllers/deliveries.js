@@ -102,7 +102,10 @@ router.post('/', function(req, res){
     var errors = req.validationErrors();
     if (errors) {
         message = errors[0].msg;
-        res.send({success: false, message: message});
+        res.send({
+            success: false,
+            message: message
+        });
         return;
     }
 
@@ -149,7 +152,7 @@ router.post('/:deliveryID', function(req, res){
     });
 });
 
-// Delete delivery
+// Delete deliveryiles
 router.delete('/:deliveryId', function(req, res){
     Delivery.remove({
         _id: req.params.deliveryId
