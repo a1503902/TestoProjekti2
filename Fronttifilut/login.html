@@ -4,7 +4,7 @@
   <meta charset = "UTF-8">
   <title>Login</title>
   <link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
@@ -16,11 +16,11 @@
       <div class="ui bottom attached segment">
         <div class="ui middle aligned grid">          
           <div class="column">
-            <form id="login">
+
             <div class="ui form">
               <div class="field">
                 <label>Käyttäjänimi</label>
-                <div class="ui left icon input" id="login">
+                <div class="ui left icon input">
                   <input placeholder="Käyttäjänimi" name="username" type="text" value="">
                   <i class="user icon"></i>
                 </div>
@@ -32,15 +32,32 @@
                   <i class="lock icon"></i>
                 </div>
               </div>
-              <input class="ui submit button" type="submit" value="Kirjaudu sisään">
+              <button id="login" class="ui submit button">Kirjaudu sisään</button>
               <a href="forgot.html">Unohtuiko salasana?</a>
             </div>
-            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  
+  <script type="text/javascript">
+    $("#login").click(function(){
+      var username = $("input[name=username]").val();
+      var password = $("input[name=password]").val();
+      $.ajax({
+        method: 'POST',
+        type: 'JSON',
+        url: 'http://localhost:8080/api/authenticate',
+        data: {username: username, password: password},
+        success: function(data){
+          alert(JSON.stringify(data));
+        },
+        error: function(err){
+          alert(JSON.stringify(err));
+        }
+      })
+    });
+  </script>
 </body>
 </html>
