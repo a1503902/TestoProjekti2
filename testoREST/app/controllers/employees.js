@@ -77,25 +77,51 @@ router.post('/', function(req, res){
 
 // Update employee details
 router.put('/:employeeId', function(req, res){
-	Employee.findById(req.params.employeeId, function(err, bear) {
+
+	// Validation
+	req.checkBody({
+		'firstname': {
+			notEmpty: true,
+			errorMessage: 'Employee first name missing'
+		},
+		'lastname': {
+			notEmpty: true,
+			errorMessage: 'Employee last name missing'
+		}
+	});
+
+	var errors = req.validationErrors();
+	if (errors) {
+		message = errors[0].msg;
+		res.send({success: false, message: message});
+		return;
+	}
+
+	Employee.findById(req.params.employeeId, function(err, employee) {
         if (err){
             res.send(err);
         }
-        bear.name = req.body.name;  // update the bears info
-        // save the bear
-        bear.save(function(err) {
+		employee.firstname = req.body.firstname;
+		employee.lastname  = req.body.lastname;
+        employee.save(function(err) {
             if (err){
                 res.send(err);
             }
-            res.json({ message: 'Employee updated!' });
+            res.json({ success: true, message: 'Employee updated!' });
         });
     });
 });
 
 // Delete employee
 router.delete('/:employeeId', function(req, res){
-	res.send(req.params);
-	res.send('Delete employee');
+	Employee.remove({
+        _id: req.params.employeeId
+    }, function(err, employee) {
+        if (err){
+            res.send(err);
+        }
+        res.json({ success: true, message: 'Employee successfully deleted' });
+    });
 });
 
 module.exports = router;

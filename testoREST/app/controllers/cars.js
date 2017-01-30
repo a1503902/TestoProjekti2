@@ -39,7 +39,7 @@ router.post('/', function(req, res){
 	var errors = req.validationErrors();
 	if (errors) {
 		message = errors[0].msg;
-		res.send({success: success, message: message});
+		res.send({success: false, message: message});
 		return;
 	}
 
@@ -67,14 +67,46 @@ router.post('/', function(req, res){
 
 // Update car details
 router.put('/:carId', function(req, res){
-	res.send(req.params);
-	res.send('Update car');
+
+	// Validation
+	req.checkBody({
+		'name': {
+			notEmpty: true,
+			errorMessage: 'Car name missing'
+		}
+	});
+
+	var errors = req.validationErrors();
+	if (errors) {
+		message = errors[0].msg;
+		res.send({success: false, message: message});
+		return;
+	}
+
+	Car.findById(req.params.carId, function(err, car) {
+        if (err){
+            res.send(err);
+        }
+		car.name = req.body.name;
+        car.save(function(err) {
+            if (err){
+                res.send(err);
+            }
+            res.json({ success: true, message: 'Car updated!' });
+        });
+    });
 });
 
 // Delete car
 router.delete('/:carId', function(req, res){
-	res.send(req.params);
-	res.send('Delete car');
+	Car.remove({
+        _id: req.params.carId
+    }, function(err, car) {
+        if (err){
+            res.send(err);
+        }
+        res.json({ success: true, message: 'Car successfully deleted' });
+    });
 });
 
 module.exports = router;
