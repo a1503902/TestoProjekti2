@@ -1,0 +1,26 @@
+.login-wrapper {
+	width: 100%;
+	height: 100%;
+}
+
+.login-container {
+	width: 350px;
+	height: auto;
+}
+
+.login-wrapper {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+.finalpageForm{
+	margin: 2% 0% 0% 41%;
+}
+.middlepageForm{
+	margin: 2% 0% 0% 41%;
+}
+.startForm{
+	margin: 2% 0% 0% 41%;
+}
+
+

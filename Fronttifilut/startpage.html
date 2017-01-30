@@ -4,53 +4,56 @@
   <meta charset = "UTF-8">
   <title>Start page</title>
   <link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
-  <link rel="stylesheet" type="text/css" href="startpagestyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 
 </head>
 
 <body>
-<div class="startForm">
-    <form>
-      <h2>Driver</h2>
-        <div class="ui input">
-          <input type="text" id="driver" placeholder="Name">
-        </div>
-        
-       
-        <h2>Vehicle</h2>
-        <select class="ui dropdown" id="carSelect">
-          <option value="">Select vehicle</option>
-          <option value="1">Car 1</option>
-          <option value="0">Car 2</option>
-        </select>
 
-        <h2>Route</h2>
-        <select class="ui dropdown" id="routeSelect">
-          <option value="">Select route</option>
-          <option value="1">FI/HEL</option>
-          <option value="0">FI/VAN</option>
-        </select>
-      
-        <h2>Kilometers</h2>
-          <div class="ui right labeled input">
-          <input type="text" placeholder="Kilometers on start">
-          <div class="ui basic label">km</div>
-        </div>
+  <div class="startForm">
+      <form>
+        <h2>Kuljettaja</h2>
+          <div class="ui input">
+            <input type="text" id="name" placeholder="Nimi">
+          </div>
 
-        <h2>Starting time</h2>
-         <div class="ui input">
-          <input type="text" id="startTime" placeholder="08:00">
-        </div>
-        <br>
-        <br>
-        <a class="ui button" id="nextBtn" href="middlepage.html">Next page</a>
-    </form>
-</div>
+
+          <h2>Auto</h2>
+          <select class="ui dropdown" id="carSelect">
+            <option value="">Valitse auto</option>
+            <option value="1">Car 1</option>
+            <option value="0">Car 2</option>
+          </select>
+
+          <h2>Reitti</h2>
+          <select class="ui dropdown" id="routeSelect">
+            <option value="">Valitse reitti</option>
+            <option value="1">FI/HEL</option>
+            <option value="0">FI/VAN</option>
+          </select>
+
+          <h2>Kilometrit</h2>
+            <div class="ui right labeled input">
+            <input type="text" placeholder="Aloitus kilometrit">
+            <div class="ui basic label">km</div>
+          </div>
+
+          <h2>Aloitus</h2>
+           <div class="ui input">
+            <input type="text" id="startTime" placeholder="08:00">
+          </div>
+          <br>
+          <br>
+          <a class="ui button" id="nextBtn" href="middlepage.html">Seuraava</a>
+      </form>
+  </div>
+
 
 <script type="text/javascript">
   function nextPage(){
-    
+
   }
 
 </script>

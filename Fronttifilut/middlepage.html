@@ -2,65 +2,57 @@
 <html>
 <head>
 	<meta charset = "UTF-8">
-  <title>Middle page</title>
-  <link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
-  <link rel="stylesheet" type="text/css" href="middlepagestyle.css">
+  	<title>Middle page</title>
+  	<link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-	
 
-	<div class="middlepageForm">
-		<form class="ui field">
-		  <h1>Distributions & pickups</h1>
+	<div class="ui container">
+		<div class="ui form">
+		<br>
+		<h1 class="ui dividing header">Jaot & noudot</h1>
+			<div class="ui grid">
 
-		<div id="postnord" class="field">
-			<h2>Postnord</h2>
-			
-			<h5>Distributions</h5>
-			<div class="ui input">
-			    <input type="text" name="pDistAmount" placeholder="Amount">
-			</div>
-
-			<h5>Pickups</h5>
-			<div class="ui input">
-			    <input type="text" name="pPickAmount" placeholder="Amount">
-			</div>
-
-			<h5>Unknown</h5>
-			<div class="ui input">
-			    <input type="text" name="pUnkAmount" placeholder="Amount">
-			</div>
-		</div>
-	<br>
-		<div id="bring">
-			<h2>Bring</h2>
-			
-			<h5>Distributions</h5>
-			<div class="ui input">
-			    <input type="text" name="bDistAmount" placeholder="Amount">
-			</div>
-
-			<h5>Pickups</h5>
-			<div class="ui input">
-			    <input type="text" name="bPickAmount" placeholder="Amount">
-			</div>
-
-			<h5>DHL pal</h5>
-			<div class="ui input">
-			    <input type="text" name="bPHLAmount" placeholder="Amount">
-			</div>
-
-		</div>
-
-		<h3>Not distributed</h3>
-		<div id="notDistributed">
-			<div class="ui input">
-			    <input type="text" name="noDistAmount" placeholder="Amount">
+				<div class="eight wide column">
+					<h4>Postnord</h4>
+					<div class="field">
+						<label>Jaot</label>
+						<input type="text" name="distP" placeholder="Jaot">
+					</div>
+					<div class="field">
+						<label>Noudot</label>
+						<input type="text" name="pickupP" placeholder="Noudot">
+					</div>
+					<div class="field">
+						<label>Tuntemattomat</label>
+						<input type="text" name="unknownP" placeholder="Tuntemattomat">
+					</div>
+				</div>
+				<div class="eight wide column">
+					<h4>Bring</h4>
+					<div class="field">
+						<label>Jaot</label>
+						<input type="text" name="distB" placeholder="Jaot">
+					</div>
+					<div class="field">
+						<label>Noudot</label>
+						<input type="text" name="pickupB" placeholder="Noudot">
+					</div>
+					<div class="field">
+						<label>DHL pal</label>
+						<input type="text" name="dhlReturns" placeholder="DHL pal">
+					</div>
+				</div>
 			</div>
 		</div>
-	<br>  
-		  <a class="ui button" id="nextBtn" href="finalpage.html">Next page</a>
-		</form>
+		<br>
+		<a class="fluid ui button" id="backBtn" href="startpage.html">Takaisin</a>
+		<br>
+		<a class="fluid ui button" id="nextBtn" href="finalpage.html">Seuraava</a>
 	</div>
+
+</div>
 </body>
 </html>
