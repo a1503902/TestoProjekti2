@@ -134,7 +134,7 @@ router.post('/:deliveryID', function(req, res){
             res.send(err);
         }else if(req.body.name != null){
             delivery.name = req.body.name;
-            
+
         }else if(req.body.delivery != null){
             delivery.delivery = req.body.delivery;
         }else if(req.body.pickup != null){
@@ -152,7 +152,7 @@ router.post('/:deliveryID', function(req, res){
 // Delete delivery
 router.delete('/:deliveryId', function(req, res){
     Delivery.remove({
-        _id: req.params.carId
+        _id: req.params.deliveryId
     }, function(err) {
         if (err){
             res.send(err);
