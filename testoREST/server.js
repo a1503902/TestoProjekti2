@@ -20,6 +20,7 @@ mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429
 
 // Controllers
 var frontController        = require('./app/controllers/front');
+var authController         = require('./app/controllers/auth');
 var authenticateController = require('./app/controllers/authenticate');
 var carsController         = require('./app/controllers/cars');
 var routesController       = require('./app/controllers/routes');
@@ -28,6 +29,7 @@ var workdaysController     = require('./app/controllers/workdays');
 var deliveriesController   = require('./app/controllers/deliveries');
 
 router.use('/', frontController);
+router.use('/', authController);
 router.use('/api/authenticate', authenticateController);
 
 // Protected routes, requires authentication
