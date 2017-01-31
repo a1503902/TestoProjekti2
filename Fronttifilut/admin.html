@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "UTF-8">
+	<title>Admin</title>
+	<link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/admin.css">
+</head>
+<body>
+	<div class="topbar-m">
+		<div class="ui grid fluid">
+			<div class="twelve wide column">
+				<a href=""><div class="menu-logo img-responsive"></div></a>
+			</div>
+			<div class="four wide column">
+				<button class="menu-btn">
+					<i class="icon list big sidebar"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="ui top right dropdown menu-m">
+			<div class="menu">
+				<div class="header">
+					Yleiset
+				</div>
+				<div class="scrolling menu">
+					<a class="item " href="orders">
+						Työntekijät
+					</a>
+				</div>
+				<div class="scrolling menu">
+					<a class="item " href="surveys">
+						Autot
+					</a>
+				</div>
+				<div class="scrolling menu">
+					<a class="item " href="surveys">
+						Reitit
+					</a>
+				</div>
+				<div class="scrolling menu">
+					<a class="item " href="surveys">
+						Seuranta
+					</a>
+				</div>
+				<div class="divider"></div>
+				<div class="header">
+					Asetukset
+				</div>
+				<div class="scrolling menu">
+					<a class="item " href="publishers">
+						Salasana
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="topbar">
+		<div class="topbar-logo pull-left"></div>
+		<div class="topbar-menu fluid">
+			<nav class="topbar-nav pull-right">
+				<a href="logout"><i class="fa fa-sign-out"></i> Kirjaudu Ulos</a>
+			</nav>
+		</div>
+	</div>
+
+	<div class="ui sidebar secondary vertical pointing menu visible uncover sidebar-navigation">
+		<div class="header item">
+			<p>Yleiset</p>
+		</div>
+		<a class="item " href="orders">
+			Työntekijät
+		</a>
+		<a class="item " href="surveys">
+			Autot
+		</a>
+		<a class="item " href="surveys">
+			Reitit
+		</a>
+		<div class="header item">
+			<p>Asetukset</p>
+		</div>
+		<a class="item " href="publishers">
+			Salasana
+		</a>
+	</div>
+	<div class="pusher main-content">
+		
+		<div class="page-emloyees">
+			<div class="ui header">
+				<h3>Työntekijät</h3>
+			</div>
+			<div class="ui grid">
+				<div class="sixteen wide column">
+						
+				</div>
+			</div>
+		</div>
+
+
+		<div id="page-content">
+			<div class="ui header">
+				<h3>Työntekijät</h3>
+			</div>
+			<div class="ui grid">
+				<div class="six wide computer six wide tablet sixteen wide mobile column">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$('.menu-m').dropdown();
+		$('.menu-btn').click(function(){
+			$('.menu-m').dropdown('toggle');
+		});
+		$(".dropdown").dropdown();
+	</script>
+</body>
+</html>
