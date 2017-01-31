@@ -1,9 +1,13 @@
 var express = require('express');
 var router  = express.Router();
+var Workday = require('../models/workday')
 
 // Get all workdays
 router.get('/', function(req, res){
-	res.send('Get all workdays');
+	Workday.find({}, function(err, workdays) {
+		if (err) throw err
+		res.json(workdays)
+	})
 });
 
 // Insert new workday
