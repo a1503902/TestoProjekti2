@@ -11,11 +11,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
+app.set('views', __dirname + '/public/views');
+app.set('view engine', 'pug');
+
 var mongoose   = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429/ohjelmistoprojektidb');
 
 // Controllers
+var frontController        = require('./app/controllers/front');
 var authenticateController = require('./app/controllers/authenticate');
 var carsController         = require('./app/controllers/cars');
 var routesController       = require('./app/controllers/routes');
@@ -23,7 +27,8 @@ var employeesController    = require('./app/controllers/employees');
 var workdaysController     = require('./app/controllers/workdays');
 var deliveriesController   = require('./app/controllers/deliveries');
 
-router.use('/authenticate', authenticateController);
+router.use('/', frontController);
+router.use('/api/authenticate', authenticateController);
 
 // Protected routes, requires authentication
 /*
@@ -47,14 +52,15 @@ router.use(function(req, res, next) {
     }
 });
 */
-router.use('/cars', carsController);
-router.use('/routes', routesController);
-router.use('/employees', employeesController);
-router.use('/workdays', workdaysController);
-router.use('/deliveries', deliveriesController);
+router.use('/api/cars', carsController);
+router.use('/api/routes', routesController);
+router.use('/api/employees', employeesController);
+router.use('/api/workdays', workdaysController);
+router.use('/api/deliveries', deliveriesController);
+
 
 // Sets routes prefix
-app.use('/api', router);
+app.use('/', router);
 
 // Start server
 app.listen(port);
