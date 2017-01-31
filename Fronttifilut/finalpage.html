@@ -6,11 +6,89 @@
   <link rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<img id="argLogo" src="https://scontent.xx.fbcdn.net/v/t1.0-9/13903333_1365934043421424_4371383356628571714_n.jpg?oh=78d7eda15ded84ac0bff72edf8dd2f9c&oe=59086621">
+	
 
-	<form class="finalpageForm">
-		<p>Täytä tämä päivän lopuksi</p>
+
+
+
+<div class="ui container">
+  <h1 class="ui dividing header" style="margin: middle;">Jaot & noudot</h1>
+    <div class="ui three item menu">
+      <a class="item active" id="postnordBtn" onclick="showhide('postnord')">Postnord</a>
+      <a class="item" onclick="showhide('bring')">Bring</a>
+      <a class="item" onclick="showhide('innight')">Innight</a>
+    </div>
+
+    <div class="ui form">
+      <br>
+      <div id="padder">
+      <div class="ui three column grid">
+        <div class="column">
+          <div id="postnord" style="display: none;">
+            <h4>Postnord</h4>
+            <div class="field">
+              <label>Jaot</label>
+              <input type="number" name="distP" placeholder="Jaot">
+            </div>
+            <div class="field">
+              <label>Noudot</label>
+              <input type="number" name="pickupP" placeholder="Noudot">
+            </div>
+            <div class="field">
+              <label>Tuntemattomat</label>
+              <input type="number" name="unknownP" placeholder="Tuntemattomat">
+            </div>
+            <div class="field">
+              <label>Jakamattomat</label>
+              <input type="number" name="ntP" placeholder="Jakamattomat Postnord">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div id="bring" style="display: none;">
+            <h4>Bring</h4>
+            <div class="field">
+              <label>Jaot</label>
+              <input type="number" name="distB" placeholder="Jaot">
+            </div>
+            <div class="field">
+              <label>Noudot</label>
+              <input type="number" name="pickupB" placeholder="Noudot">
+            </div>
+            <div class="field">
+              <label>DHL pal</label>
+              <input type="number" name="dhlReturns" placeholder="DHL pal">
+            </div>
+            <div class="field">
+              <label>Jakamattomat</label>
+              <input type="number" name="ntB" placeholder="Jakamattomat Bring">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+                  <div id="innight" style="display: none;">
+          <h4>Innight</h4>
+            <div class="field">
+              <label>Paketit</label>
+              <input type="number" name="packages" placeholder="Pakettien määrä">
+            </div>
+            <div class="field">
+              <label>Pysähdykset</label>
+              <input type="number" name="stops" placeholder="Pysähdykset">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+<br>
+  <form class="finalpageForm">
 		<h2>Lopetus</h2>
         <div class="ui input">
         	<input type="text" id="endTime" placeholder="16:00">
@@ -33,8 +111,19 @@
         </div>
 		<br>
 		<br>
-        <a class="ui button" id="backBtn" href="middlepage.html">Takaisin</a>
-        <button class="ui button">Lähetä</button>
+        <a class="ui button" id="backBtn" href="startpage.html">Takaisin</a>
+        <button class="ui button" style="background-color: #66ccff;">Lähetä</button>
 	</form>
+
+  <footer>
+    <p>Team Testo</p>
+  </footer>
+  <script type="text/javascript">
+    
+    function showhide(id) {
+        var e = document.getElementById(id);
+        e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+     }
+</script>
 </body>
 </html>

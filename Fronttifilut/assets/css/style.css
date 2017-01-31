@@ -14,13 +14,45 @@
 	justify-content: center !important;
 }
 .finalpageForm{
-	margin: 2% 0% 0% 41%;
+	margin: auto;
+	width: 300px;
 }
 .middlepageForm{
 	margin: 2% 0% 0% 41%;
 }
 .startForm{
-	margin: 2% 0% 0% 41%;
+	margin: auto;
+	width: 300px;
+}
+/*Mobile*/
+#argLogo{
+	margin: auto;
+	width: 300px;
+	width: 40%;
+	height: auto;
+}
+footer{
+	color: lightgray; 
+	padding-left: 2%; 
+	padding-bottom: 2%;
 }
 
+/*Tablet*/
+@media only screen and (min-device-width: 400px) and (max-device-width: 768px) {
+    #argLogo{
+	margin: auto;
+	width: 300px;
+	margin-left:28%;
 
+	}
+}
+
+/*Laptop*/
+@media only screen and (min-device-width: 769px) {
+    #argLogo{
+	margin: auto;
+	width: 300px;
+	margin-left: 38%;
+
+	}
+}
