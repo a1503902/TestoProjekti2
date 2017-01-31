@@ -27,7 +27,7 @@ router.post('/', function(req, res) {
     //         errorMessage: 'Start kilometers missing'
     //     }
     // });
-
+    /*
     var errors = req.validationErrors();
     if (errors) {
         message = errors[0].msg;
@@ -37,6 +37,7 @@ router.post('/', function(req, res) {
         });
         return;
     }
+    */
 
     // New workday object
     var workday = new Workday();
@@ -45,7 +46,12 @@ router.post('/', function(req, res) {
     workday.employee = req.body.employee;
 	workday.start_time = req.body.start_time;
 	workday.start_km = req.body.start_km;
-	workday.deliveries = req.body.deliveries.postnord.delivery;
+    var deliveries = {};
+    var postnord = {}; 
+    postnord.delivery = req.body.deliveries.postnord.delivery;
+    deliveries.postnord = postnord;
+
+	workday.deliveries = deliveries;
 	console.log(req.body.deliveries)
 
     // Insert car to DB
