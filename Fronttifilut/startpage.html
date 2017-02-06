@@ -12,6 +12,8 @@
 </head>
 
 <body>
+
+<script src="assets/js/startpage.js"></script>
 <div class="ui container">
 <img  id="argLogo" class="ui centered image" src="assets/images/logo.jpg">
 
@@ -19,8 +21,8 @@
     <div class="column"></div>
     <div class="column">
       <form class="ui form">
-        <h2>Kuljettaja</h2>          
-            <input type="text" id="name" placeholder="Nimi">
+        <h2>Kuljettaja</h2>
+            <input type="text" id="driver" placeholder="Nimi">
           <h2>Auto</h2>
           <select class="ui dropdown" id="carSelect">
             <option value="">Valitse auto</option>
@@ -37,7 +39,7 @@
 
           <h2>Kilometrit</h2>
             <div class="ui right labeled input">
-            <input type="number" placeholder="Aloitus kilometrit">
+            <input type="number" id="kilometer" placeholder="Aloitus kilometrit">
             <div class="ui basic label">km</div>
           </div>
 
@@ -45,12 +47,13 @@
             <input type="text" id="startTime" placeholder="08:00">
           <br>
           <br>
+          <button class="ui button" id="laheta">paska</button>
           <a class="ui button" id="nextBtn" href="finalpage.html">Seuraava</a>
       </form>
     </div>
     <div class="column"></div>
   </div>
-  
+
   </div>
   <footer>
     <p>Team Testo</p>
