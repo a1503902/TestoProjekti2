@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
 var Workday = require('../models/workday')
 
 // Get all workdays
@@ -99,10 +99,15 @@ router.put('/:workdayId', function(req, res) {
             res.send(err);
         }
 
+        // Set params
 		var deliveries = {};
 	    var postnord = {};
 	    var bring = {};
 	    var innight = {};
+        deliveries.postnord = postnord;
+	    deliveries.bring = bring;
+	    deliveries.innight = innight;
+	    workday.deliveries = deliveries;
 	    postnord.delivery = req.body.deliveries.postnord.delivery;
 	    bring.delivery = req.body.deliveries.bring.delivery;
 	    postnord.pickup = req.body.deliveries.postnord.pickup;
@@ -113,10 +118,6 @@ router.put('/:workdayId', function(req, res) {
 	    bring.nt = req.body.deliveries.bring.nt;
 	    innight.packages = req.body.deliveries.innight.packages;
 	    innight.stops = req.body.deliveries.innight.stops;
-	    deliveries.postnord = postnord;
-	    deliveries.bring = bring;
-	    deliveries.innight = innight;
-	    workday.deliveries = deliveries;
 	    workday.stop_time = req.body.stop_time;
 	    workday.stop_km = req.body.stop_km;
 	    workday.adt_info = req.body.adt_info;
@@ -136,8 +137,17 @@ router.put('/:workdayId', function(req, res) {
 
 // Delete workday
 router.delete('/:workdayId', function(req, res) {
-    res.send(req.params);
-    res.send('Delete workday');
+    Workday.remove({
+        _id: req.params.workdayId
+    }, function(err, workday) {
+        if (err) {
+            res.send(err);
+        }
+        res.json({
+            success: true,
+            message: 'Workday successfully deleted'
+        });
+    });
 });
 
 module.exports = router;

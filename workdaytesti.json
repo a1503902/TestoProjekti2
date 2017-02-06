@@ -1,0 +1,13 @@
+{
+    "deliveries": {
+        "postnord": {
+            "delivery": 123,
+            "pickup": 23,
+            "unknown": 3,
+            "nt": 0
+        }
+    },
+    "stop_time": 90,
+    "stop_km": 888888,
+    "complete": true
+}
