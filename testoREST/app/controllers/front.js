@@ -7,11 +7,11 @@ router.get('/', function(req, res){
 });
 
 router.get('/start', function(req, res){
-    res.render('startpage', { title: 'Start'});
+    res.render('views/startpage', { title: 'Start'});
 });
 
 router.get('/final', function(req, res){
-    res.render('finalpage', { title: 'Start'});
+    res.render('views/finalpage', { title: 'Start'});
 });
 
 module.exports = router;
