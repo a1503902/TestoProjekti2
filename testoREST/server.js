@@ -10,8 +10,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use('/static', express.static(__dirname + '/public/assets'));
 
-app.set('views', __dirname + '/public/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
 var mongoose   = require('mongoose');

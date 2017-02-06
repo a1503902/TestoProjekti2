@@ -1,0 +1,46 @@
+extends layout.pug
+
+block content.
+    <div class="ui container">
+    <img  id="argLogo" class="ui centered image" src="static/assets/img/logo.jpg">
+
+      <div class="ui three column grid">
+        <div class="column"></div>
+        <div class="column">
+          <form class="ui form">
+            <h2>Kuljettaja</h2>
+                <input type="text" id="name" placeholder="Nimi">
+              <h2>Auto</h2>
+              <select class="ui dropdown" id="carSelect">
+                <option value="">Valitse auto</option>
+                <option value="1">Car 1</option>
+                <option value="0">Car 2</option>
+              </select>
+
+              <h2>Reitti</h2>
+              <select class="ui dropdown" id="routeSelect">
+                <option value="">Valitse reitti</option>
+                <option value="1">FI/HEL</option>
+                <option value="0">FI/VAN</option>
+              </select>
+
+              <h2>Kilometrit</h2>
+                <div class="ui right labeled input">
+                <input type="number" placeholder="Aloitus kilometrit">
+                <div class="ui basic label">km</div>
+              </div>
+
+              <h2>Aloitus</h2>
+                <input type="text" id="startTime" placeholder="08:00">
+              <br>
+              <br>
+              <a class="ui button" id="nextBtn" href="/final">Seuraava</a>
+          </form>
+        </div>
+        <div class="column"></div>
+      </div>
+
+    <script type="text/javascript">
+
+
+    </script>
