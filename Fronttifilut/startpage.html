@@ -12,15 +12,15 @@
 </head>
 
 <body>
-<img  id="argLogo" src="https://scontent.xx.fbcdn.net/v/t1.0-9/13903333_1365934043421424_4371383356628571714_n.jpg?oh=78d7eda15ded84ac0bff72edf8dd2f9c&oe=59086621">
-  <div class="startForm">
-      <form>
-        <h2>Kuljettaja</h2>
-          <div class="ui input">
+<div class="ui container">
+<img  id="argLogo" class="ui centered image" src="assets/images/logo.jpg">
+
+  <div class="ui three column grid">
+    <div class="column"></div>
+    <div class="column">
+      <form class="ui form">
+        <h2>Kuljettaja</h2>          
             <input type="text" id="name" placeholder="Nimi">
-          </div>
-
-
           <h2>Auto</h2>
           <select class="ui dropdown" id="carSelect">
             <option value="">Valitse auto</option>
@@ -42,22 +42,22 @@
           </div>
 
           <h2>Aloitus</h2>
-           <div class="ui input">
             <input type="text" id="startTime" placeholder="08:00">
-          </div>
           <br>
           <br>
           <a class="ui button" id="nextBtn" href="finalpage.html">Seuraava</a>
       </form>
+    </div>
+    <div class="column"></div>
+  </div>
+  
   </div>
   <footer>
     <p>Team Testo</p>
   </footer>
 
 <script type="text/javascript">
-  function nextPage(){
 
-  }
 
 </script>
 

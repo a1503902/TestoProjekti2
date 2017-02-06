@@ -13,24 +13,18 @@
 	align-items: center !important;
 	justify-content: center !important;
 }
-.finalpageForm{
-	margin: auto;
-	width: 300px;
+body{
+	margin-top: 2%;
 }
-.middlepageForm{
-	margin: 2% 0% 0% 41%;
-}
-.startForm{
-	margin: auto;
-	width: 300px;
-}
-/*Mobile*/
+
+
+/*Mobile
 #argLogo{
 	margin: auto;
 	width: 300px;
 	width: 40%;
 	height: auto;
-}
+}*/
 footer{
 	color: lightgray; 
 	padding-left: 2%; 
@@ -49,10 +43,10 @@ footer{
 
 /*Laptop*/
 @media only screen and (min-device-width: 769px) {
-    #argLogo{
+    /*#argLogo{
 	margin: auto;
 	width: 300px;
 	margin-left: 36%;
 
-	}
+	}*/
 }

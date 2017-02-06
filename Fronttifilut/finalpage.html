@@ -15,8 +15,8 @@
 
 
 
-<div class="ui container">
-  <h1 class="ui dividing header" style="margin: middle;">Jaot & noudot</h1>
+  <div class="ui container">
+    <h1 class="ui dividing header">Jaot & noudot</h1>
     <div class="ui three item menu">
       <a class="item" id="postnordBtn" onclick="showhide('postnord')">Postnord</a>
       <a class="item" onclick="showhide('bring')">Bring</a>
@@ -25,7 +25,6 @@
 
     <div class="ui form">
       <br>
-      <div id="padder">
       <div class="ui three column grid">
         <div class="column">
           <div id="postnord" style="display: none;">
@@ -83,37 +82,37 @@
           </div>
         </div>
       </div>
+      <div class="ui dividing header"></div>
+      <div class="ui three column grid">
+        <div class="column">
+          <h2>Lopetus</h2>
+          <input type="text" id="endTime" placeholder="16:00">
+
+          <h2>Tauot</h2>
+
+          <input type="number" id="breakAmount" placeholder="Aika minuutteina">
+          
+          <h2>Kilometrit</h2>
+            <div class="ui right labeled input">
+            <input type="number" placeholder="Lopetus kilometrit">
+            <div class="ui basic label">km</div>
+          </div>
+
+          <h2>Kommentit</h2>
+
+          <input type="text" id="comment" placeholder="Lisätiedot">
+
+          <br>
+          <br>
+          <a class="ui button" id="backBtn" href="startpage.html">Takaisin</a>
+          <button class="ui button" style="color: white; background-color: #66ccff;">Lähetä</button>
+        </div>
+        <div class="column"></div>
+        <div class="column"></div>
       </div>
     </div>
-      <div class="ui dividing header" style="margin: middle;"/>
-    </div>
-<br>
-  <form class="finalpageForm">
-		<h2>Lopetus</h2>
-        <div class="ui input">
-        	<input type="text" id="endTime" placeholder="16:00">
-        </div>
-
-		<h2>Tauot</h2>
-         <div class="ui input">
-          <input type="number" id="breakAmount" placeholder="Aika minuutteina">
-        </div>
-
-        <h2>Kilometrit</h2>
-          <div class="ui right labeled input">
-          <input type="number" placeholder="Lopetus kilometrit">
-          <div class="ui basic label">km</div>
-        </div>
-
-        <h2>Kommentit</h2>
-         <div class="ui input">
-          <input type="text" id="comment" placeholder="Lisätiedot">
-        </div>
-		<br>
-		<br>
-        <a class="ui button" id="backBtn" href="startpage.html">Takaisin</a>
-        <button class="ui button" style="color: white; background-color: #66ccff;">Lähetä</button>
-	</form>
+  </div>
+      
 
   <footer>
     <p>Team Testo</p>
