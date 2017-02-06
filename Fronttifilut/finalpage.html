@@ -7,20 +7,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
 <img id="argLogo" src="https://scontent.xx.fbcdn.net/v/t1.0-9/13903333_1365934043421424_4371383356628571714_n.jpg?oh=78d7eda15ded84ac0bff72edf8dd2f9c&oe=59086621">
-	
 
 
 
+
+=======
+>>>>>>> 2c7750a76baa9658a24e69996a24105df27914ec
 
   <div class="ui container">
+  <img  id="argLogo" class="ui centered image" src="assets/images/logo.jpg">
     <h1 class="ui dividing header">Jaot & noudot</h1>
     <div class="ui three item menu">
-      <a class="item" id="postnordBtn" onclick="showhide('postnord')">Postnord</a>
-      <a class="item" onclick="showhide('bring')">Bring</a>
-      <a class="item" onclick="showhide('innight')">Innight</a>
+      <a class="item" id="pos" onclick="showhide('postnord')">Postnord</a>
+      <a class="item" id="bri" onclick="showhide('bring')">Bring</a>
+      <a class="item" id="inn" onclick="showhide('innight')">Innight</a>
     </div>
 
     <div class="ui form">
@@ -31,19 +36,19 @@
             <h4>Postnord</h4>
             <div class="field">
               <label>Jaot</label>
-              <input type="number" name="distP" placeholder="Jaot">
+              <input type="number" name="distP" placeholder="Jaot" min="0">
             </div>
             <div class="field">
               <label>Noudot</label>
-              <input type="number" name="pickupP" placeholder="Noudot">
+              <input type="number" name="pickupP" placeholder="Noudot" min="0">
             </div>
             <div class="field">
               <label>Tuntemattomat</label>
-              <input type="number" name="unknownP" placeholder="Tuntemattomat">
+              <input type="number" name="unknownP" placeholder="Tuntemattomat" min="0">
             </div>
             <div class="field">
               <label>Jakamattomat</label>
-              <input type="number" name="ntP" placeholder="Jakamattomat Postnord">
+              <input type="number" name="ntP" placeholder="Jakamattomat Postnord" min="0">
             </div>
           </div>
         </div>
@@ -52,19 +57,19 @@
             <h4>Bring</h4>
             <div class="field">
               <label>Jaot</label>
-              <input type="number" name="distB" placeholder="Jaot">
+              <input type="number" name="distB" placeholder="Jaot" min="0">
             </div>
             <div class="field">
               <label>Noudot</label>
-              <input type="number" name="pickupB" placeholder="Noudot">
+              <input type="number" name="pickupB" placeholder="Noudot" min="0">
             </div>
             <div class="field">
               <label>DHL pal</label>
-              <input type="number" name="dhlReturns" placeholder="DHL pal">
+              <input type="number" name="dhlReturns" placeholder="DHL pal" min="0">
             </div>
             <div class="field">
               <label>Jakamattomat</label>
-              <input type="number" name="ntB" placeholder="Jakamattomat Bring">
+              <input type="number" name="ntB" placeholder="Jakamattomat Bring" min="0">
             </div>
           </div>
         </div>
@@ -73,11 +78,11 @@
           <h4>Innight</h4>
             <div class="field">
               <label>Paketit</label>
-              <input type="number" name="packages" placeholder="Pakettien määrä">
+              <input type="number" name="packages" placeholder="Pakettien määrä" min="0">
             </div>
             <div class="field">
               <label>Pysähdykset</label>
-              <input type="number" name="stops" placeholder="Pysähdykset">
+              <input type="number" name="stops" placeholder="Pysähdykset" min="0">
             </div>
           </div>
         </div>
@@ -86,44 +91,65 @@
       <div class="ui three column grid">
         <div class="column">
           <h2>Lopetus</h2>
-          <input type="text" id="endTime" placeholder="16:00">
+          <input type="text" id="endTime"  name="endTime" placeholder="16:00">
 
           <h2>Tauot</h2>
 
-          <input type="number" id="breakAmount" placeholder="Aika minuutteina">
+<<<<<<< HEAD
+          <input type="number" id="breakAmount" name="breaks" placeholder="Aika minuutteina">
+
+          <h2>Kilometrit</h2>
+            <div class="ui right labeled input">
+            <input type="number" name="endKm" placeholder="Lopetus kilometrit">
+=======
+          <input type="number" id="breakAmount" placeholder="Aika minuutteina" min="0">
           
           <h2>Kilometrit</h2>
             <div class="ui right labeled input">
-            <input type="number" placeholder="Lopetus kilometrit">
+            <input type="number" placeholder="Lopetus" min="0">
+>>>>>>> 2c7750a76baa9658a24e69996a24105df27914ec
             <div class="ui basic label">km</div>
           </div>
 
           <h2>Kommentit</h2>
+<<<<<<< HEAD
 
+          <input type="text" id="comment" name="adtInfo" placeholder="Lisätiedot">
+
+=======
           <input type="text" id="comment" placeholder="Lisätiedot">
-
+>>>>>>> 2c7750a76baa9658a24e69996a24105df27914ec
           <br>
           <br>
           <a class="ui button" id="backBtn" href="startpage.html">Takaisin</a>
-          <button class="ui button" style="color: white; background-color: #66ccff;">Lähetä</button>
+          <button class="ui button" id="sendBtn" style="color: white; background-color: #66ccff;">Lähetä</button>
         </div>
         <div class="column"></div>
         <div class="column"></div>
       </div>
     </div>
   </div>
-      
+
 
   <footer>
     <p>Team Testo</p>
   </footer>
   <script type="text/javascript">
-    
+
     function showhide(id) {
         var e = document.getElementById(id);
-        e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+        $("#" + id).toggle();
+
+/*
+        if(!$("#" + id).is(':visible')){
+          $("#" + id).toggle().transition('drop');
+        }else{
+          $("#" + id).toggle();
+        }
+*/
      }
+     
 </script>
+<script src="assets/js/finalpage.js"></script>
 </body>
 </html>
- 
