@@ -1,2 +1,0 @@
-  lsof -i : "porttinumero"
-  killall -9 "PID"
