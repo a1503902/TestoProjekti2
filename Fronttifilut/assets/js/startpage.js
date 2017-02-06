@@ -2,9 +2,9 @@ $(document).ready(function(){
   $("#laheta").click(function(){
 
     var driver = $("input[name=driver]").val()
-    var car = $("#carSelect").val()
-    var route = $("#routeSelect").val();
-    var kilometers = $("input[name=kilometer]").val();
+    var carSelect = $("#carSelect").val()
+    var routeSelect = $("#routeSelect").val();
+    var kilometer = $("input[name=kilometer]").val();
     var startTime = $("input[name=startTime]").val();
 
     $.ajax({
