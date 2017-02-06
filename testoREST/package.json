@@ -2,12 +2,15 @@
   "name": "node-api",
   "main": "server.js",
   "dependencies": {
-	"body-parser" : "~1.0.1",
-	"express"     : "~4.0.0",
-	"jsonwebtoken": "^7.2.1",
-	"mongoose"    : "*",
-	"pug"        : "*",
-	"stylus"      : "*",
-	"nib"         : "*"
+	"body-parser"      : "~1.0.1",
+	"express"          : "~4.0.0",
+	"jsonwebtoken"     : "^7.2.1",
+	"mongoose"         : "*",
+	"pug"              : "*",
+	"stylus"           : "*",
+	"nib"              : "*",
+	"nodemon"          : "*",
+	"express-validator": "*",
+	"cors"             : "*"
   }
 }
