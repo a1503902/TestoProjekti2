@@ -3,8 +3,13 @@ var router  = express.Router();
 var Admin   = require('../models/admin');
 var jwt     = require('jsonwebtoken');
 var config  = require('../../config');
+var pug     = require('pug');
 
+router.get('/login', function(req, res){
+	res.render('admin/login', { title: 'Hey', message: 'Hello there!'});
+});
 
+// REST
 router.get('/setup', function(req, res){
 	// New admin object
 	var admin  = new Admin();

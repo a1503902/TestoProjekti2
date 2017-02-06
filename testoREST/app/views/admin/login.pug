@@ -1,0 +1,23 @@
+extends ../templates/login.pug
+
+block content
+	.login-wrapper
+		.login-container
+			img(src='/static/img/logo.jpg')
+			h5.ui.top.attached.header Kirjaudu sisään
+			.ui.bottom.attached.segment
+				.ui.middle.aligned.grid
+					.column
+						.ui.form
+							.field
+								label Käyttäjänimi
+								.ui.left.icon.input
+									input(placeholder='Käyttäjänimi', name='username', type='text', value='')
+									i.user.icon
+							.field
+								label Salasana
+								.ui.left.icon.input
+									input(placeholder='Salasana', name='password', type='password', value='')
+									i.lock.icon
+							button#login.ui.submit.button Kirjaudu sisään
+							a(href='forgot.html') Unohtuiko salasana?

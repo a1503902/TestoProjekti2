@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 app.use('/static', express.static(__dirname + '/public/assets'));
 
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/app/views');
 app.set('view engine', 'pug');
 
 var mongoose   = require('mongoose');
@@ -20,7 +20,11 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429/ohjelmistoprojektidb');
 
 // Controllers
-var frontController        = require('./app/controllers/front');
+// FRONT
+var frontController = require('./app/controllers/front');
+var adminController = require('./app/controllers/admin');
+
+// REST
 var authController         = require('./app/controllers/auth');
 var authenticateController = require('./app/controllers/authenticate');
 var carsController         = require('./app/controllers/cars');
@@ -30,6 +34,8 @@ var workdaysController     = require('./app/controllers/workdays');
 var deliveriesController   = require('./app/controllers/deliveries');
 
 router.use('/', frontController);
+router.use('/admin', adminController);
+
 router.use('/', authController);
 router.use('/api/authenticate', authenticateController);
 
