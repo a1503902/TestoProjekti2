@@ -1,7 +1,7 @@
 extends ../templates/basiclayout.pug
 block content
     .ui.container
-        img#argLogo.ui.centered.image(src='static/img/logo.jpg')
+        img#argLogo.ui.centered.image(src='static/images/logo.jpg')
         h1.ui.dividing.header Jaot &amp; noudot
         .ui.three.item.menu
             a#postnordBtn.item(onclick="showhide('postnord')") Postnord
@@ -80,9 +80,9 @@ block content
                     br
                     br
                     
-                    a#backBtn.ui.button(href='startpage.html') Takaisin
+                    a#backBtn.ui.button(href='/start') Takaisin
                     
-                    button.ui.button(style='color: white; background-color: #66ccff;') L&auml;het&auml;
+                    button#sendBtn.ui.button(style='color: white; background-color: #66ccff;') L&auml;het&auml;
                 .column
                 .column
     script(type='text/javascript').
