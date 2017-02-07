@@ -1,13 +1,13 @@
-extends ../templates/basiclayout.pug
+extends layouts/basiclayout.pug
 block content
     .ui.container
         img#argLogo.ui.centered.image(src='static/images/logo.jpg')
         h1.ui.dividing.header Jaot &amp; noudot
         .ui.three.item.menu
             a#postnordBtn.item(onclick="showhide('postnord')") Postnord
-            
+
             a.item(onclick="showhide('bring')") Bring
-            
+
             a.item(onclick="showhide('innight')") Innight
         .ui.form
             br
@@ -17,71 +17,71 @@ block content
                         h4 Postnord
                         .field
                             label Jaot
-                            
+
                             input(type='number', name='distP', placeholder='Jaot')
                         .field
                             label Noudot
-                            
+
                             input(type='number', name='pickupP', placeholder='Noudot')
                         .field
                             label Tuntemattomat
-                            
+
                             input(type='number', name='unknownP', placeholder='Tuntemattomat')
                         .field
                             label Jakamattomat
-                            
+
                             input(type='number', name='ntP', placeholder='Jakamattomat Postnord')
                 .column
                     #bring(style='display: none;')
                         h4 Bring
                         .field
                             label Jaot
-                            
+
                             input(type='number', name='distB', placeholder='Jaot')
                         .field
                             label Noudot
-                            
+
                             input(type='number', name='pickupB', placeholder='Noudot')
                         .field
                             label DHL pal
-                            
+
                             input(type='number', name='dhlReturns', placeholder='DHL pal')
                         .field
                             label Jakamattomat
-                            
+
                             input(type='number', name='ntB', placeholder='Jakamattomat Bring')
                 .column
                     #innight(style='display: none;')
                         h4 Innight
                         .field
                             label Paketit
-                            
+
                             input(type='number', name='packages', placeholder='Pakettien määrä')
                         .field
                             label Pys&auml;hdykset
-                            
+
                             input(type='number', name='stops', placeholder='Pysähdykset')
             .ui.dividing.header
             .ui.three.column.grid
                 .column
                     h2 Lopetus
-                    
+
                     input#endTime(type='text', placeholder='16:00')
                     h2 Tauot
-                    
+
                     input#breakAmount(type='number', placeholder='Aika minuutteina')
                     h2 Kilometrit
                     .ui.right.labeled.input
                         input(type='number', placeholder='Lopetus kilometrit')
                         .ui.basic.label km
                     h2 Kommentit
-                    
+
                     input#comment(type='text', placeholder='Lisätiedot')
                     br
                     br
-                    
+
                     a#backBtn.ui.button(href='/start') Takaisin
-                    
+
                     button#sendBtn.ui.button(style='color: white; background-color: #66ccff;') L&auml;het&auml;
                 .column
                 .column
@@ -90,3 +90,4 @@ block content
             var e = document.getElementById(id);
             e.style.display = (e.style.display == 'block') ? 'none' : 'block';
         }
+    script(src='/static/js/finalpage.js')
