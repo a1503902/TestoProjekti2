@@ -20,12 +20,10 @@ $(document).ready(function(){
       },
 
       success: function(data){
-        console.log(startTime)
         console.log(data)
       },
 
       error: function(err){
-        console.log(start_time)
         alert(JSON.stringify(err))
       }
     })
