@@ -22,7 +22,7 @@ $(document).ready(function() {
         $.ajax({
 			method: 'PUT',
 			type: 'JSON',
-			url: 'http://localhost:8080/api/workdays',
+			url: 'http://localhost:8080/api/workdays/589090cbf9d5fa20bcab6cfe',
 			data: {
                 deliveries: {
                     postnord: {
@@ -47,8 +47,8 @@ $(document).ready(function() {
                 adt_info: info,
                 complete: true
             },
-			success: function () {
-                console.log(data)
+			success: function (msg) {
+                console.log(msg)
             }
 		})
     })
