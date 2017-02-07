@@ -9,7 +9,7 @@ block content
       .column
         .ui.form
           h2 Kuljettaja
-          input#driver(type='text', placeholder='Nimi')
+          input(type='text', name='employee' placeholder='Nimi')
           h2 Auto
           .ui.fluid.search.selection.dropdown
             i.dropdown.icon
@@ -32,10 +32,10 @@ block content
               .item FI/VAN
           h2 Kilometrit
           .ui.right.labeled.input
-            input#kilometer(type='number', placeholder='Aloitus kilometrit')
+            input(type='number', name='kilometer' placeholder='Aloitus kilometrit')
             .ui.basic.label km
           h2 Aloitus
-          input#startTime(type='text', placeholder='08:00')
+          input(type='text', name='startTime' placeholder='08:00')
           br
           br
           button#laheta.ui.button paska
