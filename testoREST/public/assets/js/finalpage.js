@@ -14,10 +14,10 @@ $(document).ready(function() {
         var packages = $("input[name=packages]").val()
         var stops = $("input[name=stops]").val()
         // Stop info
-        var endTime = $("input[name=endTime]").val()
+        var stopTime = $("input[name=stopTime]").val()
         var breaks = $("input[name=breaks]").val()
-        var endKm = $("input[name=endKm]").val()
-        var info = $("input[name=adtInfo]").val()
+        var stopKm = $("input[name=stopKm]").val()
+        var adtInfo = $("input[name=adtInfo]").val()
 
         $.ajax({
 			method: 'PUT',
@@ -42,9 +42,10 @@ $(document).ready(function() {
                         stops: stops,
                     }
                 },
-                stop_time: endTime,
-                stop_km: endKm,
-                adt_info: info,
+                stop_time: stopTime,
+                breaks: breaks,
+                stop_km: stopKm,
+                adt_info: adtInfo,
                 complete: true
             },
 			success: function (msg) {

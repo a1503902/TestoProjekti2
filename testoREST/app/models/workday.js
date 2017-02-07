@@ -30,6 +30,7 @@ var WorkdaySchema = new Schema({
         }
     },
     stop_time: Number,
+    breaks: Number,
     stop_km: Number,
     adt_info: String,
     complete: {

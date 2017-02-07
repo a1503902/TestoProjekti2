@@ -106,7 +106,7 @@ router.put('/:workdayId', function(req, res) {
 	    var innight = {};
 
 
-        
+
         postnord.delivery = req.body.deliveries.postnord.delivery;
         bring.delivery = req.body.deliveries.bring.delivery;
         postnord.pickup = req.body.deliveries.postnord.pickup;
@@ -118,6 +118,7 @@ router.put('/:workdayId', function(req, res) {
         innight.packages = req.body.deliveries.innight.packages;
         innight.stops = req.body.deliveries.innight.stops;
         workday.stop_time = req.body.stop_time;
+        workday.breaks = req.body.breaks;
         workday.stop_km = req.body.stop_km;
         workday.adt_info = req.body.adt_info;
         workday.complete = req.body.complete;
@@ -126,7 +127,7 @@ router.put('/:workdayId', function(req, res) {
         deliveries.bring = bring;
         deliveries.innight = innight;
         workday.deliveries = deliveries;
-        
+
 		workday.save(function(err) {
             if (err) {
                 res.send(err);
