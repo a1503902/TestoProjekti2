@@ -11,6 +11,11 @@
 	"nib"              : "*",
 	"nodemon"          : "*",
 	"express-validator": "*",
-	"cors"             : "*"
+	"cors"             : "*",
+	"passport"         : "*",
+	"passport-local"   : "*",
+	"bcrypt-nodejs"    : "*",
+	"connect-flash"    : "*",
+	"express-session"  : "*"
   }
 }
