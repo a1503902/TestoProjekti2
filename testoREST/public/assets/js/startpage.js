@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  $('.ui.fluid.search.selection.dropdown')
+    .dropdown()
+
   $("#laheta").click(function(){
 
     var employee = $("input[name=employee]").val()

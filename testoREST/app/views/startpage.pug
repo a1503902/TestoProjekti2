@@ -11,25 +11,21 @@ block content
           h2 Kuljettaja
           input(type='text', name='employee' placeholder='Nimi')
           h2 Auto
-          .ui.fluid.search.selection.dropdown
-            i.dropdown.icon
-            .default.text.input Valitse auto
-            .menu
-              .item XXX-313
-              .item AAA-123
-              .item BBB-666
-              .item BBC-505
-              .item CCL-232
-              .item WTF-420
-              .item YOL-069
-              .item TIS-517
+          select#carSelect.ui.fluid.search.selection.dropdown
+            option(value='') Valitse auto
+            option(value='XXX-313') XXX-313
+            option(value='AAA-123') AAA-123
+            option(value='BBB-666') BBB-666
+            option(value='BBC-505') BBC-505
+            option(value='CCL-232') CCL-232
+            option(value='WTF-420') WTF-420
+            option(value='YOL-069') YOL-069
+            option(value='TIS-517') TIS-517
           h2 Reitti
-          .ui.fluid.search.selection.dropdown
-            i.dropdown.icon
-            .default.text.input Valitse reitti
-            .menu
-              .item FI/HEL
-              .item FI/VAN
+          select#routeSelect.ui.fluid.search.selection.dropdown
+              option(value='') Valitse reitti
+              option(value='FI/HEL') FI/HEL
+              option(value='FI/VAN') FI/VAN
           h2 Kilometrit
           .ui.right.labeled.input
             input(type='number', name='kilometer' placeholder='Aloitus kilometrit')
@@ -41,7 +37,3 @@ block content
           button#laheta.ui.button paska
           a#nextBtn.ui.button(href='/final') Seuraava
       .column
-  script(type='text/javascript').
-    $('.ui.fluid.search.selection.dropdown')
-    .dropdown()
-    ;
