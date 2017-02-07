@@ -1,33 +1,47 @@
 extends layouts/basiclayout.pug
 block content
-    .ui.container
-        img#argLogo.ui.centered.image(src='static/images/logo.jpg')
-        .ui.three.column.grid
-            .column
-            .column
-                form.ui.form
-                    h2 Kuljettaja
-                    input#name(type='text', placeholder='Nimi')
-
-                    h2 Auto
-                    select#carSelect.ui.dropdown
-                        option(value='') Valitse auto
-                        option(value='1') Car 1
-                        option(value='0') Car 2
-
-                    h2 Reitti
-                    select#routeSelect.ui.dropdown
-                        option(value='') Valitse reitti
-                        option(value='1') FI/HEL
-                        option(value='0') FI/VAN
-                    h2 Kilometrit
-
-                    .ui.right.labeled.input
-                        input#kilometer(type='number', placeholder='Aloitus kilometrit')
-                        .ui.basic.label km
-                    h2 Aloitus
-                    input#startTime(type='text', placeholder='08:00')
-                    br
-                    br
-                    a#nextBtn.ui.button(href='/final') Seuraava
-            .column
+  script(src='static/js/startpage.js')
+  .ui.container
+    img#argLogo.ui.centered.image(src='static/images/logo.jpg')
+    br
+    .ui.three.column.grid
+      .column
+      .column
+        .ui.form
+          h2 Kuljettaja
+          input(type='text', name='employee' placeholder='Nimi')
+          h2 Auto
+          .ui.fluid.search.selection.dropdown
+            i.dropdown.icon
+            .default.text.input Valitse auto
+            .menu
+              .item XXX-313
+              .item AAA-123
+              .item BBB-666
+              .item BBC-505
+              .item CCL-232
+              .item WTF-420
+              .item YOL-069
+              .item TIS-517
+          h2 Reitti
+          .ui.fluid.search.selection.dropdown
+            i.dropdown.icon
+            .default.text.input Valitse reitti
+            .menu
+              .item FI/HEL
+              .item FI/VAN
+          h2 Kilometrit
+          .ui.right.labeled.input
+            input(type='number', name='kilometer' placeholder='Aloitus kilometrit')
+            .ui.basic.label km
+          h2 Aloitus
+          input(type='text', name='startTime' placeholder='08:00')
+          br
+          br
+          button#laheta.ui.button paska
+          a#nextBtn.ui.button(href='/final') Seuraava
+      .column
+  script(type='text/javascript').
+    $('.ui.fluid.search.selection.dropdown')
+    .dropdown()
+    ;

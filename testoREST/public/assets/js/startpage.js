@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $("#laheta").click(function(){
 
-    var driver = $("input[name=driver]").val()
+    var employee = $("input[name=employee]").val()
     var carSelect = $("#carSelect").val()
     var routeSelect = $("#routeSelect").val();
     var kilometer = $("input[name=kilometer]").val();
@@ -12,7 +12,7 @@ $(document).ready(function(){
       type: 'JSON',
       url: 'http://localhost:8080/api/workdays',
       data: {
-        employee: driver,
+        employee: employee,
         car: carSelect,
         route: routeSelect,
         start_km: kilometer,
@@ -20,10 +20,12 @@ $(document).ready(function(){
       },
 
       success: function(data){
+        console.log(startTime)
         console.log(data)
       },
 
       error: function(err){
+        console.log(start_time)
         alert(JSON.stringify(err))
       }
     })
