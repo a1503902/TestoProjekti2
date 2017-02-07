@@ -73,16 +73,16 @@ router.post('/', function(req, res) {
 router.put('/:workdayId', function(req, res) {
 
     // Validation
-    req.checkBody({
-        'stop_time': {
-            notEmpty: true,
-            errorMessage: 'Stop time missing'
-        },
-		'stop_km': {
-            notEmpty: true,
-            errorMessage: 'Stop kilometers missing'
-        }
-    });
+    // req.checkBody({
+    //     'stop_time': {
+    //         notEmpty: true,
+    //         errorMessage: 'Stop time missing'
+    //     },
+	// 	'stop_km': {
+    //         notEmpty: true,
+    //         errorMessage: 'Stop kilometers missing'
+    //     }
+    // });
 
     var errors = req.validationErrors();
     if (errors) {
