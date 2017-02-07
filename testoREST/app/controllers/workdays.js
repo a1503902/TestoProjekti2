@@ -104,25 +104,29 @@ router.put('/:workdayId', function(req, res) {
 	    var postnord = {};
 	    var bring = {};
 	    var innight = {};
-        deliveries.postnord = postnord;
-	    deliveries.bring = bring;
-	    deliveries.innight = innight;
-	    workday.deliveries = deliveries;
-	    postnord.delivery = req.body.deliveries.postnord.delivery;
-	    bring.delivery = req.body.deliveries.bring.delivery;
-	    postnord.pickup = req.body.deliveries.postnord.pickup;
-	    bring.pickup = req.body.deliveries.bring.pickup;
-	    postnord.unknown = req.body.deliveries.postnord.unknown;
-	    bring.dhl_return = req.body.deliveries.bring.dhl_return;
-	    postnord.nt = req.body.deliveries.postnord.nt;
-	    bring.nt = req.body.deliveries.bring.nt;
-	    innight.packages = req.body.deliveries.innight.packages;
-	    innight.stops = req.body.deliveries.innight.stops;
-	    workday.stop_time = req.body.stop_time;
-	    workday.stop_km = req.body.stop_km;
-	    workday.adt_info = req.body.adt_info;
-		workday.complete = req.body.complete;
 
+
+        
+        postnord.delivery = req.body.deliveries.postnord.delivery;
+        bring.delivery = req.body.deliveries.bring.delivery;
+        postnord.pickup = req.body.deliveries.postnord.pickup;
+        bring.pickup = req.body.deliveries.bring.pickup;
+        postnord.unknown = req.body.deliveries.postnord.unknown;
+        bring.dhl_return = req.body.deliveries.bring.dhl_return;
+        postnord.nt = req.body.deliveries.postnord.nt;
+        bring.nt = req.body.deliveries.bring.nt;
+        innight.packages = req.body.deliveries.innight.packages;
+        innight.stops = req.body.deliveries.innight.stops;
+        workday.stop_time = req.body.stop_time;
+        workday.stop_km = req.body.stop_km;
+        workday.adt_info = req.body.adt_info;
+        workday.complete = req.body.complete;
+
+        deliveries.postnord = postnord;
+        deliveries.bring = bring;
+        deliveries.innight = innight;
+        workday.deliveries = deliveries;
+        
 		workday.save(function(err) {
             if (err) {
                 res.send(err);
