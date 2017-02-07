@@ -66,17 +66,17 @@ block content
                 .column
                     h2 Lopetus
 
-                    input#endTime(type='text', placeholder='16:00')
+                    input#endTime(type='text', name='endTime' placeholder='16:00')
                     h2 Tauot
 
-                    input#breakAmount(type='number', placeholder='Aika minuutteina')
+                    input#breakAmount(type='number', name='breaks' placeholder='Aika minuutteina')
                     h2 Kilometrit
                     .ui.right.labeled.input
-                        input(type='number', placeholder='Lopetus kilometrit')
+                        input(type='number', name='endKm' placeholder='Lopetus kilometrit')
                         .ui.basic.label km
                     h2 Kommentit
 
-                    input#comment(type='text', placeholder='Lisätiedot')
+                    input#comment(type='text', name='adtInfo' placeholder='Lisätiedot')
                     br
                     br
 

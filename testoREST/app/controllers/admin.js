@@ -6,7 +6,7 @@ var config  = require('../../config');
 var pug     = require('pug');
 
 router.get('/login', function(req, res){
-	res.render('admin/login', { title: 'Hey', message: 'Hello there!'});
+	res.render('admin/login', { title: 'Login'});
 });
 
 // REST
