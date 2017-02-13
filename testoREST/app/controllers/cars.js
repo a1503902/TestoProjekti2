@@ -4,11 +4,17 @@ var Car = require('../models/car');
 
 // Get all cars
 router.get('/', function(req, res) {
-    Car.find({}, '_id name', function(err, cars) {
+    Car.find('_id name', function(err, cars) {
         if (err) {
-            res.send({success: false, message: err});
+            res.send({
+                        success: false,
+                        message: err
+            });
         }
-        res.json({success: true, data: cars});
+        res.json({
+                    success: true,
+                    data: cars
+        });
     });
 });
 

@@ -1,47 +1,53 @@
 extends ../layouts/admin.pug
 
 block content
-    h1 Moi
-
         h1.ui.dividing.header Reitit
         button(data-action="add-route").ui.orange.button Lisää uusi reitti
         table.ui.table#routes-table
             thead
                 tr
-                    th Reitti
+                    th.eight.wide Reitti
+                    th.four.wide
+                    th.four.wide
             tbody
                 tr
-                    td(colspan="4") Ei reittejä...
+                    td
+                    td
 
 block scripts
-script.
-    function loadRoutes(){
-        $.ajax({
-            url: "http://localhost:8080/api/routes",
-            method: "GET",
-            type: "JSON",
-            success: function(response){
-                if(!!response.success && response.success == true){
-                    if(response.data.length > 0){
-                        $("#routes-table tbody").html("");
-                        for(var i = 0; i < response.data.length; i++){
-                            var row = $('<tr />');
-                            $("#routes-table tbody").append(row);
-                            row.append('<td>' + response.data[i].name + '</td>');
+    script.
+        function loadRoutes(){
+            $.ajax({
+                url: "http://localhost:8080/api/routes",
+                method: "GET",
+                type: "JSON",
+                success: function(response){
+                    if(!!response.success && response.success == true){
+                        if(response.data.length > 0){
+                            $("#routes-table tbody").html("");
+                            for(var i = 0; i < response.data.length; i++){
+                                var row = $('<tr />');
+                                $("#routes-table tbody").append(row);
+                                row.append('<td>' + response.data[i].name + '</td>');
+                                row.append("<td><div class='two ui buttons'>" +
+                                    "<button class='ui red button' data-action=''><i class='remove icon'/>Poista</button>" +
+                                    "<button class='ui button' data-action=''><i class='settings icon'/>Muokkaa</button>" +
+                                    "</div></td>");
+                                row.append('<td/>');
+                            }
                         }
+                    }else{
+                        alert("Failed to load data: " + data.message);
                     }
-                }else{
-                    alert("Failed to load data: " + data.message);
+                },
+                error: function(err){
+                    alert("Failed to load data: " + JSON.stringify(err));
                 }
-            },
-            error: function(err){
-                alert("Failed to load data: " + JSON.stringify(err));
-            }
-        });
-    }
+            });
+        }
 
-    $(function(){
-        loadRoutes();
-    });
+        $(function(){
+            loadRoutes();
+        });
 
 

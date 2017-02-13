@@ -14,8 +14,8 @@ router.get('/', function(req, res) {
         res.json({
             success: true,
             data: routes
+            });
         });
-    });
 });
 
 // Find by ID
