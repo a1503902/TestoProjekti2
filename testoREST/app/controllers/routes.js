@@ -4,11 +4,17 @@ var Route = require('../models/route');
 
 // Get all routes
 router.get('/', function(req, res) {
-    Route.find(function(err, deliveries) {
+    Route.find(function(err, routes) {
         if (err) {
-            res.send(err);
+            res.send({
+                success: false,
+                message: err
+            });
         }
-        res.json(deliveries);
+        res.json({
+            success: true,
+            data: routes
+        });
     });
 });
 
