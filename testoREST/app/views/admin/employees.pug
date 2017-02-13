@@ -21,10 +21,22 @@ block content
 		.header Lisää uusi työntekijä
 		.content
 			.description
-				p jebajee
+				.ui.form
+					.field
+						label Etunimi
+						input(type="text", name="firstname")
+					.field
+						label Sukunimi
+						input(type="text", name="lastname")
+					.field
+						label Käyttäjätunnus
+						input(type="text", name="username")
+					.field
+						label Salasana
+						input(type="text", name="password")
+					button(type="button", data-action="save-employee").ui.orange.button Lisää työntekijä
 		.actions
 			.ui.button Peruuta
-			.ui.button Lisää työntekijä
 
 block scripts
 	script.
@@ -57,6 +69,47 @@ block scripts
 				}
 			});
 		}
+
+		$(document).on('click', 'button[data-action=save-employee]', function(){
+			var firstname = $("input[name=firstname]").val();
+			var lastname  = $("input[name=lastname]").val();
+			var username  = $("input[name=username]").val();
+			var password  = $("input[name=password]").val();
+			if(firstname == ''){
+				alert('Etunimi puuttuu');
+				return;
+			}
+			if(lastname == ''){
+				alert('Sukunimi puuttuu');
+				return;
+			}
+			if(username == ''){
+				alert('Käyttäjänimi puuttuu');
+				return;
+			}
+			if(password == ''){
+				alert('Salasana puuttuu');
+				return;
+			}
+
+			$.ajax({
+				url: '/api/employees',
+				method: 'POST',
+				type: 'JSON',
+				data: {firstname: firstname, lastname: lastname, username: username, password: password},
+				success: function(response){
+					if(!!response.success && response.success){
+						alert('Työntekijä lisätty!');
+						location.reload();
+					}else{
+						alert(response.message);
+					}
+				},
+				error: function(err){
+					alert(JSON.stringify(err));
+				}
+			});
+		});
 
 		$("#modal-add-employee").modal();
 		$(document).on('click', 'button[data-action=add-employee]', function(){
