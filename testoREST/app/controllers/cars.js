@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
         if (err) {
             res.send({success: false, message: err});
         }
-        res.json(success: true, data: cars});
+        res.json({success: true, data: cars});
     });
 });
 
