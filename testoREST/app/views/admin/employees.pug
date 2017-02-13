@@ -1,8 +1,49 @@
 extends ../layouts/admin.pug
 
 block content
-	h1.ui.header Työntekijät
-		
+	h1.ui.dividing.header Työntekijät
+	button(data-action="add-emloyee").ui.orange.button Lisää uusi työntekijä
+	table.ui.table#employees-table
+		thead
+			tr
+				th Etunimi
+				th Sukunimi
+				th Käyttäjänimi
+				th
+		tbody
+			tr
+				td(colspan="4") Ei työntekijöitä...
 
 block scripts
-	script
+	script.
+		function loadEmployees(){
+			$.ajax({
+				url: "http://localhost:8080/api/employees",
+				method: "GET",
+				type: "JSON",
+				success: function(response){
+					if(!!response.success && response.success){
+						if(response.data.length > 0){
+							$("#employees-table tbody").html("");
+							for(var i = 0; i < response.data.length; i++){
+								var row = $('<tr />');
+								$("#employees-table tbody").append(row);
+								row.append('<td>' + response.data[i].firstname + '</td>');
+								row.append('<td>' + response.data[i].lastname + '</td>');
+								row.append('<td>' + response.data[i].username + '</td>');
+								row.append('<td>Nappulat tänne</td>');
+							}
+						}
+					}else{
+						alert("Failed to load data: " + data.message);
+					}
+				},
+				error: function(err){
+					alert("Failed to load data: " + JSON.stringify(err));
+				}
+			});
+		}
+
+		$(function(){
+			loadEmployees();
+		});

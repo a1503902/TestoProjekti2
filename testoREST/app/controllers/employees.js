@@ -6,9 +6,9 @@ var Employee = require('../models/employee');
 router.get('/', function(req, res){
 	Employee.find(function(err, employees) {
         if (err){
-            res.send(err);
+            res.send({success: false, message: err});
         }
-        res.json(employees);
+        res.json({success: true, data: employees});
     });
 });
 
