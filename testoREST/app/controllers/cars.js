@@ -6,9 +6,9 @@ var Car = require('../models/car');
 router.get('/', function(req, res) {
     Car.find({}, '_id name', function(err, cars) {
         if (err) {
-            res.send(err);
+            res.send({success: false, message: err});
         }
-        res.json(cars);
+        res.json(success: true, data: cars});
     });
 });
 
