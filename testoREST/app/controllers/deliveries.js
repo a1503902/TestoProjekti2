@@ -6,9 +6,9 @@ var Delivery 	= require('../models/delivery');
 router.get('/', function(req, res){
     Delivery.find(function(err, deliveries) {
         if (err){
-            res.send(err);
+            res.send({success: false, message: err});
         }
-        res.json(deliveries);
+        res.json({success: true, data: deliveries});
     });
 });
 

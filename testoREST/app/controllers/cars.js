@@ -15,6 +15,9 @@ router.get('/', function(req, res) {
                     success: true,
                     data: cars
         });
+            res.send({success: false, message: err});
+        }
+        res.json({success: true, data: cars
     });
 });
 

@@ -6,7 +6,7 @@ var Workday = require('../models/workday')
 router.get('/', function(req, res) {
     Workday.find(function(err, workdays) {
         if (err) throw err
-        res.json(workdays)
+        res.json({success: true, data: workdays})
     })
 });
 
