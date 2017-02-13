@@ -2,7 +2,7 @@ extends ../layouts/admin.pug
 
 block content
         h1.ui.dividing.header Reitit
-        button(data-action="add-route").ui.orange.button Lisää uusi reitti
+        button(data-action="add-route").ui.icon.orange.button Lisää uusi reitti
         table.ui.table#routes-table
             thead
                 tr
@@ -13,6 +13,19 @@ block content
                 tr
                     td
                     td
+
+        .ui.modal#modal-add-route
+            i.close.icon
+            .header Lisää uusi reitti
+            .content
+                .description
+                    .ui.form
+                        .field
+                            label Reitin nimi
+                            input(type="text", name="routeName")
+                        button(type="button", data-action="save-route").ui.orange.button Lisää reitti
+            .actions
+                .ui.button Peruuta
 
 block scripts
     script.
@@ -29,11 +42,20 @@ block scripts
                                 var row = $('<tr />');
                                 $("#routes-table tbody").append(row);
                                 row.append('<td>' + response.data[i].name + '</td>');
+                                /*
+                                row.append('<td><div class="ui icon basic compact buttons right floated"><button type="button" class="ui button tooltip" data-action="delete-route" data-content="Poista" data-id="' +
+                                    data._id + '"><i class="remove red icon"></i></button><button type="button" class="ui button tooltip" data-action="edit-route" data-content="Muokkaa" data-id="' +
+                                    data._id + '"><i class="edit black icon"></i></button></div>');
+                                row.append('<td/>');
+                                */
+
                                 row.append("<td><div class='two ui buttons'>" +
-                                    "<button class='ui red button' data-action=''><i class='remove icon'/>Poista</button>" +
-                                    "<button class='ui button' data-action=''><i class='settings icon'/>Muokkaa</button>" +
+                                    "<button class='ui red button' data-action='delete-route'><i class='remove icon'/>Poista</button>" +
+                                    "<button class='ui button' data-action='edit-route'><i class='settings icon'/>Muokkaa</button>" +
                                     "</div></td>");
                                 row.append('<td/>');
+
+
                             }
                         }
                     }else{
@@ -48,6 +70,60 @@ block scripts
 
         $(function(){
             loadRoutes();
+        });
+
+        $(document).on('click', 'button[data-action=save-route]', function () {
+            var routeName = $("input[name=routeName]").val();
+
+            if (routeName == '') {
+                alert('Reitti puuttuu');
+                return;
+            }
+
+            $.ajax({
+                url: '/api/routes',
+                method: 'POST',
+                type: 'JSON',
+                data: {name: routeName},
+                success: function (response) {
+                    if (!!response.success && response.success) {
+                        alert('Reitti lisätty!');
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+        });
+
+        $("#modal-add-route").modal();
+        $(document).on('click', 'button[data-action=add-route]', function () {
+            $("#modal-add-route").modal('show');
+        });
+
+        $(document).on('click', 'button[data-action=delete-route]', function () {
+            if (confirm('Haluatko varmasti poistaa tämän reitin?')) {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '/api/routes/' + id,
+                    method: 'DELETE',
+                    type: 'JSON',
+                    success: function (response) {
+                        if (!!response.success && response.success) {
+                            alert('Reitti poistettu!');
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
+                    }
+                });
+            }
         });
 
 
