@@ -10,7 +10,9 @@ block content
 				th Date
 				th Auto
 				th Reitti
-				th Mitä työntekijä tekee
+				th Deliveries (Postnord)
+				th Deliveries (Bring)
+				th Deliveries (Innight)
 		tbody
 			tr
 				td(colspan="4") Ei toimituksia
@@ -33,6 +35,19 @@ block scripts
 									row.append('<td>' + response.data[i].created_at + '</td>');
 									row.append('<td>' + response.data[i].car + '</td>');
 									row.append('<td>' + response.data[i].route + '</td>');
+									//Postnord
+									row.append('<td>' + response.data[i].deliveries.postnord.delivery + '<br>' +
+																		+ response.data[i].deliveries.postnord.pickup +'<br>' +
+																		+ response.data[i].deliveries.postnord.unknown +'<br>' +
+																		+ response.data[i].deliveries.postnord.nt + '</td>');
+									//Bring
+									row.append('<td>' + response.data[i].deliveries.bring.delivery + '<br>' +
+									 									+	response.data[i].deliveries.bring.pickup + '<br>' +
+																		+ response.data[i].deliveries.bring.dhl_return + '<br>' +
+																		+ response.data[i].deliveries.bring.nt + '</td>');
+									//Innight
+									row.append('<td>' + response.data[i].deliveries.innight.packages + '<br>' +
+									 									+	response.data[i].deliveries.innight.stops + '<br>' + '</td>');
 								}
 							}
 						}else{
