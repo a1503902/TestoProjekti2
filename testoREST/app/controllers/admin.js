@@ -11,6 +11,16 @@ router.get('/tracking', function(req, res){
 
 router.get('/cars', function(req, res){
     res.render('admin/cars', { title: 'Cars'});
+
+router.get('/routes', function(req, res){
+	res.render('admin/routes', { title: 'Reitit'});
 });
+
+router.get('/employees', function(req, res){
+	res.render('admin/employees', { title: 'Työntekijät'});
+});
+
+router.get('/password', function(req, res){
+	res.render('admin/password', { title: 'Salasana'});
 
 module.exports = router;
