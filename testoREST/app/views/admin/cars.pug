@@ -2,7 +2,7 @@ extends ../layouts/admin.pug
 
 block content
     h1.ui.dividing.header= title
-    button(data-action="add-employee").ui.orange.button Lisää uusi auto
+    button(data-action="add-car").ui.orange.button Lisää uusi auto
     table.ui.table#cars-table
         thead
             tr
@@ -13,6 +13,19 @@ block content
             tr
                 td
                 td
+
+        .ui.modal#modal-add-car
+            i.close.icon
+            .header Lisää uusi auto
+            .content
+                .ui.form
+                    label Lisää rekisterinumero
+                    input(name="rekisterinumero" placeholder="ABC-123" type="text")
+            .actions
+                .ui.cancel.icon.red.button
+                    i.remove.icon
+                    |Peruuta
+                .ui.positive.button Lisää työntekijä
 block scripts
     script.
         function loadCars(){
@@ -29,8 +42,8 @@ block scripts
                                 $("#cars-table tbody").append(row);
                                 row.append('<td>' + response.data[i].name + '</td>');
                                 row.append("<td><div class='two ui buttons'>" +
-                                    "<button class='ui red button' data-action=''><i class='remove icon'/>Poista</button>" +
-                                    "<button class='ui button' data-action=''><i class='settings icon'/>Muokkaa</button>" +
+                                    "<button class='ui red icon button' data-action=''><i class='remove icon'/>Poista</button>" +
+                                    "<button class='ui icon button' data-action=''><i class='settings icon'/>Muokkaa</button>" +
                                     "</div></td>");
                                 row.append('<td/>');
                             }
@@ -47,4 +60,9 @@ block scripts
 
         $(function(){
             loadCars();
+        });
+
+        $("#modal-add-car").modal();
+        $(document).on('click', 'button[data-action=add-car]', function () {
+            $("#modal-add-car").modal('show');
         });
