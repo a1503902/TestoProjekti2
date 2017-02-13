@@ -6,11 +6,11 @@ var config  = require('../../config');
 var pug     = require('pug');
 
 router.get('/tracking', function(req, res){
-	res.render('admin/tracking', { title: 'Tracking'});
+	res.render('admin/tracking', { title: 'Seuranta'});
 });
 
 router.get('/cars', function(req, res){
-    res.render('admin/cars', { title: 'Cars'});
+    res.render('admin/cars', { title: 'Autot'});
 });
 
 router.get('/routes', function(req, res){
