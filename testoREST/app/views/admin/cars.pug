@@ -1,3 +1,50 @@
-extends ../layouts/list.pug
+extends ../layouts/admin.pug
 
 block content
+    h1.ui.dividing.header= title
+    button(data-action="add-car").ui.orange.button Lisää uusi auto
+    table.ui.table#cars-table
+        thead
+            tr
+                th.eight.wide Auto
+                th.six.wide
+                th.two.wide
+        tbody
+            tr
+                td
+                td
+block scripts
+    script.
+        function loadCars(){
+            $.ajax({
+                url: "http://localhost:8080/api/cars",
+                method: "GET",
+                type: "JSON",
+                success: function(response){
+                    if(!!response.success && response.success){
+                        if(response.data.length > 0){
+                            $("#cars-table tbody").html("");
+                            for(var i = 0; i < response.data.length; i++){
+                                var row = $('<tr />');
+                                $("#cars-table tbody").append(row);
+                                row.append('<td>' + response.data[i].name + '</td>');
+                                row.append("<td><div class='two ui buttons'>" +
+                                    "<button class='ui red button' data-action=''><i class='remove icon'/>Poista</button>" +
+                                    "<button class='ui button' data-action=''><i class='settings icon'/>Muokkaa</button>" +
+                                    "</div></td>");
+                                row.append('<td/>');
+                            }
+                        }
+                    }else{
+                        alert("Failed to load data: " + data.message);
+                    }
+                },
+                error: function(err){
+                    alert("Failed to load data: " + JSON.stringify(err));
+                }
+            });
+        }
+
+        $(function(){
+            loadCars();
+        });
