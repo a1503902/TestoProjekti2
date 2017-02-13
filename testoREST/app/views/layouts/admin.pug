@@ -5,12 +5,52 @@ html(lang="en")
     meta(charset = "UTF-8")
     link(rel="stylesheet" type="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
-    link(rel="stylesheet" type="text/css" href="/static/css/style.css")
+    link(rel="stylesheet" type="text/css" href="/static/css/admin.css")
     meta(viewport="width=device-width, initial-scale=1.0")
 
-    
   body
-    block content
+    .topbar-m
+      .ui.grid.fluid
+        .twelve.wide.column
+          a(href='')
+            .menu-logo.img-responsive
+        .four.wide.column
+          button.menu-btn
+            i.icon.list.big.sidebar
+      .ui.top.right.dropdown.menu-m
+        .menu
+          .header
+            p Yleiset
+          .scrolling.menu
+            a.item(href='tracking') Seuranta
+          .scrolling.menu
+            a.item(href='employees') Työntekijät
+          .scrolling.menu
+            a.item(href='cars') Autot
+          .scrolling.menu
+            a.item(href='routes') Reitit
+          .divider
+          .header
+            p Asetukset
+          .scrolling.menu
+            a.item(href='password') Salasana
+    .topbar
+      .topbar-logo.pull-left
+      .topbar-menu.fluid
+        nav.topbar-nav.pull-right
+          a(href='logout')
+            i.fa.fa-sign-out Kirjaudu Ulos
+    .ui.sidebar.secondary.vertical.pointing.menu.visible.uncover.sidebar-navigation
+      .header.item
+        p Yleiset
+      a.item(href='tracking') Seuranta
+      a.item(href='employees') Työntekijät
+      a.item(href='cars') Autot
+      a.item(href='routes') Reitit
+      .header.item
+        p Asetukset
+      a.item(href='password') Salasana
+    .pusher.main-content
+      block content
 
-  footer
-    p Team Testo
+  block scripts
