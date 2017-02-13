@@ -2,7 +2,7 @@ extends ../layouts/admin.pug
 
 block content
 	h1.ui.dividing.header Työntekijät
-	button(data-action="add-emloyee").ui.orange.button Lisää uusi työntekijä
+	button(data-action="add-employee").ui.orange.button Lisää uusi työntekijä
 	table.ui.table#employees-table
 		thead
 			tr
@@ -13,6 +13,16 @@ block content
 		tbody
 			tr
 				td(colspan="4") Ei työntekijöitä...
+
+	.ui.modal#modal-add-employee
+		i.close.icon
+		.header Lisää uusi työntekijä
+		.content
+			.description
+				p jebajee
+		.actions
+			.ui.button Peruuta
+			.ui.button Lisää työntekijä
 
 block scripts
 	script.
@@ -26,13 +36,15 @@ block scripts
 						if(response.data.length > 0){
 							$("#employees-table tbody").html("");
 							for(var i = 0; i < response.data.length; i++){
-								var row = $('<tr />');
+								var data = response.data[i];
+								var row  = $('<tr />');
 								$("#employees-table tbody").append(row);
-								row.append('<td>' + response.data[i].firstname + '</td>');
-								row.append('<td>' + response.data[i].lastname + '</td>');
-								row.append('<td>' + response.data[i].username + '</td>');
-								row.append('<td>Nappulat tänne</td>');
+								row.append('<td>' + data.firstname + '</td>');
+								row.append('<td>' + data.lastname + '</td>');
+								row.append('<td>' + data.username + '</td>');
+								row.append('<td><div class="ui icon basic compact buttons right floated"><button type="button" class="ui button tooltip" data-action="delete-employee" data-content="Poista" data-id="' + data._id + '"><i class="remove red icon"></i></button><button type="button" class="ui button tooltip" data-action="edit-employee" data-content="Muokkaa" data-id="' + data._id + '"><i class="edit black icon"></i></button></div></td>');
 							}
+							$(".tooltip").popup();
 						}
 					}else{
 						alert("Failed to load data: " + data.message);
@@ -43,6 +55,34 @@ block scripts
 				}
 			});
 		}
+
+		$("#modal-add-employee").modal();
+		$(document).on('click', 'button[data-action=add-employee]', function(){
+			$("#modal-add-employee").modal('show');
+		});
+
+		$(document).on('click', 'button[data-action=delete-employee]', function(){
+			if(confirm('Haluatko varmasti poistaa tämän työntekijän?')){
+				var id = $(this).data('id');
+				$.ajax({
+					url: '/api/employees/' + id,
+					method: 'DELETE',
+					type: 'JSON',
+					success: function(response){
+						if(!!response.success && response.success){
+							alert('Työntekijä poistettu!');
+							location.reload();
+						}else{
+							alert(response.message);
+						}
+					},
+					error: function(err){
+						alert(JSON.stringify(err));
+					}
+				});
+			}
+		});
+
 
 		$(function(){
 			loadEmployees();

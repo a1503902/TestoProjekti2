@@ -121,7 +121,7 @@ router.delete('/:employeeId', function(req, res){
         _id: req.params.employeeId
     }, function(err, employee) {
         if (err){
-            res.send(err);
+            res.send({success: false, message: err});
         }
         res.json({ success: true, message: 'Employee successfully deleted' });
     });
