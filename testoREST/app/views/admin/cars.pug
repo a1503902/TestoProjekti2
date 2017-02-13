@@ -6,12 +6,10 @@ block content
     table.ui.table#cars-table
         thead
             tr
-                th.eight.wide Auto
-                th.six.wide
-                th.two.wide
+                th Auto
+                th
         tbody
             tr
-                td
                 td
 
         .ui.modal#modal-add-car
@@ -19,13 +17,34 @@ block content
             .header Lisää uusi auto
             .content
                 .ui.form
-                    label Lisää rekisterinumero
-                    input(name="rekisterinumero" placeholder="ABC-123" type="text")
+                    .field
+                        label Lisää rekisterinumero
+                        input(name="name", placeholder="ABC-123", type="text")
+                    button(type="button", data-action="save-car").ui.orange.icon.button
+                        i.add.icon
+                        |Lisää auto
             .actions
-                .ui.cancel.icon.red.button
+                Button.ui.red.icon.button.cancel
                     i.remove.icon
                     |Peruuta
-                .ui.positive.button Lisää työntekijä
+
+        .ui.modal#modal-car-settings
+            i.close.icon
+            h1.header
+            .content
+                .ui.form
+                    .field
+                        label Anna uusi rekisterinumero
+                        input(type="text", name="uname", placeholder="ABC-123")
+                    .field
+                        input(name="id", type="hidden")
+                    button(type="button", data-action="update-car").ui.orange.icon.button
+                        i.undo.icon
+                        | Päivitä
+            .actions
+                Button.ui.red.icon.button.cancel
+                    i.remove.icon
+                    | Peruuta
 block scripts
     script.
         function loadCars(){
@@ -38,15 +57,17 @@ block scripts
                         if(response.data.length > 0){
                             $("#cars-table tbody").html("");
                             for(var i = 0; i < response.data.length; i++){
+                                var data = response.data[i];
                                 var row = $('<tr />');
                                 $("#cars-table tbody").append(row);
-                                row.append('<td>' + response.data[i].name + '</td>');
-                                row.append("<td><div class='two ui buttons'>" +
-                                    "<button class='ui red icon button' data-action=''><i class='remove icon'/>Poista</button>" +
-                                    "<button class='ui icon button' data-action=''><i class='settings icon'/>Muokkaa</button>" +
-                                    "</div></td>");
-                                row.append('<td/>');
+                                row.append('<td>' + data.name + '</td>');
+                                row.append("<td><div class='ui icon compact buttons right floated'>"+
+                                    "<button class='red ui button tooltip' data-content='Poista' data-action='delete-car' " +
+                                    "data-id="+data._id +"data-name="+data.name+"><i class='remove icon'/></button>" +
+                                    "<button class='ui button tooltip' data-content='Muokkaa' data-action='car-settings' " +
+                                    "data-id=" + data._id +" data-name=" + data.name+ "><i class='edit black icon'/></button></div></td>");
                             }
+                            $(".tooltip").popup();
                         }
                     }else{
                         alert("Failed to load data: " + data.message);
@@ -62,7 +83,88 @@ block scripts
             loadCars();
         });
 
-        $("#modal-add-car").modal();
         $(document).on('click', 'button[data-action=add-car]', function () {
             $("#modal-add-car").modal('show');
+        });
+
+        $(document).on('click', 'button[data-action=save-car]', function () {
+            var name = $("input[name=name]").val();
+            if(name == ''){
+                alert('Rekisterinumero puuttuu.');
+                return;
+            }
+            $.ajax({
+                url: '/api/cars',
+                method: 'POST',
+                type: 'JSON',
+                data: {name: name},
+                success: function (response) {
+                    if (!!response.success && response.success) {
+                        alert('Auto lisätty!');
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+        });
+
+        $(document).on('click', 'button[data-action=car-settings]', function () {
+            var name = $(this).data('name');
+            var id = $(this).data('id');
+            $("input[name=id]").val(id);
+            $("#modal-car-settings h1").html('');
+            $("#modal-car-settings h1").append(name);
+            $("#modal-car-settings").modal('show');
+        })
+
+        $(document).on('click', 'button[data-action=update-car]', function () {
+            var name = $("input[name=uname]").val();
+            if (name == '') {
+                alert('Rekisterinumero puuttuu.');
+                return;
+            }
+            var id = $("input[name=id]").val();
+            $.ajax({
+                url: '/api/cars/' + id,
+                method: 'PUT',
+                type: 'JSON',
+                data: {name: name},
+                success: function (response) {
+                    if (!!response.success && response.success) {
+                        alert('Auto päivitetty!');
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+        })
+
+        $(document).on('click', 'button[data-action=delete-car]', function () {
+            if (confirm('Haluatko varmasti poistaa tämän auton?')) {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '/api/cars/' + id,
+                    method: 'DELETE',
+                    type: 'JSON',
+                    success: function (response) {
+                        if (!!response.success && response.success) {
+                            alert('Auto poistettu!');
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
+                    }
+                });
+            }
         });

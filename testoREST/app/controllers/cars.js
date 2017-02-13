@@ -4,7 +4,7 @@ var Car = require('../models/car');
 
 // Get all cars
 router.get('/', function(req, res) {
-    Car.find('_id name', function(err, cars) {
+    Car.find(function(err, cars) {
         if (err) {
             res.send({
                         success: false,
@@ -127,7 +127,10 @@ router.delete('/:carId', function(req, res) {
         _id: req.params.carId
     }, function(err, car) {
         if (err) {
-            res.send(err);
+            res.send({
+                success: false,
+                message: err
+            });
         }
         res.json({
             success: true,

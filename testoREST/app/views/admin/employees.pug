@@ -55,7 +55,11 @@ block scripts
 								row.append('<td>' + data.firstname + '</td>');
 								row.append('<td>' + data.lastname + '</td>');
 								row.append('<td>' + data.username + '</td>');
-								row.append('<td><div class="ui icon basic compact buttons right floated"><button type="button" class="ui button tooltip" data-action="delete-employee" data-content="Poista" data-id="' + data._id + '"><i class="remove red icon"></i></button><button type="button" class="ui button tooltip" data-action="edit-employee" data-content="Muokkaa" data-id="' + data._id + '"><i class="edit black icon"></i></button></div></td>');
+								row.append('<td><div class="ui icon basic compact buttons right floated">' +
+									'<button type="button" class="ui button tooltip" data-action="delete-employee" data-content="Poista" data-id="' + data._id + '">' +
+									'<i class="remove red icon"></i></button>' +
+									'<button type="button" class="ui button tooltip" data-action="edit-employee" data-content="Muokkaa" data-id="' + data._id + '">' +
+									'<i class="edit black icon"></i></button></div></td>');
 							}
 							$(".tooltip").popup();
 						}
