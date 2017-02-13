@@ -8,7 +8,13 @@ block content
 			.ui.bottom.attached.segment
 				.ui.middle.aligned.grid
 					.column
-						.ui.form
+						-if(message != '')
+							.ui.negative.message
+								.header
+									Virhe
+								p #{message}
+						
+						form.ui.form(action='/admin/login', method='POST')
 							.field
 								label Käyttäjänimi
 								.ui.left.icon.input

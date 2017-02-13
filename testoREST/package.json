@@ -1,21 +1,22 @@
 {
-  "name": "node-api",
+  "name": "node-starter-api",
   "main": "server.js",
   "dependencies": {
-	"body-parser"      : "~1.0.1",
-	"express"          : "~4.0.0",
-	"jsonwebtoken"     : "^7.2.1",
-	"mongoose"         : "*",
-	"pug"              : "*",
-	"stylus"           : "*",
-	"nib"              : "*",
-	"nodemon"          : "*",
-	"express-validator": "*",
-	"cors"             : "*",
-	"passport"         : "*",
-	"passport-local"   : "*",
-	"bcrypt-nodejs"    : "*",
-	"connect-flash"    : "*",
-	"express-session"  : "*"
+    "bcrypt-nodejs": "*",
+    "body-parser": "~1.0.1",
+    "connect-flash": "*",
+    "cookie-parser": "*",
+    "cors": "*",
+    "express": "~4.0.0",
+    "express-session": "^1.15.1",
+    "express-validator": "*",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.8.2",
+    "nib": "*",
+    "nodemon": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "pug": "*",
+    "stylus": "*"
   }
 }

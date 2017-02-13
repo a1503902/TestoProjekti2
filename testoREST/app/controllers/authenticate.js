@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+var express  = require('express');
+var router   = express.Router();
 var Employee = require('../models/employee');
-var jwt = require('jsonwebtoken');
-var config = require('../../config');
+var jwt      = require('jsonwebtoken');
+var config   = require('../../config');
 
 router.post('/', function(req, res) {
     // Find user

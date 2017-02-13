@@ -5,57 +5,8 @@ var jwt     = require('jsonwebtoken');
 var config  = require('../../config');
 var pug     = require('pug');
 
-router.get('/login', function(req, res){
-	res.render('admin/login', { title: 'Login'});
-});
-
-// REST
-router.get('/setup', function(req, res){
-	// New admin object
-	var admin  = new Admin();
-
-	// Set params
-	admin.username = "admin";
-	admin.password = "admin";
-
-	// Insert admin to DB
-	var success = admin.save(function(err){
-		if(err){
-			message = "Failed to insert admin to db " + err;
-			return false;
-		}
-		return true;
-	});
-	if(success){
-		message = "Admin added";
-	}
-	res.json({success: success, message: message});
-});
-
-router.post('/', function(req, res){
-	// Find user
-	Admin.findOne({username: req.body.username}, function(err, admin){
-		// user not found
-		if(!admin){
-			res.json({ success: false, message: 'Authentication failed. User not found.'});
-		}else if(admin){
-			if(admin.password != req.body.password){
-				res.json({ success: false, message: 'Authentication failed. Invalid password.'});
-			}else{
-
-				var token = jwt.sign(admin, config.secret, {
-					expiresIn: 1440 // 24h token
-        		});
-
-        		res.json({
-		          success: true,
-		          message: 'Login success!',
-		          token: token
-		        });
-
-			}
-		}
-	});
+router.get('/dashboard', function(req, res){
+	res.json({message: 'asd'});
 });
 
 module.exports = router;
