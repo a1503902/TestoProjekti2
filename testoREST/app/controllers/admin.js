@@ -9,4 +9,8 @@ router.get('/tracking', function(req, res){
 	res.render('admin/tracking', { title: 'Tracking'});
 });
 
+router.get('/cars', function(req, res){
+    res.render('admin/cars', { title: 'Cars'});
+});
+
 module.exports = router;
