@@ -7,15 +7,15 @@ router.get('/', function(req, res) {
     Route.find(function(err, routes) {
         if (err) {
             res.send({
-                        success: false,
-                        message: err
+                success: false,
+                message: err
             });
         }
         res.json({
-                    success: true,
-                    data: routes
+            success: true,
+            data: routes
+            });
         });
-    });
 });
 
 // Find by ID
