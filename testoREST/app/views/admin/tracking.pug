@@ -1,7 +1,51 @@
 extends ../layouts/admin.pug
 
 block content
-	h1.ui.header Tracking
+	h1.ui.dividing.header Seuranta
+	button(data-action="show-delivery-employee").ui.orange.button Näytä toimitukset by employee
+	table.ui.table#deliveries-table
+		thead
+			tr
+				th Työntekijä
+				th Date
+				th Auto
+				th Reitti
+				th Mitä työntekijä tekee
+				th asdfgh
+		tbody
+			tr
+				td(colspan="4") Ei toimituksia
 
 block scripts
-	script
+	script.
+		function loadDeliveries(){
+			$.ajax({
+				url: "http://localhost:8080/api/workdays",
+				method: "GET",
+				type: "JSON",
+					success: function(response){
+						if(!!response.success && response.success == true){
+							if(response.data.length > 0){
+								$("#deliveries-table tbody").html("");
+								for(var i = 0; i < response.data.length; i++){
+									var row = $('<tr />');
+									$("#deliveries-table tbody").append(row);
+									row.append('<td>' + response.data[i].employee + '</td>');
+									row.append('<td>' + response.data[i].created_at + '</td>');
+									row.append('<td>' + response.data[i].car + '</td>');
+									row.append('<td>' + response.data[i].route + '</td>');
+								}
+							}
+						}else{
+							alert("Failed to load data: " + data.message);
+						}
+					},
+					error: function(err){
+						alert("Failed to load data: " + JSON.stringify(err));
+					}
+				});
+			}
+
+			$(function(){
+				loadDeliveries();
+			});
