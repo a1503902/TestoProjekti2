@@ -5,8 +5,8 @@ var jwt     = require('jsonwebtoken');
 var config  = require('../../config');
 var pug     = require('pug');
 
-router.get('/dashboard', function(req, res){
-	res.json({message: 'asd'});
+router.get('/tracking', function(req, res){
+	res.render('admin/tracking', { title: 'Tracking'});
 });
 
 module.exports = router;

@@ -63,7 +63,7 @@ router.post('/admin/login', function(req, res){
                 });
                 req.session.token = token;
                 req.flash('message', 'Login success!');
-                res.redirect('/admin/dashboard');
+                res.redirect('/admin/tracking');
             }
         }
     });

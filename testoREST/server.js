@@ -40,7 +40,7 @@ var middlewares = {
 					return res.redirect('/login');
 				}
 				if(!!user.isAdmin && user.isAdmin){
-					return res.redirect('/admin/dashboard');
+					return res.redirect('/admin/tracking');
 				}else{
 					return res.redirect('/employees/start');
 				}
@@ -117,16 +117,16 @@ var middlewares = {
 }
 
 // Front
-var loginController     = require('./app/controllers/login');
-var employeesController = require('./app/controllers/employees');
-var adminController     = require('./app/controllers/admin');
+var loginController = require('./app/controllers/login');
+var frontController = require('./app/controllers/front');
+var adminController = require('./app/controllers/admin');
 
 // REST
-var carsController         = require('./app/controllers/cars');
-var routesController       = require('./app/controllers/routes');
-var employeesController    = require('./app/controllers/employees');
-var workdaysController     = require('./app/controllers/workdays');
-var deliveriesController   = require('./app/controllers/deliveries');
+var carsController       = require('./app/controllers/cars');
+var routesController     = require('./app/controllers/routes');
+var employeesController  = require('./app/controllers/employees');
+var workdaysController   = require('./app/controllers/workdays');
+var deliveriesController = require('./app/controllers/deliveries');
 
 // Middlewares
 router.all('/login', middlewares.loginRedirect);
@@ -137,7 +137,7 @@ router.all('/api/*', middlewares.isAuthApi);
 
 // Routes
 router.use('/', loginController);
-router.use('/employees', employeesController);
+router.use('/employees', frontController);
 router.use('/admin', adminController);
 
 router.use('/api/cars', carsController);
