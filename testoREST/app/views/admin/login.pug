@@ -4,8 +4,8 @@ block content
 	.login-wrapper
 		.login-container
 			img(src='/static/images/logo.jpg')
+			p(style="text-align:center; padding-top: 10px;") Admin
 			h5.ui.top.attached.header Kirjaudu sisään
-				a(href='/login' style="padding-left: 5px;")  Switch to employee login
 			.ui.bottom.attached.segment
 				.ui.middle.aligned.grid
 					.column
@@ -14,7 +14,7 @@ block content
 								.header
 									Virhe
 								p #{message}
-						
+
 						form.ui.form(action='/admin/login', method='POST')
 							.field
 								label Käyttäjänimi
