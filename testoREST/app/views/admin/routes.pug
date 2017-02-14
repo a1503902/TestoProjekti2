@@ -49,9 +49,9 @@ block scripts
                                 row.append('<td/>');
                                 */
 
-                                row.append("<td><div class='two ui buttons'>" +
-                                    "<button class='ui red button' data-action='delete-route'><i class='remove icon'/>Poista</button>" +
-                                    "<button class='ui button' data-action='edit-route'><i class='settings icon'/>Muokkaa</button>" +
+                                row.append("<td><div class='ui icon basic compact buttons right floated'>" +
+                                    "<button class='ui button tooltip' data-action='delete-route'><i class='remove red icon'/></button>" +
+                                    "<button class='ui button tooltip' data-action='edit-route'><i class='edit black icon'/></button>" +
                                     "</div></td>");
                                 row.append('<td/>');
 
@@ -125,5 +125,3 @@ block scripts
                 });
             }
         });
-
-

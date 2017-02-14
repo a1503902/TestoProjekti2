@@ -6,23 +6,28 @@ var config  = require('../../config');
 var pug     = require('pug');
 
 router.get('/tracking', function(req, res){
-	res.render('admin/tracking', { title: 'Seuranta'});
+	var page = "tracking";
+	res.render('admin/tracking', { title: 'Seuranta', page: page});
 });
 
 router.get('/cars', function(req, res){
-    res.render('admin/cars', { title: 'Autot'});
+	var page = "cars";
+    res.render('admin/cars', { title: 'Autot', page: page});
 });
 
 router.get('/routes', function(req, res){
-	res.render('admin/routes', { title: 'Reitit'});
+	var page="routes";
+	res.render('admin/routes', { title: 'Reitit', page: page});
 });
 
 router.get('/employees', function(req, res){
-	res.render('admin/employees', { title: 'Työntekijät'});
+	var page="emplyees";
+	res.render('admin/employees', { title: 'Työntekijät', page: page});
 });
 
 router.get('/password', function(req, res){
-	res.render('admin/password', { title: 'Salasana'});
+	var page="password";
+	res.render('admin/password', { title: 'Salasana', page: page});
 });
 
 router.get('/logout', function(req, res){
