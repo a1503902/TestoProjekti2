@@ -2,7 +2,7 @@ $(document).ready(function(){
   $('.ui.fluid.search.selection.dropdown')
     .dropdown()
 
-  $("#laheta").click(function(){
+  $("#nextBtn").click(function(){
 
     var employee = $("input[name=employee]").val()
     var carSelect = $("#carSelect").val()
@@ -23,7 +23,7 @@ $(document).ready(function(){
       },
 
       success: function(data){
-        console.log(data)
+        window.location = '/employees/final'
       },
 
       error: function(err){
