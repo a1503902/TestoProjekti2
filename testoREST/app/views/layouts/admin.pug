@@ -10,7 +10,8 @@ html(lang="en")
     meta(viewport="width=device-width, initial-scale=1.0")
 
   body
-    .topbar-m
+
+    //.topbar-m
       .ui.grid.fluid
         .twelve.wide.column
           a(href='')
@@ -35,13 +36,13 @@ html(lang="en")
             p Asetukset
           .scrolling.menu
             a.item(href='password') Salasana
-    .topbar
+    //.topbar
       .topbar-logo.pull-left
       .topbar-menu.fluid
         nav.topbar-nav.pull-right
           a(href='logout')
             i.fa.fa-sign-out Kirjaudu Ulos
-    .ui.sidebar.secondary.vertical.pointing.menu.visible.uncover.sidebar-navigation
+    //.ui.sidebar.secondary.vertical.pointing.menu.visible.uncover.sidebar-navigation
       .header.item
         p Yleiset
       a.item(href='tracking') Seuranta
@@ -51,8 +52,18 @@ html(lang="en")
       .header.item
         p Asetukset
       a.item(href='password') Salasana
-    .pusher.main-content
-      block content
+    .ui.top.huge.fixed.menu.top-menu
+      .item.navigation-logo
+        img(src="/static/images/logo.jpg").ui.image
+      a.item(href='tracking') Seuranta
+      a.item(href='employees') Työntekijät
+      a.item(href='cars') Autot
+      a.item(href='routes') Reitit
+      .right.menu
+        a.ui.item(href='logout') Kirjaudu ulos
+    .pusher
+      .ui.fluid.container.main-content
+        block content
 
   script.
     $('.menu-m').dropdown();

@@ -201,15 +201,16 @@ b.caret {
 }
 .main-content {
     padding-top: 80px;
-    padding-left: 302px!important
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.topbar-m {
-    width: 100%;
-    background: #fff!important;
-    border-bottom: 1px solid #ddd;
-    display: none;
-    padding: 0 30px
+.top-navigation {
+    border-bottom: 2px solid #f2711c !important;   
 }
+.navigation-logo {
+    width: 200px !important;
+}
+
 .img-responsive {
     max-width: 100%;
     height: auto;

@@ -25,4 +25,9 @@ router.get('/password', function(req, res){
 	res.render('admin/password', { title: 'Salasana'});
 });
 
+router.get('/logout', function(req, res){
+	req.flash('message', 'Kirjauduttu ulos onnistuneesti.');
+	return res.redirect('/admin/login');
+	req.session = null;
+});
 module.exports = router;
