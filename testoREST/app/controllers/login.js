@@ -31,7 +31,7 @@ router.post('/login', function(req, res){
                 });
                 req.session.token = token;
                 req.flash('message', 'Login success!');
-                res.redirect('/start');
+                res.redirect('/employees/start');
             }
         }
     });
