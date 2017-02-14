@@ -7,6 +7,7 @@
     "connect-flash": "*",
     "cookie-parser": "*",
     "cors": "*",
+    "dateformat": "^2.0.0",
     "express": "~4.0.0",
     "express-session": "^1.15.1",
     "express-validator": "*",

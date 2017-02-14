@@ -42,11 +42,11 @@ router.post('/', function(req, res) {
     var workday = new Workday();
 
     // Set params
-    workday.employee = req.body.employee;
+    workday.employee   = req.body.employee;
     workday.start_time = req.body.start_time;
-	workday.car = req.body.car;
-	workday.route = req.body.route;
-    workday.start_km = req.body.start_km;
+    workday.car        = req.body.car;
+    workday.route      = req.body.route;
+    workday.start_km   = req.body.start_km;
 
     // Insert workday to DB
     var success = workday.save(function(err) {
@@ -100,33 +100,30 @@ router.put('/:workdayId', function(req, res) {
         }
 
         // Set params
-		var deliveries = {};
-	    var postnord = {};
-	    var bring = {};
-	    var innight = {};
+        var deliveries = {};
+        var postnord   = {};
+        var bring      = {};
+        var innight    = {};
 
-
-
-        postnord.delivery = req.body.deliveries.postnord.delivery;
-        bring.delivery = req.body.deliveries.bring.delivery;
-        postnord.pickup = req.body.deliveries.postnord.pickup;
-        bring.pickup = req.body.deliveries.bring.pickup;
-        postnord.unknown = req.body.deliveries.postnord.unknown;
-        bring.dhl_return = req.body.deliveries.bring.dhl_return;
-        postnord.nt = req.body.deliveries.postnord.nt;
-        bring.nt = req.body.deliveries.bring.nt;
-        innight.packages = req.body.deliveries.innight.packages;
-        innight.stops = req.body.deliveries.innight.stops;
-        workday.stop_time = req.body.stop_time;
-        workday.breaks = req.body.breaks;
-        workday.stop_km = req.body.stop_km;
-        workday.adt_info = req.body.adt_info;
-        workday.complete = req.body.complete;
-
+        postnord.delivery   = req.body.deliveries.postnord.delivery;
+        bring.delivery      = req.body.deliveries.bring.delivery;
+        postnord.pickup     = req.body.deliveries.postnord.pickup;
+        bring.pickup        = req.body.deliveries.bring.pickup;
+        postnord.unknown    = req.body.deliveries.postnord.unknown;
+        bring.dhl_return    = req.body.deliveries.bring.dhl_return;
+        postnord.nt         = req.body.deliveries.postnord.nt;
+        bring.nt            = req.body.deliveries.bring.nt;
+        innight.packages    = req.body.deliveries.innight.packages;
+        innight.stops       = req.body.deliveries.innight.stops;
+        workday.stop_time   = req.body.stop_time;
+        workday.breaks      = req.body.breaks;
+        workday.stop_km     = req.body.stop_km;
+        workday.adt_info    = req.body.adt_info;
+        workday.complete    = req.body.complete;
         deliveries.postnord = postnord;
-        deliveries.bring = bring;
-        deliveries.innight = innight;
-        workday.deliveries = deliveries;
+        deliveries.bring    = bring;
+        deliveries.innight  = innight;
+        workday.deliveries  = deliveries;
 
 		workday.save(function(err) {
             if (err) {
