@@ -27,7 +27,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429/ohjelmistoprojektidb');
 
 
-app.use(session({ secret: config.secret })); // session secret
+app.use(session({ secret: config.secret, resave: true, saveUninitialized: true })); // session secret
 app.use(flash());
 
 
