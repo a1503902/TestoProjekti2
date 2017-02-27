@@ -8,7 +8,8 @@ var config   = require('../../config');
 
 // Employee login
 router.get('/login', function(req, res){
-	res.render('login', { title: 'Kirjaudu'});
+    var message = req.flash('message');
+	res.render('login', { title: 'Kirjaudu', message: message});
 });
 
 router.post('/login', function(req, res){
