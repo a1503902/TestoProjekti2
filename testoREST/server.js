@@ -128,14 +128,14 @@ var routesController     = require('./app/controllers/routes');
 var employeesController  = require('./app/controllers/employees');
 var workdaysController   = require('./app/controllers/workdays');
 var deliveriesController = require('./app/controllers/deliveries');
-
+var messageController    = require('./app/controllers/message');
 // Middlewares
 
-// router.all('/login', middlewares.loginRedirect);
-// router.all('/admin/login', middlewares.loginRedirect);
-// router.all('/employees/*', middlewares.isAuth);
-// router.all('/admin/*', middlewares.isAdmin)
-// router.all('/api/*', middlewares.isAuthApi);
+router.all('/login', middlewares.loginRedirect);
+router.all('/admin/login', middlewares.loginRedirect);
+router.all('/employees/*', middlewares.isAuth);
+router.all('/admin/*', middlewares.isAdmin)
+router.all('/api/*', middlewares.isAuthApi);
 
 
 // Routes
@@ -148,7 +148,7 @@ router.use('/api/routes', routesController);
 router.use('/api/employees', employeesController);
 router.use('/api/workdays', workdaysController);
 router.use('/api/deliveries', deliveriesController);
-
+router.use('/api/message', messageController);
 // Set router to app
 app.use('/', router);
 

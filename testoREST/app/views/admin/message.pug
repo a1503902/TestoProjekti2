@@ -1,0 +1,115 @@
+extends ../layouts/admin.pug
+
+block content
+	h1.ui.dividing.header= title
+	button(data-action="send-message").ui.orange.button Lähetä uusi viesti
+
+	//table.ui.table#employees-table
+		thead
+			tr
+				th Etunimi
+				th Sukunimi
+				th Käyttäjänimi
+				th
+		tbody
+			tr
+				td(colspan="4") Ei työntekijöitä...
+
+	.ui.modal#modal-send-message
+		i.close.icon
+		.header Lähetä uusi viesti
+		.content
+			.description
+				.ui.form
+					.field
+						label Vastaanottajat
+						select.ui.fluid.search.dropdown#select-employees(multiple="")
+							option(value="") Valitse yksi tai useampi vastaanottaja
+					.field
+						label Otsikko
+						input(type="text", name="title")
+					.field
+						label Viesti
+						textarea(name="message", rows="7", cols="50")
+					button(type="button", data-action="save-message").ui.orange.button Lähetä viesti
+		.actions
+			.ui.button Peruuta
+
+block scripts
+	script.
+		//var employees = [];
+		function loadEmployees(){
+			$.ajax({
+				url: "http://localhost:8080/api/employees",
+				method: "GET",
+				type: "JSON",
+				success: function(response){
+					if(!!response.success && response.success){
+						if(response.data.length > 0){
+							employees = [];
+							//$("#select-employees").empty();
+							for(var i = 0; i < response.data.length; i++){
+								var employee = response.data[i];
+
+								$('#select-employees').append($('<option/>', { 
+									value: employee._id,
+									text: employee.firstname + ' ' + employee.lastname
+								}));
+							}
+						}
+					}else{
+						alert("Failed to load data: " + data.message);
+					}
+				},
+				error: function(err){
+					alert("Failed to load data: " + JSON.stringify(err));
+				}
+			});
+		}
+
+		$(document).on('click', 'button[data-action=save-message]', function(){
+
+			var title   = $("input[name=title]").val();
+			var message = $("textarea[name=message]").val();
+			var employees = $("#select-employees").val();
+
+			if(title == ''){
+				alert('Otsikko puuttuu');
+				return;
+			}
+			if(message == ''){
+				alert('Viestin sisältö puuttuu');
+				return;
+			}
+			if(employees.length <= 0){
+				alert('Vastaanottajat puuttuu');
+				return;
+			}
+
+			$.ajax({
+				url: '/api/message',
+				method: 'POST',
+				type: 'JSON',
+				data: {title: title, message: message, to: employees},
+				success: function(response){
+					if(!!response.success && response.success){
+						alert('Viesti lähetetty!');
+						location.reload();
+					}else{
+						alert(response.message);
+					}
+				},
+				error: function(err){
+					alert(JSON.stringify(err));
+				}
+			});
+		});
+
+		$("#modal-send-message").modal();
+		$(document).on('click', 'button[data-action=send-message]', function(){
+			$("#modal-send-message").modal('show');
+		});
+
+		$(function(){
+			loadEmployees();
+		});

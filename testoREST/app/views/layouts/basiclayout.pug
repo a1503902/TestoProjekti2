@@ -10,7 +10,15 @@ html(lang="en")
         meta(viewport="width=device-width, initial-scale=1.0")
 
     body
-        block content
+        .ui.top.huge.fixed.menu.top-menu
+          .item.navigation-logo
+            img(src="/static/images/logo.jpg").ui.image
+          .right.menu
+            a.ui.item#menu-messages(href='#') Viestit
+            a.ui.item(href='logout') Kirjaudu ulos
+        .pusher
+          .ui.fluid.container.main-content
+            block content
 
     footer
         p Team Testo
