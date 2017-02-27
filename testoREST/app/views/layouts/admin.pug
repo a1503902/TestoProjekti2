@@ -57,14 +57,19 @@ html(lang="en")
         img(src="/static/images/logo.jpg").ui.image
       a.item(href='tracking') Seuranta
       .dropdown-menu.menu
-        .ui.dropdown.item
-          | Työntekijät
+        .ui.dropdown.item Työntekijät
           i.angle.down.icon
           .dropdown-content.menu
             a.item(href='employees') Kaikki työntekijät
             a.item(href='toplist') Top lista
       a.item(href='cars') Autot
       a.item(href='routes') Reitit
+      .dropdown-menu.menu
+        .ui.dropdown.item Viestit
+          i.angle.down.icon
+          .dropdown-content.menu
+            a.item(href='message') Yksityisviestit
+            a.item(href='notifications') Ilmoitukset
       .right.menu
         a.ui.item(href='logout') Kirjaudu ulos
     .pusher
@@ -76,6 +81,6 @@ html(lang="en")
     $('.menu-btn').click(function(){
       $('.menu-m').dropdown('toggle');
     });
-    $(".dropdown").dropdown();
+    $(".dropdown").dropdown({forceSelection: false});
 
   block scripts

@@ -40,4 +40,9 @@ router.get('/logout', function(req, res){
 	return res.redirect('/admin/login');
 	req.session = null;
 });
+
+router.get('/message', function(req, res){
+	res.render('admin/message', { title: 'Viestit'});
+});
+
 module.exports = router;
