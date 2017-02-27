@@ -22,7 +22,7 @@ $(document).ready(function() {
         $.ajax({
 			method: 'PUT',
 			type: 'JSON',
-			url: 'http://localhost:8080/api/workdays/58b41cea63e5a46b5fb92b35',
+			url: 'http://localhost:8080/api/workdays/58b42a52e6c27d6c93449f00',
 			data: {
                 deliveries: {
                     postnord: {

@@ -96,20 +96,19 @@ block scripts
 				var bDhl = data.deliveries.bring.unknown;
 				var bNt = data.deliveries.bring.nt;
 				var time = (data.stop_time - data.start_time) - data.breaks;
-
 				var ifNull = [pD, pP, pU, pNt, bD, bP, bDhl, bNt];
 				var sum;
 				for (var i = 0; i < ifNull.length; i++) {
-					if (ifNull[i] == null || ifNull[i] == undefined) {
+					if (ifNull[i] == null) {
 						ifNull[i] = 0;
 					}
-					if(!ifNull[0]){
+					if (!ifNull[0]) {
 						sum = ifNull[i] + ifNull[i - 1];
-					}else{
+					} else {
 						sum = ifNull[0];
 					}
 				}
-				console.log(ifNull)
+
 				var efficiency = sum / time;
 				return efficiency;
 			}
