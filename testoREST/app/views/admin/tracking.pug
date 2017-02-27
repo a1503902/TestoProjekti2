@@ -13,6 +13,7 @@ block content
 				th(colspan=4) Postnord
 				th(colspan=4) Bring
 				th(colspan=2) Innight
+				th(colspan=2) Tehot
 			tr
 				th Jaot
 				th Noudot
@@ -65,6 +66,9 @@ block scripts
 										// Innight
 										row.append('<td>' + setDefaultVal(data.deliveries.innight.packages, 0) + '</td>');
 										row.append('<td>' + setDefaultVal(data.deliveries.innight.stops, 0) + '</td>');
+
+										// Efficiency
+										row.append('<td>' + calcEff(data) + '</td>');
 									}
 								}
 							}
@@ -81,6 +85,33 @@ block scripts
 			$(function(){
 				loadDeliveries();
 			});
+
+			function calcEff(data) {
+				var pD = data.deliveries.postnord.delivery;
+				var pP = data.deliveries.postnord.pickup;
+				var pU = data.deliveries.postnord.unknown;
+				var pNt = data.deliveries.postnord.nt;
+				var bD = data.deliveries.bring.delivery;
+				var bP = data.deliveries.bring.pickup;
+				var bDhl = data.deliveries.bring.unknown;
+				var bNt = data.deliveries.bring.nt;
+				var time = (data.stop_time - data.start_time) - data.breaks;
+				var ifNull = [pD, pP, pU, pNt, bD, bP, bDhl, bNt];
+				var sum;
+				for (var i = 0; i < ifNull.length; i++) {
+					if (ifNull[i] == null) {
+						ifNull[i] = 0;
+					}
+					if (!ifNull[0]) {
+						sum = ifNull[i] + ifNull[i - 1];
+					} else {
+						sum = ifNull[0];
+					}
+				}
+
+				var efficiency = sum / time;
+				return efficiency;
+			}
 
 			function setDefaultVal(value, defaultValue){
 				return (value === undefined) ? defaultValue : (value == null) ? defaultValue : value;

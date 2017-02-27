@@ -25,6 +25,11 @@ router.get('/employees', function(req, res){
 	res.render('admin/employees', { title: 'Työntekijät', page: page});
 });
 
+router.get('/toplist', function(req, res){
+	var page = "toplist"
+	res.render('admin/toplist', {title: 'Lista', page: page});
+});
+
 router.get('/password', function(req, res){
 	var page="password";
 	res.render('admin/password', { title: 'Salasana', page: page});

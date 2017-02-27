@@ -1,0 +1,57 @@
+extends ../layouts/admin.pug
+
+block content
+  h1.ui.dividing.header= title
+
+  table.ui.table#list-table
+    thead
+      tr
+        th #
+        th Työntekijä
+        th Monta päivää töissä
+        th Teho
+    tbody
+      tr
+        td(colspan="4") Ei työntekijöitä.
+
+block scripts
+  script.
+    function loadList(){
+      $.ajax({
+        url: "http://localhost:8080/api/workdays",
+        method: "GET",
+        type: "JSON",
+          success: function(response){
+            if(!!response.success && response.success == true){
+              if(response.data.length > 0){
+                $("#list-table tbody").html("");
+                for(var i = 0; i < response.data.length; i++){
+                  var data = response.data[i];
+                  var row = $('<tr />');
+                  $("#list-table tbody").append(row);
+                  if(data.complete == true){
+                    row.append('<td>' + '-') + '</td>';
+                    row.append('<td>' + setDefaultVal(data.employee, '-') + '</td>');
+                    row.append('<td>' + '-') + '</td>';
+                    row.append('<td>' + '-') + '</td>';
+
+                  }
+                }
+              }
+            }else{
+              alert("Failed to load data: " + data.message);
+            }
+          },
+          error: function(err){
+            alert("Failed to load data: " + JSON.stringify(err));
+          }
+      });
+    }
+
+    $(function(){
+      loadList();
+    });
+
+    function setDefaultVal(value, defaultValue){
+      return (value === undefined) ? defaultValue : (value == null) ? defaultValue : value;
+    }
