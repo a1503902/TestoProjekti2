@@ -56,7 +56,13 @@ html(lang="en")
       .item.navigation-logo
         img(src="/static/images/logo.jpg").ui.image
       a.item(href='tracking') Seuranta
-      a.item(href='employees') Työntekijät
+      .dropdown-menu.menu
+        .ui.dropdown.item
+          | Työntekijät
+          i.angle.down.icon
+          .dropdown-content.menu
+            a.item(href='employees') Kaikki työntekijät
+            a.item(href='toplist') Top lista
       a.item(href='cars') Autot
       a.item(href='routes') Reitit
       .right.menu

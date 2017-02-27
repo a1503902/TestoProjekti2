@@ -127,6 +127,9 @@ b.caret {
     background: rgba(252, 252, 252, .89);
     margin: -20px -30px 30px
 }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 .topbar,
 .topbar-m {
     height: 70px;
@@ -205,7 +208,7 @@ b.caret {
     padding-right: 10px;
 }
 .top-navigation {
-    border-bottom: 2px solid #f2711c !important;   
+    border-bottom: 2px solid #f2711c !important;
 }
 .navigation-logo {
     width: 200px !important;
