@@ -6,7 +6,8 @@ var port             = process.env.PORT || 8080;
 var router           = express.Router();
 var cookieParser     = require('cookie-parser');
 var cors             = require('cors');
-var session          = require('express-session');
+//var session          = require('express-session');
+var cookieSession = require('cookie-session')
 var flash            = require('connect-flash');
 var config           = require('./config');
 var jwt              = require('jsonwebtoken');
@@ -27,7 +28,16 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://ohjelmistoprojekti:asdasd123@ds127429.mlab.com:27429/ohjelmistoprojektidb');
 
 
-app.use(session({ secret: config.secret, resave: true, saveUninitialized: true })); // session secret
+//app.use(session({ secret: config.secret, resave: true, saveUninitialized: true })); // session secret
+
+app.use(cookieSession({
+  name: 'session',
+  keys: [config.secret],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
 app.use(flash());
 
 

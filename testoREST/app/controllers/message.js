@@ -3,8 +3,7 @@ var router   = express.Router();
 var Message = require('../models/message');
 
 // Get private message data
-router.get('/unseen', function(req, res){
-    console.log(req.user);
+router.get('/unread', function(req, res){
     Message.find({to: req.user.id}, '_id seen', function(err, messages){
         if (err) {
             return res.json({
@@ -12,29 +11,97 @@ router.get('/unseen', function(req, res){
                 message: err
             });
         }
-
-        var unseenMessages = 0;
+        var unreadMessages = 0;
+        // Loop messages
         for(var i = 0; i < messages.length; i++){
+            // Default unread
             var found = false;
-            for(var n = 0; messages[i].seen.length; n++){
+            for(var n = 0; n < messages[i].seen.length; n++){
                 var seen = messages[i].seen[n];
                 if(seen == req.user.id){
                     found = true;
                 }
             }
             if(!found){
-                unseenMessages++;
+                unreadMessages++;
             }
         }
 
         return res.json({
             success: true,
             data: {
-                unseen: unseenMessages
+                unread: unreadMessages
             }
         });
     });
+});
 
+// Get message list
+router.get('/list', function(req, res){
+    Message.find({to: req.user.id}, '_id title seen', function(err, messages){
+        if (err) {
+            return res.json({
+                success: false,
+                message: err
+            });
+        }
+
+        var messagesData = [];
+        for(var i = 0; i < messages.length; i++){
+            var message = { id: messages[i]._id, title: messages[i].title, unread: false };
+            var found   = false;
+            for(var n = 0; n < messages[i].seen.length; n++){
+                var seen = messages[i].seen[n];
+                if(seen == req.user.id){
+                    found = true;
+                }
+            }
+            if(!found){
+                message.unread = true;
+            }
+            messagesData.push(message);
+        }
+        return res.json({
+            success: true,
+            data: messagesData
+        });
+    });
+});
+
+// Get message by id
+router.get('/:id', function(req, res){
+    Message.findOne({_id: req.params.id, to: req.user.id}, '_id title message seen', function(err, message){
+        if (err) {
+            return res.json({
+                success: false,
+                message: err
+            });
+        }
+        if(message){
+            var found = false;
+            for(var i = 0; i < message.seen.length; i++){
+                var seen = message.seen[i];
+                if(seen == req.user.id){
+                    found = true;
+                }
+            }
+            if(!found){
+                message.seen.push(req.user.id);
+                message.save(function(err){
+                    if(err){
+                        return res.send(err);
+                    }
+                });
+            }
+            return res.json({
+                success: true,
+                data: {
+                    title: message.title,
+                    message: message.message
+                }
+            });
+        }
+    });
 });
 
 // Insert new message
