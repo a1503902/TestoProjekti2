@@ -14,11 +14,138 @@ html(lang="en")
           .item.navigation-logo
             img(src="/static/images/logo.jpg").ui.image
           .right.menu
-            a.ui.item#menu-messages(href='#') Viestit
+            a.ui.item#menu-messages(href='#', data-action="show-messages") Viestit
             a.ui.item(href='logout') Kirjaudu ulos
         .pusher
           .ui.fluid.container.main-content
             block content
+            .ui.modal#my-messages
+                i.close.icon
+                .header Viestit
+                .content
+                    .view-list
+                        .ui.relaxed.divided.large.list#messages-list
+                    .view-message.hidden
+                        button.ui.button(data-action="go-back") Takaisin viesteihin
+                        h3.ui.dividing.header#message-title
+                        #message-content
+                .actions
+                    .ui.cancel.button Sulje
 
-    footer
-        p Team Testo
+        footer
+            p Team Testo
+
+    script.
+
+        function getUnreadMessages(){
+            $.ajax({
+                url: 'http://localhost:8080/api/message/unread',
+                method: 'GET',
+                success: function(response){
+                    if(!!response.success && response.success){
+                        var bold = response.data.unread > 0 ? true : false;
+                        var html = bold == true ? 'Viestit <b>(' + response.data.unread + ')</b>' : 'Viestit (0)';
+                        $("#menu-messages").html(html);
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error: function(err){
+                    alert(err);
+                }
+            });
+        }
+
+        var messageList = [];
+        function getMessageList(){
+            if(messageList.length > 0){
+                loadList(messageList);
+            }else{
+                $.ajax({
+                    url: 'http://localhost:8080/api/message/list',
+                    dataType: "json",
+                    type: "GET",
+                    cache: false,
+                    contentType: "application/json",
+                    success: function(response){
+                        if(!!response.success && response.success){
+                            messageList = [];
+                            for(var i = 0; i < response.data.length; i++){
+                                messageList.push(response.data[i]);
+                            }
+                            loadList(messageList);
+                        }else{
+                            alert(data.message);
+                        }
+                    },
+                    error: function(err){
+                        alert(err);
+                    }
+                });
+            }
+        }
+
+        function loadList(list){
+            $("#messages-list").html('');
+            for(var i = 0; i < list.length; i++){
+                var message = list[i];
+                var html = message.unread == true ? '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '"><b>' + message.title + '</b></a>' : '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '">' + message.title + '</a>';
+                $("#messages-list").append(html);
+            }
+
+            $("#my-messages").modal('show');
+        }
+
+        function getMessage(id){
+            $.ajax({
+                url: 'http://localhost:8080/api/message/' + id,
+                method: 'GET',
+                dataType: "json",
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                success: function(response){
+                    if(!!response.success && response.success){
+                        $("#message-title").text(response.data.title);
+                        $("#message-content").text(response.data.message);
+                        showMessage();
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error: function(err){
+                    alert(err);
+                }
+            });
+        }
+
+        $(document).on('click', '[data-action=view-message]', function(){
+            var id = $(this).data('id');
+            getMessage(id);
+        });
+
+        $("[data-action=go-back]").click(function(){
+            showList();
+        });
+
+        $("#my-messages").modal();
+        $("a[data-action=show-messages]").click(function(){
+            showList();
+            getMessageList();
+        });
+
+        function showMessage(){
+            $(".view-list").hide();
+            $(".view-message").show();
+        }
+
+        function showList(){
+            $(".view-list").show();
+            $(".view-message").hide();
+        }
+        
+        $(function(){
+            getUnreadMessages();
+        });
+
+    block scripts
