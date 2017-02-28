@@ -31,4 +31,47 @@ $(document).ready(function(){
       }
     })
   })
+  $.ajax({
+    method: 'GET',
+    type: 'JSON',
+    url: 'http://localhost:8080/api/publicmessage/publicmessage',
+
+    success: function(data){
+      if(!data){
+        alert("no new messages")
+      }else{
+        var title=data.data.title;
+        var message=data.data.message;
+        var id=data.data._id;
+        $("#modal-public-message h1").html(title);
+        $("#modal-public-message p").append(message);
+        $("input[name=id]").val(id);
+        $("#modal-public-message").modal('show');
+      }
+    },
+
+    error: function(err){
+      alert(JSON.stringify(err))
+    }
+  })
+
+  $(document).on('click', 'button[data-action=seen]', function () {
+    var id=$("input[name=id]").val();
+    $.ajax({
+      url: '/api/publicmessage/seen/' + id,
+      method: 'PUT',
+      type: 'JSON',
+
+      success: function (data) {
+        if (data.success) {
+          alert(data.message);
+        }
+      },
+
+      error: function (err) {
+        console.log(JSON.stringify(err));
+      }
+
+    });
+  })
 })

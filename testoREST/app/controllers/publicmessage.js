@@ -2,9 +2,9 @@ var express         = require('express');
 var router          = express.Router();
 var publicmessage   = require('../models/publicmessage');
 
-//Get all publicMessages
+//Get all publicmessages
 router.get('/', function(req, res){
-    publicmessage.find(function(err, publicMessages){
+    publicmessage.find(function(err, publicmessages){
         if (err) {
             res.send({
                 success: false,
@@ -13,34 +13,31 @@ router.get('/', function(req, res){
         }
         res.json({
             success: true,
-            data: publicMessages
+            data: publicmessages
         });
     });
 });
 
 router.get('/publicmessage', function (req, res) {
-    publicmessage.findOne({}, {}, {sort: {'created_at': 1}}, function(err, publicMessage) {
-        var found = false;
+    publicmessage.findOne({}, {}, {sort: {'created_at': 1}}, function(err, publicmessage) {
         if (err) {
             res.send({
                 success: false,
                 message: err
             });
-        } else if (publicMessage) {
-            for (var i = 0; i < publicMessage.length; i++) {
-                if (publicMessage.seen[i] == req.user.id) {
-                    found = true;
+        }else if(publicmessage){
+            for (var i = 0; i < publicmessage.length; i++) {
+                if (publicmessage.seen[i] == req.user.id) {
+                    res.send({
+                        success: true,
+                        data: false
+                    });
+                }else{
+                    res.json({
+                        success: true,
+                        data: publicmessage
+                    });
                 }
-            }
-            if (!found) {
-                res.json({
-                    success: true,
-                    data: publicMessage
-                });
-            } else {
-                res.send({
-                    success: true
-                });
             }
         }
     });
@@ -71,16 +68,16 @@ router.post('/', function (req, res) {
         });
         return;
     }
-
-    // New car object
-    var publicMessage = new publicmessage();
+    
+    // New publicmessage
+    var publicmessage = new publicmessage();
 
     // Set params
-    publicMessage.title = req.body.title;
-    publicMessage.message = req.body.message;
+    publicmessage.title = req.body.title;
+    publicmessage.message = req.body.message;
 
-    // Insert car to DB
-    var success = publicMessage.save(function(err) {
+    // Insert publicmessage to DB
+    var success = publicmessage.save(function(err) {
         if (err) {
             message = "Failed to insert message to db " + err;
         }
@@ -97,31 +94,14 @@ router.post('/', function (req, res) {
     });
 });
 
-router.put('/seen/:publicMessageID', function(req, res) {
+router.put('/seen/:publicmessageID', function(req, res) {
 
-    // Validation
-    req.checkBody({
-        'id': {
-            notEmpty: true,
-            errorMessage: 'EmlpyeeID missing'
-        }
-    });
-
-    var errors = req.validationErrors();
-    if (errors) {
-        message = errors[0].msg;
-        res.send({
-            success: false,
-            message: message
-        });
-        return;
-    }
-
-    publicmessage.findById(req.params.publicMessageID, function(err, publicmessage) {
+    publicmessage.findById(req.params.publicmessageID, function(err, publicmessage) {
         if (err) {
             res.send(err);
         }
-        publicmessage.seen.set(req.body.id);
+        publicmessage.seen.push(req.user.id);
+        console.log(publicmessage.seen);
         publicmessage.save(function(err) {
             if (err) {
                 res.send(err);
