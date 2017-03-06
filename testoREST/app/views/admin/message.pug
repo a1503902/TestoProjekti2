@@ -22,10 +22,11 @@ block content
             .description
                 .ui.form
                     .field
-                        label Vastaanottajat
                         .ui.toggle.checkbox
-                            label Lähetä viesti kaikille
-                            input(tabindex="0" class="hidden" type="checkbox")
+                            label Ilmoitusviesti kaikille
+                            input(tabindex="0" class="hidden" type="checkbox" value="submit")
+                    .field#Receivers
+                        label Vastaanottajat
                         select.ui.fluid.search.dropdown#select-employees(multiple="")
                             option(value="") Valitse yksi tai useampi vastaanottaja
                     .field
@@ -70,6 +71,18 @@ block scripts
             });
         }
 
+        var toggled = false;
+        $('.ui.checkbox').on('click', function () {
+            $("#select-employees").dropdown('clear');
+            if(!toggled){
+                toggled = true;
+                $("#Receivers").hide("slow");
+            }else{
+                toggled = false;
+                $("#Receivers").show("slow");
+            }
+        })
+
         $(document).on('click', 'button[data-action=save-message]', function(){
 
             var title   = $("input[name=title]").val();
@@ -84,28 +97,47 @@ block scripts
                 alert('Viestin sisältö puuttuu');
                 return;
             }
-            if(employees.length <= 0){
+            if(employees.length <= 0 && !toggled){
                 alert('Vastaanottajat puuttuu');
                 return;
             }
-
-            $.ajax({
-                url: '/api/message',
-                method: 'POST',
-                type: 'JSON',
-                data: {title: title, message: message, to: employees},
-                success: function(response){
-                    if(!!response.success && response.success){
-                        alert('Viesti lähetetty!');
-                        location.reload();
-                    }else{
-                        alert(response.message);
+            if(toggled){
+                $.ajax({
+                    url: '/api/notification/',
+                    method: 'POST',
+                    type: 'JSON',
+                    data: {title: title, message: message},
+                    success: function (response) {
+                        if (!!response.success && response.success) {
+                            alert('Viesti lähetetty!');
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
                     }
-                },
-                error: function(err){
-                    alert(JSON.stringify(err));
-                }
-            });
+                });
+            }else{
+                $.ajax({
+                    url: '/api/message',
+                    method: 'POST',
+                    type: 'JSON',
+                    data: {title: title, message: message, to: employees},
+                    success: function (response) {
+                        if (!!response.success && response.success) {
+                            alert('Viesti lähetetty!');
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
+                    }
+                });
+            }
         });
 
         $("#modal-send-message").modal();

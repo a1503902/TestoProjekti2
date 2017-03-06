@@ -57,19 +57,14 @@ html(lang="en")
         img(src="/static/images/logo.jpg").ui.image
       a.item(href='tracking') Seuranta
       .dropdown-menu.menu
-        .ui.dropdown.item Työntekijät
+        .ui.dropdown.item(href='employees') Työntekijät
           i.angle.down.icon
           .dropdown-content.menu
             a.item(href='employees') Kaikki työntekijät
             a.item(href='toplist') Top lista
       a.item(href='cars') Autot
       a.item(href='routes') Reitit
-      .dropdown-menu.menu
-        .ui.dropdown.item Viestit
-          i.angle.down.icon
-          .dropdown-content.menu
-            a.item(href='message') Yksityisviestit
-            a.item(href='notifications') Ilmoitukset
+      a.item(href='message') Viestit
       .right.menu
         a.ui.item(href='logout') Kirjaudu ulos
     .pusher

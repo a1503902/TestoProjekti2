@@ -1,10 +1,10 @@
 var express         = require('express');
 var router          = express.Router();
-var notification   = require('../models/notification');
+var Notification   = require('../models/notification');
 
 //Get all notifications
 router.get('/', function(req, res){
-    notification.find(function(err, notifications){
+    Notification.find(function(err, notifications){
         if (err) {
             res.send({
                 success: false,
@@ -19,7 +19,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/notification', function (req, res) {
-    notification.findOne({}, {}, {sort: {'created_at': 1}}, function(err, notification) {
+    Notification.findOne({}, {}, {sort: {'created_at': 1}}, function(err, notification) {
         if (err) {
             res.send({
                 success: false,
@@ -54,6 +54,7 @@ router.get('/notification', function (req, res) {
 router.post('/', function (req, res) {
     var message = "";
     var success = false;
+    console.log(req.body);
 
     // Validation
     req.checkBody({
@@ -78,7 +79,7 @@ router.post('/', function (req, res) {
     }
     
     // New notification
-    var notification = new notification();
+    var notification = new Notification();
 
     // Set params
     notification.title = req.body.title;
