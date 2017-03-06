@@ -13,7 +13,10 @@ html(lang="en")
         .ui.top.huge.fixed.menu.top-menu
           .item.navigation-logo
             img(src="/static/images/logo.jpg").ui.image
+          .left.menu
           .right.menu
+            .ui.item
+                  h4= fullName
             a.ui.item#menu-messages(href='#', data-action="show-messages") Viestit
             a.ui.item(href='logout') Kirjaudu ulos
         .pusher

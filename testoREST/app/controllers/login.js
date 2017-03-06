@@ -26,7 +26,7 @@ router.post('/login', function(req, res){
                 req.flash('message', 'Authentication failed. Invalid username or password.');
                 res.redirect('/login');
             } else {
-            	var user = { id: employee._id, username: employee.username, isAdmin: false};
+            	var user = { id: employee._id, username: employee.username, isAdmin: false, firstname: employee.firstname, lastname: employee.lastname};
                 var token = jwt.sign(user, config.secret, {
                     expiresIn: 1440 // 24h token
                 });

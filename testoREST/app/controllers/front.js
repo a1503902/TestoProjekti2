@@ -4,7 +4,9 @@ var pug      = require('pug');
 var Employee = require('../models/employee');
 
 router.get('/start', function(req, res){
-    res.render('startpage', { title: 'Start'});
+    console.log(req.user);
+    res.render('startpage', { title: 'Start', fullName: req.user.firstname + ' ' + req.user.lastname});
+
 });
 
 router.get('/final', function(req, res){
