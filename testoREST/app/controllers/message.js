@@ -137,7 +137,7 @@ router.post('/', function(req, res) {
     var message = new Message();
 
     // Set params
-    message.title = req.body.message;
+    message.title = req.body.title;
     message.message = req.body.message;
     message.to = [];
     for(var i = 0; i < req.body.to.length; i++){

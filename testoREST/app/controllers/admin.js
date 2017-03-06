@@ -36,9 +36,8 @@ router.get('/password', function(req, res){
 });
 
 router.get('/logout', function(req, res){
-	req.flash('message', 'Kirjauduttu ulos onnistuneesti.');
-	return res.redirect('/admin/login');
 	req.session = null;
+	return res.redirect('/admin/login');
 });
 
 router.get('/message', function(req, res){

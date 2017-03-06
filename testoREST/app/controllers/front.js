@@ -11,4 +11,9 @@ router.get('/final', function(req, res){
     res.render('finalpage', { title: 'final'});
 });
 
+router.get('/logout', function(req, res){
+	req.session = null;
+	return res.redirect('/login');
+});
+
 module.exports = router;
