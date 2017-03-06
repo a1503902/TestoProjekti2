@@ -139,7 +139,7 @@ var employeesController  = require('./app/controllers/employees');
 var workdaysController   = require('./app/controllers/workdays');
 var deliveriesController = require('./app/controllers/deliveries');
 var messageController    = require('./app/controllers/message');
-var publicmessageController = require('./app/controllers/publicmessage');
+var notificationController = require('./app/controllers/notification');
 
 // Middlewares
 router.all('/login', middlewares.loginRedirect);
@@ -160,7 +160,7 @@ router.use('/api/employees', employeesController);
 router.use('/api/workdays', workdaysController);
 router.use('/api/deliveries', deliveriesController);
 router.use('/api/message', messageController);
-router.use('/api/publicmessage', publicmessageController);
+router.use('/api/notification', notificationController);
 
 // Set router to app
 app.use('/', router);

@@ -34,7 +34,7 @@ $(document).ready(function(){
   $.ajax({
     method: 'GET',
     type: 'JSON',
-    url: 'http://localhost:8080/api/publicmessage/publicmessage',
+    url: 'http://localhost:8080/api/notification/notification',
 
     success: function(data){
       console.log(data.message);
@@ -42,35 +42,15 @@ $(document).ready(function(){
         var title=data.message.title;
         var message=data.message.message;
         var id=data.message._id;
-        $("#modal-public-message h1").html(title);
-        $("#modal-public-message p").append(message);
+        $("#modal-notification h1").html(title);
+        $("#modal-notification p").append(message);
         $("input[name=id]").val(id);
-        $("#modal-public-message").modal('show');
+        $("#modal-notification").modal('show');
       }
     },
 
     error: function(err){
       alert(JSON.stringify(err))
     }
-  })
-
-  $(document).on('click', 'button[data-action=seen]', function () {
-    var id=$("input[name=id]").val();
-    $.ajax({
-      url: '/api/publicmessage/seen/' + id,
-      method: 'PUT',
-      type: 'JSON',
-
-      success: function (data) {
-        if (data.success) {
-          alert(data.message);
-        }
-      },
-
-      error: function (err) {
-        console.log(JSON.stringify(err));
-      }
-
-    });
-  })
-})
+  });
+});
