@@ -36,3 +36,12 @@ block content
           br
           button#nextBtn.ui.button Seuraava
       .column
+
+      .ui.modal#modal-public-message
+        i.close.icon
+        h1.ui.dividing.header
+        p.content
+        .field
+          input(type="hidden", name="id")
+        .actions
+          Button(type="button", data-action="seen").ui.green.button.cancel OK
