@@ -47,7 +47,7 @@ var middlewares = {
 		if(token){
 			jwt.verify(token, config.secret, function(err, user) {
 				if(err){
-					req.session.destroy();
+					req.session = null;
 					return res.redirect('/login');
 				}
 				if(!!user.isAdmin && user.isAdmin){
