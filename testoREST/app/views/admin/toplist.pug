@@ -30,9 +30,10 @@ block scripts
                   console.log(list);
                 for(var i = 0; i < response.data.length; i++){
                     var data = response.data[i];
+                    var eff = calcEff(data);
                     var dataEff = {
                         employee: data.employee,
-                        efficiency: calcEff(data)
+                        efficiency: eff
                     }
                     list.push(dataEff);
                 }
@@ -73,7 +74,7 @@ block scripts
         var pNt = data.deliveries.postnord.nt;
         var bD = data.deliveries.bring.delivery;
         var bP = data.deliveries.bring.pickup;
-        var bDhl = data.deliveries.bring.unknown;
+        var bDhl = data.deliveries.bring.dhl_return;
         var bNt = data.deliveries.bring.nt;
         var time = (data.stop_time - data.start_time) - data.breaks;
         var ifNull = [pD, pP, pU, pNt, bD, bP, bDhl, bNt];
@@ -90,5 +91,6 @@ block scripts
         }
 
         var efficiency = sum / time;
+        console.log("Efficiency @calcEff: "+efficiency);
         return efficiency;
     }
