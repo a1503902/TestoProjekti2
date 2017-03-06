@@ -37,12 +37,11 @@ $(document).ready(function(){
     url: 'http://localhost:8080/api/publicmessage/publicmessage',
 
     success: function(data){
-      if(!data){
-        alert("no new messages")
-      }else{
-        var title=data.data.title;
-        var message=data.data.message;
-        var id=data.data._id;
+      console.log(data.message);
+      if(!!data.message && data.data != "") {
+        var title=data.message.title;
+        var message=data.message.message;
+        var id=data.message._id;
         $("#modal-public-message h1").html(title);
         $("#modal-public-message p").append(message);
         $("input[name=id]").val(id);

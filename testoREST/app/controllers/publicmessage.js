@@ -26,20 +26,28 @@ router.get('/publicmessage', function (req, res) {
                 message: err
             });
         }else if(publicmessage){
-            for (var i = 0; i < publicmessage.length; i++) {
+            var seen = false;
+            var message = publicmessage;
+            for (var i = 0; i < publicmessage.seen.length; i++) {
                 if (publicmessage.seen[i] == req.user.id) {
-                    res.send({
-                        success: true,
-                        data: false
-                    });
-                }else{
-                    res.json({
-                        success: true,
-                        data: publicmessage
-                    });
+                    seen = true;
+                    message = "";
                 }
             }
+            if(!seen){
+                publicmessage.seen.push(req.user.id);
+                publicmessage.save(function(err) {
+                    if (err) {
+                        return res.send(err);
+                    }
+                });
+            }
         }
+        return res.send({
+            success: true,
+            message: message
+        });
+
     });
 });
 
@@ -89,28 +97,8 @@ router.post('/', function (req, res) {
     }
 
     res.json({
-        success: success,
+        success: true,
         message: message
-    });
-});
-
-router.put('/seen/:publicmessageID', function(req, res) {
-
-    publicmessage.findById(req.params.publicmessageID, function(err, publicmessage) {
-        if (err) {
-            res.send(err);
-        }
-        publicmessage.seen.push(req.user.id);
-        console.log(publicmessage.seen);
-        publicmessage.save(function(err) {
-            if (err) {
-                res.send(err);
-            }
-            res.json({
-                success: true,
-                message: 'Message seen'
-            });
-        });
     });
 });
 
