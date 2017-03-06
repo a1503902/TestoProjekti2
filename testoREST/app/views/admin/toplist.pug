@@ -25,19 +25,27 @@ block scripts
             if(!!response.success && response.success == true){
               if(response.data.length > 0){
                 $("#list-table tbody").html("");
+                var count = 1;
+                var list = [];
+                  console.log(list);
                 for(var i = 0; i < response.data.length; i++){
-                  var data = response.data[i];
-                  var row = $('<tr />');
-                  console.log(data);
-                  listByEff("DATA:A:A:A::A::"+data);
-                  $("#list-table tbody").append(row);
-                  if(data.complete == true){
-                    row.append('<td>' + 'Sijoitus') + '</td>';
-                    row.append('<td>' + setDefaultVal(data.employee, '-') + '</td>');
-                    row.append('<td>' + '-' + '</td>');
-                    row.append('<td>' + calcEff(data).toFixed(2) + '</td>');
+                    var data = response.data[i];
+                    var dataEff = {
+                        employee: data.employee,
+                        efficiency: calcEff(data)
+                    }
+                    list.push(dataEff);
+                }
+                list.sort();
 
-                  }
+                for(var p = 0; p < list.length; p++){
+                  var row = $('<tr />');
+                  $("#list-table tbody").append(row);
+                    row.append('<td>' + count ) + '</td>';
+                    row.append('<td>' +  + '</td>');
+                    row.append('<td>' + '-' + '</td>');
+                    row.append('<td>' +  + '</td>');
+                    count++;
                 }
               }
             }else{
@@ -83,18 +91,4 @@ block scripts
 
         var efficiency = sum / time;
         return efficiency;
-    }
-
-    var toplist = [];
-    function listByEff(data) {
-        console.log("DATA: "+data.name);
-        var empl = {
-            name : data.name,
-            efficiency : calcEff(data)
-        }
-        toplist.push(empl);
-
-        console.log("TOPLIST: "+toplist);
-
-        return toplist;
     }
