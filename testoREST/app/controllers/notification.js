@@ -19,7 +19,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/notification', function (req, res) {
-    Notification.findOne({}, {}, {sort: {'created_at': 1}}, function(err, notification) {
+    Notification.findOne({}, {}, {sort: {'created_at': -1}}, function(err, notification) {
         if (err) {
             res.send({
                 success: false,
@@ -29,6 +29,7 @@ router.get('/notification', function (req, res) {
             var seen = false;
             var message = notification;
             for (var i = 0; i < notification.seen.length; i++) {
+                console.log(notification.seen);
                 if (notification.seen[i] == req.user.id) {
                     seen = true;
                     message = "";
