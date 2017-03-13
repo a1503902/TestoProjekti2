@@ -13,7 +13,7 @@ block content
 				th(colspan=4) Postnord
 				th(colspan=4) Bring
 				th(colspan=2) Innight
-				th(colspan=2) Tehot
+				th(rowspan=2) Tehot
 			tr
 				th Jaot
 				th Noudot
@@ -27,7 +27,7 @@ block content
 				th Stopit
 		tbody
 			tr
-				td(colspan="7") Ei toimituksia
+				td(colspan="15") Ei toimituksia
 
 block scripts
 	script.
@@ -68,7 +68,7 @@ block scripts
 										row.append('<td>' + setDefaultVal(data.deliveries.innight.stops, 0) + '</td>');
 
 										// Efficiency
-										row.append('<td>' + calcEff(data) + '</td>');
+										row.append('<td>' + calcEff(data).toFixed(4) + '</td>');
 									}
 								}
 							}
