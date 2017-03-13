@@ -18,7 +18,7 @@ html(lang="en")
           .left.menu
           .right.menu
             .ui.item
-                  h4= fullName
+                h4= fullName
             a.ui.item#menu-messages(href='#', data-action="show-messages") Viestit
             a.ui.item(href='logout') Kirjaudu ulos
         .pusher
@@ -40,45 +40,19 @@ html(lang="en")
         footer
             p Team Testo
 
-    script.
+        script.
 
-        function getUnreadMessages(){
-            $.ajax({
-                url: 'http://localhost:8080/api/message/unread',
-                method: 'GET',
-                success: function(response){
-                    if(!!response.success && response.success){
-                        var bold = response.data.unread > 0 ? true : false;
-                        var html = bold == true ? 'Viestit <b>(' + response.data.unread + ')</b>' : 'Viestit (0)';
-                        $("#menu-messages").html(html);
-                    }else{
-                        alert(data.message);
-                    }
-                },
-                error: function(err){
-                    alert(err);
-                }
-            });
-        }
-
-        var messageList = [];
-        function getMessageList(){
-            if(messageList.length > 0){
-                loadList(messageList);
-            }else{
+            $(".dropdown").dropdown();
+            
+            function getUnreadMessages(){
                 $.ajax({
-                    url: 'http://localhost:8080/api/message/list',
-                    dataType: "json",
-                    type: "GET",
-                    cache: false,
-                    contentType: "application/json",
+                    url: 'http://localhost:8080/api/message/unread',
+                    method: 'GET',
                     success: function(response){
                         if(!!response.success && response.success){
-                            messageList = [];
-                            for(var i = 0; i < response.data.length; i++){
-                                messageList.push(response.data[i]);
-                            }
-                            loadList(messageList);
+                            var bold = response.data.unread > 0 ? true : false;
+                            var html = bold == true ? 'Viestit <b>(' + response.data.unread + ')</b>' : 'Viestit (0)';
+                            $("#menu-messages").html(html);
                         }else{
                             alert(data.message);
                         }
@@ -88,69 +62,97 @@ html(lang="en")
                     }
                 });
             }
-        }
 
-        function loadList(list){
-            $("#messages-list").html('');
-            for(var i = 0; i < list.length; i++){
-                var message = list[i];
-                var html = message.unread == true ? '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '"><b>' + message.title + '</b></a>' : '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '">' + message.title + '</a>';
-                $("#messages-list").append(html);
+            var messageList = [];
+            function getMessageList(){
+                if(messageList.length > 0){
+                    loadList(messageList);
+                }else{
+                    $.ajax({
+                        url: 'http://localhost:8080/api/message/list',
+                        dataType: "json",
+                        type: "GET",
+                        cache: false,
+                        contentType: "application/json",
+                        success: function(response){
+                            if(!!response.success && response.success){
+                                messageList = [];
+                                for(var i = 0; i < response.data.length; i++){
+                                    messageList.push(response.data[i]);
+                                }
+                                loadList(messageList);
+                            }else{
+                                alert(data.message);
+                            }
+                        },
+                        error: function(err){
+                            alert(err);
+                        }
+                    });
+                }
             }
 
-            $("#my-messages").modal('show');
-        }
-
-        function getMessage(id){
-            $.ajax({
-                url: 'http://localhost:8080/api/message/' + id,
-                method: 'GET',
-                dataType: "json",
-                type: "GET",
-                cache: false,
-                contentType: "application/json",
-                success: function(response){
-                    if(!!response.success && response.success){
-                        $("#message-title").text(response.data.title);
-                        $("#message-content").text(response.data.message);
-                        showMessage();
-                    }else{
-                        alert(data.message);
-                    }
-                },
-                error: function(err){
-                    alert(err);
+            function loadList(list){
+                $("#messages-list").html('');
+                for(var i = 0; i < list.length; i++){
+                    var message = list[i];
+                    var html = message.unread == true ? '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '"><b>' + message.title + '</b></a>' : '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '">' + message.title + '</a>';
+                    $("#messages-list").append(html);
                 }
+
+                $("#my-messages").modal('show');
+            }
+
+            function getMessage(id){
+                $.ajax({
+                    url: 'http://localhost:8080/api/message/' + id,
+                    method: 'GET',
+                    dataType: "json",
+                    type: "GET",
+                    cache: false,
+                    contentType: "application/json",
+                    success: function(response){
+                        if(!!response.success && response.success){
+                            $("#message-title").text(response.data.title);
+                            $("#message-content").text(response.data.message);
+                            showMessage();
+                        }else{
+                            alert(data.message);
+                        }
+                    },
+                    error: function(err){
+                        alert(err);
+                    }
+                });
+            }
+
+            $(document).on('click', '[data-action=view-message]', function(){
+                var id = $(this).data('id');
+                getMessage(id);
             });
-        }
 
-        $(document).on('click', '[data-action=view-message]', function(){
-            var id = $(this).data('id');
-            getMessage(id);
-        });
+            $("[data-action=go-back]").click(function(){
+                showList();
+            });
 
-        $("[data-action=go-back]").click(function(){
-            showList();
-        });
+            $("#my-messages").modal();
+            $("a[data-action=show-messages]").click(function(){
+                showList();
+                getMessageList();
+            });
 
-        $("#my-messages").modal();
-        $("a[data-action=show-messages]").click(function(){
-            showList();
-            getMessageList();
-        });
+            function showMessage(){
+                $(".view-list").hide();
+                $(".view-message").show();
+            }
 
-        function showMessage(){
-            $(".view-list").hide();
-            $(".view-message").show();
-        }
+            function showList(){
+                $(".view-list").show();
+                $(".view-message").hide();
+            }
+            
+            $(function(){
+                getUnreadMessages();
+            });
 
-        function showList(){
-            $(".view-list").show();
-            $(".view-message").hide();
-        }
-        
-        $(function(){
-            getUnreadMessages();
-        });
-
-    block scripts
+        block scripts

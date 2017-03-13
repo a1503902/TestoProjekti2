@@ -10,6 +10,20 @@ router.get('/', function(req, res) {
     })
 });
 
+// Check if active workday and return data
+router.get('/hasActive', function(req, res){
+    Workday.findOne({employeeId: req.user.id, complete: false}, function(err, workday){
+        if(err){
+            return res.json({success: false, message: "Failed to get workday"});
+        }
+        if(workday){
+            return res.json({success: true, data: workday});
+        }else{
+            return res.json({success: false, message: "Failed to get workday"});
+        }
+    });
+});
+
 // Insert new workday
 router.post('/', function(req, res) {
 

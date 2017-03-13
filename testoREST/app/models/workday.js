@@ -37,7 +37,7 @@ var WorkdaySchema = new Schema({
     complete: {
         type: Boolean,
         default: false
-    }
+    },
     efficiency: Number
 })
 
