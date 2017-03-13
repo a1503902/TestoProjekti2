@@ -7,7 +7,7 @@ block content
 			p(style="text-align:center; padding-top: 10px;") Admin
 			h5.ui.top.attached.header Kirjaudu sisään
 			.ui.bottom.attached.segment
-				.ui.middle.aligned.grid
+				.ui.middle.aligned.grids
 					.column
 						-if(message != '')
 							.ui.negative.message
@@ -27,8 +27,13 @@ block content
 									input(placeholder='Salasana', name='password', type='password', value='')
 									i.lock.icon
 							button#login.ui.submit.button Kirjaudu sisään
+							| &nbsp
+							| &nbsp
+							| &nbsp
+							| &nbsp
+							| &nbsp
+							| &nbsp
 							a(href='forgot.html') Unohtuiko salasana?
-
 block scripts
 	script
 		
