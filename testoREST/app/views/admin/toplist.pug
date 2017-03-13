@@ -8,7 +8,6 @@ block content
       tr
         th #
         th Työntekijä
-        th Monta päivää töissä
         th Teho
     tbody
       tr
@@ -31,11 +30,7 @@ block scripts
                 for(var i = 0; i < response.data.length; i++){
                     var data = response.data[i];
                     var eff = calcEff(data);
-                    var dataEff = {
-                        employee: data.employee,
-                        efficiency: eff
-                    }
-                    list.push(dataEff);
+                    list.push(eff);
                 }
                 list.sort();
 
@@ -43,9 +38,8 @@ block scripts
                   var row = $('<tr />');
                   $("#list-table tbody").append(row);
                     row.append('<td>' + count ) + '</td>';
-                    row.append('<td>' +  + '</td>');
-                    row.append('<td>' + '-' + '</td>');
-                    row.append('<td>' +  + '</td>');
+                    row.append('<td>' + data.employee + '</td>');
+                    row.append('<td>' + list[i] + '</td>');
                     count++;
                 }
               }
@@ -91,6 +85,6 @@ block scripts
         }
 
         var efficiency = sum / time;
-        console.log("Efficiency @calcEff: "+efficiency);
+        console.log(efficiency)
         return efficiency;
     }

@@ -46,7 +46,7 @@ block scripts
 									$("#deliveries-table tbody").append(row);
 									if(data.complete == true){
 										row.append('<td>' + setDefaultVal(data.employee, '-') + '</td>');
-										row.append('<td>' + setDefaultVal(data.created_at, '-') + '</td>');
+										row.append('<td>' + setDefaultVal(data.start_time, '-') + '</td>');
 										row.append('<td>' + setDefaultVal(data.car, '-') + '</td>');
 										row.append('<td>' + setDefaultVal(data.route, '-') + '</td>');
 
