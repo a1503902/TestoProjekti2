@@ -18,6 +18,48 @@ router.get('/', function(req, res){
     });
 });
 
+// Get notification by id
+router.get('/notification/:id', function(req, res){
+    Notification.findOne({_id: req.params.id},{},{}, function(err, notification){
+        if (err) {
+            res.json({
+                success: false,
+                message: err
+            });
+        }
+        res.json({
+            success: true,
+            data: {
+                title: notification.title,
+                message: notification.message
+            }
+        });
+    });
+});
+
+// Get notification list
+router.get('/list', function(req, res){
+    Notification.find(function(err, notifications){
+        if (err) {
+            res.send({
+                success: false,
+                message: err
+            });
+        }
+
+        var notificationsData = [];
+        for(var i = 0; i < notifications.length && i < 10; i++){
+            var notification = { id: notifications[i]._id, title: notifications[i].title};
+            notificationsData.push(notification);
+        }
+        return res.json({
+            success: true,
+            data: notificationsData
+        });
+    });
+});
+
+//Get latest notification message if not seen yet
 router.get('/notification', function (req, res) {
     Notification.findOne({}, {}, {sort: {'created_at': -1}}, function(err, notification) {
         if (err) {
@@ -52,6 +94,7 @@ router.get('/notification', function (req, res) {
     });
 });
 
+//Send a notification message
 router.post('/', function (req, res) {
     var message = "";
     var success = false;
@@ -78,7 +121,7 @@ router.post('/', function (req, res) {
         });
         return;
     }
-    
+
     // New notification
     var notification = new Notification();
 

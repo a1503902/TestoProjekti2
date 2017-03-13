@@ -24,18 +24,29 @@ html(lang="en")
         .pusher
           .ui.fluid.container.main-content
             block content
-            .ui.modal#my-messages
-                i.close.icon
-                .header Viestit
-                .content
-                    .view-list
-                        .ui.relaxed.divided.large.list#messages-list
-                    .view-message.hidden
-                        button.ui.button(data-action="go-back") Takaisin viesteihin
-                        h3.ui.dividing.header#message-title
-                        #message-content
-                .actions
-                    .ui.cancel.button Sulje
+                .ui.modal#my-messages
+                    i.close.icon
+                    .ui.orange.secondary.pointing.menu
+                        a.active.item(data-action="to-messages" data-tab="Viestit") Viestit
+                        a.item(data-action="to-notifications" data-tab="Ilmoitukset") Ilmoitukset
+                    .ui.tab.segment.active(data-tab="Viestit")
+                        .view-list
+                            .ui.relaxed.divided.large.list#messages-list
+                        .view-message.hidden
+                            button.ui.button(data-action="go-back") Takaisin
+                            h3.ui.dividing.header#message-title
+                            #message-content
+                    .ui.tab.segment(data-tab="Ilmoitukset")
+                        .notifications#notifications
+                            .content
+                                .view-list
+                                    .ui.relaxed.divided.large.list#notifications-list
+                                .view-message.hidden
+                                    button.ui.button(data-action="go-back") Takaisin
+                                    h3.ui.dividing.header#notification-title
+                                    #notification-content
+                    .actions
+                        .ui.cancel.button Sulje
 
         footer
             p Team Testo
@@ -92,6 +103,35 @@ html(lang="en")
                 }
             }
 
+            var notificationList = [];
+            function getnotificationList() {
+                if (notificationList.length > 0) {
+                    loadNotificationList(notificationList);
+                } else {
+                    $.ajax({
+                        url: 'http://localhost:8080/api/notification/list',
+                        dataType: "json",
+                        type: "GET",
+                        cache: false,
+                        contentType: "application/json",
+                        success: function (response) {
+                            if (!!response.success && response.success) {
+                                notificationList = [];
+                                for (var i = 0; i < response.data.length; i++) {
+                                    notificationList.push(response.data[i]);
+                                }
+                                loadNotificationList(notificationList);
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
+            }
+
             function loadList(list){
                 $("#messages-list").html('');
                 for(var i = 0; i < list.length; i++){
@@ -101,6 +141,15 @@ html(lang="en")
                 }
 
                 $("#my-messages").modal('show');
+            }
+
+            function loadNotificationList(list) {
+                $("#notifications-list").html('');
+                for (var i = 0; i < list.length; i++) {
+                    var message = list[i];
+                    var html = message.unread == true ? '<a href="#" class="item" data-action="view-notification" data-id="' + message.id + '"><b>' + message.title + '</b></a>' : '<a href="#" class="item" data-action="view-notification" data-id="' + message.id + '">' + message.title + '</a>';
+                    $("#notifications-list").append(html);
+                }
             }
 
             function getMessage(id){
@@ -126,9 +175,37 @@ html(lang="en")
                 });
             }
 
+            function getNotification(id) {
+                $.ajax({
+                    url: 'http://localhost:8080/api/notification/notification/' + id,
+                    method: 'GET',
+                    dataType: "json",
+                    type: "GET",
+                    cache: false,
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (!!response.success && response.success) {
+                            $("#notification-title").text(response.data.title);
+                            $("#notification-content").text(response.data.message);
+                            showMessage();
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
+            }
+
             $(document).on('click', '[data-action=view-message]', function(){
                 var id = $(this).data('id');
                 getMessage(id);
+            });
+
+            $(document).on('click', '[data-action=view-notification]', function () {
+                var id = $(this).data('id');
+                getNotification(id);
             });
 
             $("[data-action=go-back]").click(function(){
@@ -136,9 +213,22 @@ html(lang="en")
             });
 
             $("#my-messages").modal();
-            $("a[data-action=show-messages]").click(function(){
+            $("a[data-action=show-messages]").click(function () {
                 showList();
                 getMessageList();
+                getnotificationList();
+            });
+
+            $("a[data-action=to-notifications]").click(function () {
+                showList();
+                $("#messages").hide();
+                $("#notifications").show();
+            });
+
+            $("a[data-action=to-messages]").click(function () {
+                showList();
+                $("#notifications").hide();
+                $("#messages").show();
             });
 
             function showMessage(){
@@ -154,5 +244,8 @@ html(lang="en")
             $(function(){
                 getUnreadMessages();
             });
+
+            $('.menu .item')
+                .tab();
 
         block scripts
