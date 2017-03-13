@@ -42,29 +42,20 @@ router.post('/', function(req, res) {
     var workday = new Workday();
 
     // Set params
-    workday.employee   = req.body.employee;
+    workday.employeeId = req.user.id;
+    workday.employee   = req.user.firstname + ' ' + req.user.lastname
     workday.start_time = req.body.start_time;
     workday.car        = req.body.car;
     workday.route      = req.body.route;
     workday.start_km   = req.body.start_km;
 
     // Insert workday to DB
-    var success = workday.save(function(err) {
+    workday.save(function(err, workday) {
         if (err) {
-            message = "Failed to insert workday to db " + err;
-            console.log(err)
-            return false;
+            return res.json({success: false, message: "Failed to insert workday to DB"});
         }
-        return true;
-    });
-
-    if (success) {
-        message = "workday added";
-    }
-
-    res.json({
-        success: true,
-        message: message
+        console.log(workday);
+        return res.json({success: true, message: "Workday started", workdayId: workday._id});
     });
 
 });

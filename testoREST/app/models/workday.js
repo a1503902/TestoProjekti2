@@ -6,8 +6,9 @@ var WorkdaySchema = new Schema({
         type: Date,
         default: Date.now
     },
+    employeeId: String,
     employee: String,
-    start_time: Number,
+    start_time: String,
     car: String,
     route: String,
     start_km: Number,
@@ -29,7 +30,7 @@ var WorkdaySchema = new Schema({
             stops: Number
         }
     },
-    stop_time: Number,
+    stop_time: String,
     breaks: Number,
     stop_km: Number,
     adt_info: String,

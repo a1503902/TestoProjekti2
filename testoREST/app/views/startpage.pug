@@ -4,42 +4,167 @@ block content
   .ui.container
     img#argLogo.ui.centered.image(src='/static/images/logo.jpg')
     br
-    .ui.three.column.grid
-      .column
-      .column
-        .ui.form
-          h2 Auto
-          select#carSelect.ui.fluid.search.selection.dropdown
-            option(value='') Valitse auto
-            option(value='XXX-313') XXX-313
-            option(value='AAA-123') AAA-123
-            option(value='BBB-666') BBB-666
-            option(value='BBC-505') BBC-505
-            option(value='CCL-232') CCL-232
-            option(value='WTF-420') WTF-420
-            option(value='YOL-069') YOL-069
-            option(value='TIS-517') TIS-517
-          h2 Reitti
-          select#routeSelect.ui.fluid.search.selection.dropdown
-              option(value='') Valitse reitti
-              option(value='FI/HEL') FI/HEL
-              option(value='FI/VAN') FI/VAN
-          h2 Kilometrit
-          .ui.right.labeled.input
-            input(type='number', name='kilometer' placeholder='Aloitus kilometrit')
-            .ui.basic.label km
-          h2 Aloitus
-          input(type='text', name='startTime' placeholder='08:00')
-          br
-          br
-          button#nextBtn.ui.button Seuraava
-      .column
+    .start-page
+      .ui.three.column.grid
+        .column
+        .column
+          .ui.form
+            h2 Auto
+            select#carSelect.ui.fluid.search.selection.dropdown
+              option(value='') Valitse auto
+            h2 Reitti
+            select#routeSelect.ui.fluid.search.selection.dropdown
+                option(value='') Valitse reitti
+            h2 Kilometrit
+            .ui.right.labeled.input
+              input(type='number', name='kilometer' placeholder='Aloitus kilometrit')
+              .ui.basic.label km
+            h2 Aloitus
+            input(id="startTime" type='text', name='startTime' placeholder='08:00')
+            br
+            br
+            button#startWorkday.ui.button Aloita työpäivä
+        .column
 
-      .ui.modal#modal-notification
-        i.close.icon
-        h1.ui.dividing.header
-        p.content
-        .field
-          input(type="hidden", name="id")
-        .actions
-          Button(type="button", data-action="seen").ui.green.button.cancel OK
+        .ui.modal#modal-notification
+          i.close.icon
+          h1.ui.dividing.header
+          p.content
+          .field
+            input(type="hidden", name="id")
+          .actions
+            Button(type="button", data-action="seen").ui.green.button.cancel OK
+    .final-page(style="display:none")
+      h1.ui.dividing.header Jaot &amp; noudot
+        .ui.three.item.menu
+            a#postnordBtn.item(onclick="showhide('postnord')") Postnord
+
+            a.item(onclick="showhide('bring')") Bring
+
+            a.item(onclick="showhide('innight')") Innight
+        .ui.form
+            br
+            .ui.three.column.grid
+                .column
+                    #postnord(style='display: none;')
+                        h4 Postnord
+                        .field
+                            label Jaot
+
+                            input(type='number', name='distP', placeholder='Jaot')
+                        .field
+                            label Noudot
+
+                            input(type='number', name='pickupP', placeholder='Noudot')
+                        .field
+                            label Tuntemattomat
+
+                            input(type='number', name='unknownP', placeholder='Tuntemattomat')
+                        .field
+                            label Jakamattomat
+
+                            input(type='number', name='ntP', placeholder='Jakamattomat Postnord')
+                .column
+                    #bring(style='display: none;')
+                        h4 Bring
+                        .field
+                            label Jaot
+
+                            input(type='number', name='distB', placeholder='Jaot')
+                        .field
+                            label Noudot
+
+                            input(type='number', name='pickupB', placeholder='Noudot')
+                        .field
+                            label DHL pal
+
+                            input(type='number', name='dhlReturns', placeholder='DHL pal')
+                        .field
+                            label Jakamattomat
+
+                            input(type='number', name='ntB', placeholder='Jakamattomat Bring')
+                .column
+                    #innight(style='display: none;')
+                        h4 Innight
+                        .field
+                            label Paketit
+
+                            input(type='number', name='packages', placeholder='Pakettien määrä')
+                        .field
+                            label Pys&auml;hdykset
+
+                            input(type='number', name='stops', placeholder='Pysähdykset')
+            .ui.dividing.header
+            .ui.three.column.grid
+                .column
+                    h2 Lopetus
+
+                    input#stopTime(type='text', name='stopTime' placeholder='16:00')
+                    h2 Tauot
+
+                    input#breakAmount(type='number', name='breaks' placeholder='Aika minuutteina')
+                    h2 Kilometrit
+                    .ui.right.labeled.input
+                        input(type='number', name='stopKm' placeholder='Lopetus kilometrit')
+                        .ui.basic.label km
+                    h2 Kommentit
+
+                    input#comment(type='text', name='adtInfo' placeholder='Lisätiedot')
+                    br
+                    br
+
+                    a#backBtn.ui.button(href='/employees/start') Takaisin
+
+                    button#sendBtn.ui.button(style='color: white; background-color: #66ccff;') L&auml;het&auml;
+                .column
+                .column
+block scripts
+    script.
+
+      $("#startTime").datetimepicker({
+        format:'d.m.Y H:i',
+        startDate: Date.now()
+      });
+
+      function loadCars(){
+        $.ajax({
+          url: 'http://localhost:8080/api/cars',
+          method: 'GET',
+          success: function(response){
+            if(!!response.success && response.success){
+              for(var i = 0; i < response.data.length; i++){
+                var car = response.data[i];
+                var html = '<option value="' + car.name + '">' + car.name + '</option>';
+                $("#carSelect").append(html);
+              }
+            }
+          },
+          error: function(err){
+            alert('Error ' + err);
+          }
+        });
+      }
+
+      function loadRoutes(){
+        $.ajax({
+          url: 'http://localhost:8080/api/routes',
+          method: 'GET',
+          success: function(response){
+            if(!!response.success && response.success){
+              for(var i = 0; i < response.data.length; i++){
+                var route = response.data[i];
+                var html = '<option value="' + route.name + '">' + route.name + '</option>';
+                $("#routeSelect").append(html);
+              }
+            }
+          },
+          error: function(err){
+            alert('Error ' + err);
+          }
+        });
+      }
+
+      $(function(){
+        loadCars();
+        loadRoutes();
+      });

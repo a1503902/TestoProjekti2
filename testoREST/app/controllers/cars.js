@@ -7,13 +7,13 @@ router.get('/', function(req, res) {
     Car.find(function(err, cars) {
         if (err) {
             res.send({
-                        success: false,
-                        message: err
+                success: false,
+                message: err
             });
         }
         res.json({
-                    success: true,
-                    data: cars
+            success: true,
+            data: cars
         });
     });
 });
