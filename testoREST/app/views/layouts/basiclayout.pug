@@ -11,42 +11,42 @@ html(lang="en")
         link(rel="stylesheet" type="text/css" href="/static/css/style.css")
         meta(viewport="width=device-width, initial-scale=1.0")
 
-    body
-        .ui.top.huge.fixed.menu.top-menu
-          .item.navigation-logo
-            img(src="/static/images/logo.jpg").ui.image
-          .left.menu
-          .right.menu
-            .ui.item
-                h4= fullName
-            a.ui.item#menu-messages(href='#', data-action="show-messages") Viestit
-            a.ui.item(href='logout') Kirjaudu ulos
-        .pusher
-          .ui.fluid.container.main-content
-            block content
-                .ui.modal#my-messages
-                    i.close.icon
-                    .ui.orange.secondary.pointing.menu
-                        a.active.item(data-action="to-messages" data-tab="Viestit") Viestit
-                        a.item(data-action="to-notifications" data-tab="Ilmoitukset") Ilmoitukset
-                    .ui.tab.segment.active(data-tab="Viestit")
-                        .view-list
-                            .ui.relaxed.divided.large.list#messages-list
-                        .view-message.hidden
-                            button.ui.button(data-action="go-back") Takaisin
-                            h3.ui.dividing.header#message-title
-                            #message-content
-                    .ui.tab.segment(data-tab="Ilmoitukset")
-                        .notifications#notifications
-                            .content
-                                .view-list
-                                    .ui.relaxed.divided.large.list#notifications-list
-                                .view-message.hidden
-                                    button.ui.button(data-action="go-back") Takaisin
-                                    h3.ui.dividing.header#notification-title
-                                    #notification-content
-                    .actions
-                        .ui.cancel.button Sulje
+        body
+            .ui.top.huge.fixed.menu.top-menu
+                .item.navigation-logo
+                    img(src="/static/images/logo.jpg").ui.image
+                .left.menu
+                .right.menu
+                    .ui.item
+                        h4= fullName
+                    a.ui.item#menu-messages(href='#', data-action="show-messages") Viestit
+                    a.ui.item(href='logout') Kirjaudu ulos
+            .pusher
+                .ui.fluid.container.main-content
+                    block content
+                    .ui.modal#my-messages
+                        i.close.icon
+                        .ui.orange.secondary.pointing.menu
+                            a.active.item(data-action="to-messages" data-tab="Viestit") Viestit
+                            a.item(data-action="to-notifications" data-tab="Ilmoitukset") Ilmoitukset
+                        .ui.tab.segment.active(data-tab="Viestit")
+                            .view-list
+                                .ui.relaxed.divided.large.list#messages-list
+                            .view-message.hidden
+                                button.ui.button(data-action="go-back") Takaisin
+                                h3.ui.dividing.header#message-title
+                                #message-content
+                        .ui.tab.segment(data-tab="Ilmoitukset")
+                            .notifications#notifications
+                                .content
+                                    .view-list
+                                        .ui.relaxed.divided.large.list#notifications-list
+                                    .view-message.hidden
+                                        button.ui.button(data-action="go-back") Takaisin
+                                        h3.ui.dividing.header#notification-title
+                                        #notification-content
+                        .actions
+                            .ui.cancel.button Sulje
 
         footer
             p Team Testo
@@ -139,8 +139,7 @@ html(lang="en")
                     var html = message.unread == true ? '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '"><b>' + message.title + '</b></a>' : '<a href="#" class="item" data-action="view-message" data-id="' + message.id + '">' + message.title + '</a>';
                     $("#messages-list").append(html);
                 }
-
-                $("#my-messages").modal('show');
+                $("#my-messages").modal("show");
             }
 
             function loadNotificationList(list) {
