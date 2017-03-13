@@ -112,18 +112,17 @@ block content
               br
               br
 
-              a#backBtn.ui.button(href='/employees/start') Takaisin
+              button#backBtn.ui.button Edellinen sivu
 
-              button#sendBtn.ui.button(style='color: white; background-color: #66ccff;') L&auml;het&auml;
+              button#endWorkday.ui.orange.button Lopeta työpäivä
             .column
             .column
 
 block scripts
   script.
-    alert('2');
+
     $("#startTime").datetimepicker({
-      format:'d.m.Y H:i',
-      startDate: Date.now()
+      format:'d.m.Y H:i'
     });
 
     $("#stopTime").datetimepicker({
@@ -136,9 +135,16 @@ block scripts
         url: 'http://localhost:8080/api/workdays/hasActive',
         success: function(response){
           if(!!response.success && response.success == true){
-            alert(JSON.stringify(response));
-          }else{
-            alert("no active workday");
+            workdayId = response.data._id;
+            $("input[name=kilometer]").val(response.data.start_km);
+            $("#startTime").val(response.data.start_time);
+            $("#carSelect").dropdown("set value", response.data.car);
+            $("#routeSelect").dropdown("set value", response.data.route);
+
+            $("#startWorkday").text('Seuraava sivu');
+            $(".start-page").hide();
+            $(".final-page").show();
+
           }
         },
         error: function(err){
@@ -195,7 +201,7 @@ block scripts
       var e = document.getElementById(id);
       e.style.display = (e.style.display == 'block') ? 'none' : 'block';
     }
-    
+
     var workdayId = "";
     $("#startWorkday").click(function(){
       var carSelect = $("#carSelect").val()
@@ -211,10 +217,10 @@ block scripts
           car: carSelect,
           route: routeSelect,
           start_km: kilometer,
-          start_time: startTime
+          start_time: startTime,
+          workdayId: workdayId
         },
         success: function(response){
-          alert(JSON.stringify(response));
           if(!!response.success && response.success){
             workdayId = response.workdayId;
             $(".start-page").hide();
@@ -229,6 +235,12 @@ block scripts
         }
       })
     });
+
+    $("#backBtn").click(function(){
+      $(".start-page").show();
+      $(".final-page").hide();
+    });
+
     $("#endWorkday").click(function(){
       if(workdayId == ""){
         alert("Workday id puuttuu");
@@ -285,7 +297,7 @@ block scripts
           complete: true
         },
         success: function(msg) {
-          console.log(msg)
+          alert("Työpäivä lopetettu!");
         }
       })
     });

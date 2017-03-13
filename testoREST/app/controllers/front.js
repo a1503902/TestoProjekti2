@@ -4,7 +4,16 @@ var pug      = require('pug');
 var Employee = require('../models/employee');
 
 router.get('/start', function(req, res){
-    console.log(req.user);
+
+	/*
+	var start = new Date(Date.parse("13.03.2017 15:00"));
+   	console.log(start);
+
+    var stop  = new Date.parse("13.3.2017 18:00").getTime()/1000;
+    stop      = stop / 1000;
+
+    console.log(stop-start);
+	*/
     res.render('startpage', { title: 'Start', fullName: req.user.firstname + ' ' + req.user.lastname});
 
 });
