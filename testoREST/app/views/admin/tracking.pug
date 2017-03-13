@@ -62,13 +62,13 @@ block scripts
 										row.append('<td>' + setDefaultVal(data.deliveries.bring.dhl_return, 0) + '</td>');
 										row.append('<td>' + setDefaultVal(data.deliveries.bring.nt, 0) + '</td>');
 
-
 										// Innight
 										row.append('<td>' + setDefaultVal(data.deliveries.innight.packages, 0) + '</td>');
 										row.append('<td>' + setDefaultVal(data.deliveries.innight.stops, 0) + '</td>');
 
 										// Efficiency
-										row.append('<td>' + calcEff(data).toFixed(4) + '</td>');
+										row.append('<td>' + setDefaultVal(data.efficiency, 0) + '</td>');
+										console.log(data.efficiency);
 									}
 								}
 							}

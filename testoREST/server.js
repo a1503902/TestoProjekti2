@@ -146,7 +146,7 @@ router.all('/login', middlewares.loginRedirect);
 router.all('/admin/login', middlewares.loginRedirect);
 router.all('/employees/*', middlewares.isAuth);
 router.all('/admin/*', middlewares.isAdmin)
-router.all('/api/*', middlewares.isAuthApi);
+// router.all('/api/*', middlewares.isAuthApi);
 
 
 // Routes
