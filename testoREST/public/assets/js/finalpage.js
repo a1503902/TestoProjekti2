@@ -18,12 +18,15 @@ $(document).ready(function() {
         var breaks = $("input[name=breaks]").val()
         var stopKm = $("input[name=stopKm]").val()
         var adtInfo = $("input[name=adtInfo]").val()
+        // efficiency
+        // startTime pitää kaivaa jostain NIKO
+        // var efficiency = (distP + pickupP + distB + pickupB) / ((stopTime - startTime) - breaks)
 
         $.ajax({
-			method: 'PUT',
-			type: 'JSON',
-			url: 'http://localhost:8080/api/workdays/58b42a52e6c27d6c93449f00',
-			data: {
+            method: 'PUT',
+            type: 'JSON',
+            url: 'http://localhost:8080/api/workdays/58b42a52e6c27d6c93449f00',
+            data: {
                 deliveries: {
                     postnord: {
                         delivery: distP,
@@ -46,11 +49,12 @@ $(document).ready(function() {
                 breaks: breaks,
                 stop_km: stopKm,
                 adt_info: adtInfo,
-                complete: true
+                complete: true,
+                efficiency: efficiency
             },
-			success: function (msg) {
+            success: function(msg) {
                 console.log(msg)
             }
-		})
+        })
     })
 })
