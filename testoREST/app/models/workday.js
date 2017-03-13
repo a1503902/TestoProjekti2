@@ -38,7 +38,7 @@ var WorkdaySchema = new Schema({
         type: Boolean,
         default: false
     },
-    efficiency: Number
+    efficiency: String
 })
 
 module.exports = mongoose.model('Workday', WorkdaySchema)
