@@ -18,9 +18,6 @@ $(document).ready(function() {
         var breaks = $("input[name=breaks]").val()
         var stopKm = $("input[name=stopKm]").val()
         var adtInfo = $("input[name=adtInfo]").val()
-        // efficiency
-        // startTime pitää kaivaa jostain NIKO
-        // var efficiency = (distP + pickupP + distB + pickupB) / ((stopTime - startTime) - breaks)
 
         $.ajax({
             method: 'PUT',

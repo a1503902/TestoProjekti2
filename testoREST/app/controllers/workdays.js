@@ -1,12 +1,15 @@
 var express = require('express');
-var router  = express.Router();
+var router = express.Router();
 var Workday = require('../models/workday')
 
 // Get all workdays
 router.get('/', function(req, res) {
     Workday.find(function(err, workdays) {
         if (err) throw err
-        res.json({success: true, data: workdays})
+        res.json({
+            success: true,
+            data: workdays
+        })
     })
 });
 
@@ -57,19 +60,26 @@ router.post('/', function(req, res) {
 
     // Set params
     workday.employeeId = req.user.id;
-    workday.employee   = req.user.firstname + ' ' + req.user.lastname
+    workday.employee = req.user.firstname + ' ' + req.user.lastname
     workday.start_time = req.body.start_time;
-    workday.car        = req.body.car;
-    workday.route      = req.body.route;
-    workday.start_km   = req.body.start_km;
+    workday.car = req.body.car;
+    workday.route = req.body.route;
+    workday.start_km = req.body.start_km;
 
     // Insert workday to DB
     workday.save(function(err, workday) {
         if (err) {
-            return res.json({success: false, message: "Failed to insert workday to DB"});
+            return res.json({
+                success: false,
+                message: "Failed to insert workday to DB"
+            });
         }
         console.log(workday);
-        return res.json({success: true, message: "Workday started", workdayId: workday._id});
+        return res.json({
+            success: true,
+            message: "Workday started",
+            workdayId: workday._id
+        });
     });
 
 });
@@ -83,7 +93,7 @@ router.put('/:workdayId', function(req, res) {
     //         notEmpty: true,
     //         errorMessage: 'Stop time missing'
     //     },
-	// 	'stop_km': {
+    // 	'stop_km': {
     //         notEmpty: true,
     //         errorMessage: 'Stop kilometers missing'
     //     }
@@ -103,34 +113,36 @@ router.put('/:workdayId', function(req, res) {
         if (err) {
             res.send(err);
         }
-
+        var startTime = workday.start_time;
         // Set params
         var deliveries = {};
-        var postnord   = {};
-        var bring      = {};
-        var innight    = {};
+        var postnord = {};
+        var bring = {};
+        var innight = {};
 
-        postnord.delivery   = req.body.deliveries.postnord.delivery;
-        bring.delivery      = req.body.deliveries.bring.delivery;
-        postnord.pickup     = req.body.deliveries.postnord.pickup;
-        bring.pickup        = req.body.deliveries.bring.pickup;
-        postnord.unknown    = req.body.deliveries.postnord.unknown;
-        bring.dhl_return    = req.body.deliveries.bring.dhl_return;
-        postnord.nt         = req.body.deliveries.postnord.nt;
-        bring.nt            = req.body.deliveries.bring.nt;
-        innight.packages    = req.body.deliveries.innight.packages;
-        innight.stops       = req.body.deliveries.innight.stops;
-        workday.stop_time   = req.body.stop_time;
-        workday.breaks      = req.body.breaks;
-        workday.stop_km     = req.body.stop_km;
-        workday.adt_info    = req.body.adt_info;
-        workday.complete    = req.body.complete;
+        postnord.delivery = req.body.deliveries.postnord.delivery;
+        bring.delivery = req.body.deliveries.bring.delivery;
+        postnord.pickup = req.body.deliveries.postnord.pickup;
+        bring.pickup = req.body.deliveries.bring.pickup;
+        postnord.unknown = req.body.deliveries.postnord.unknown;
+        bring.dhl_return = req.body.deliveries.bring.dhl_return;
+        postnord.nt = req.body.deliveries.postnord.nt;
+        bring.nt = req.body.deliveries.bring.nt;
+        innight.packages = req.body.deliveries.innight.packages;
+        innight.stops = req.body.deliveries.innight.stops;
+        workday.stop_time = req.body.stop_time;
+        workday.breaks = req.body.breaks;
+        workday.stop_km = req.body.stop_km;
+        workday.adt_info = req.body.adt_info;
+        workday.complete = req.body.complete;
         deliveries.postnord = postnord;
-        deliveries.bring    = bring;
-        deliveries.innight  = innight;
-        workday.deliveries  = deliveries;
+        deliveries.bring = bring;
+        deliveries.innight = innight;
+        workday.deliveries = deliveries;
+        workday.efficiency = (postnord.delivery + postnord.pickup + bring.delivery + bring.pickup) /
+            ((workday.stop_time - startTime) - workday.breaks);
 
-		workday.save(function(err) {
+        workday.save(function(err) {
             if (err) {
                 res.send(err);
             }
