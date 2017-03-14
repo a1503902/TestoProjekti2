@@ -35,14 +35,12 @@ block content
             Button(type="button", data-action="seen").ui.green.button.cancel OK
     .final-page(style='display: none;')
       h1.ui.dividing.header Jaot &amp; noudot
-        .ui.three.item.menu
-          a.item() Postnord
-          a.item() Bring
-          a.item() Innight
         .ui.form
           br
           .ui.three.column.grid
             .column
+              .ui.block.header
+                h3 Postnord
                 .field
                   label Jaot
                   input(type='number', name='distP', placeholder='Jaot')
@@ -56,6 +54,8 @@ block content
                   label Jakamattomat
                   input(type='number', name='ntP', placeholder='Jakamattomat Postnord')
             .column
+              .ui.block.header
+                h3 Bring
                 .field
                   label Jaot
                   input(type='number', name='distB', placeholder='Jaot')
@@ -69,8 +69,8 @@ block content
                   label Jakamattomat
                   input(type='number', name='ntB', placeholder='Jakamattomat Bring')
             .column
-              #innight
-                h4 Innight
+              .ui.block.header
+                h3 Innight
                 .field
                   label Paketit
                   input(type='number', name='packages', placeholder='Pakettien määrä')
