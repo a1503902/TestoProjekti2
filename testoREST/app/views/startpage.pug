@@ -45,7 +45,10 @@ block content
             .column
                 .field
                   label Jaot
-                  input(type='number', name='distP', placeholder='Jaot')
+                  .inline.field
+                    input(type='number', name='distP', placeholder='Jaot')
+                    button.circular.ui.icon.button.orange: i.icon.plus
+                    button.circular.ui.icon.button: i.icon.minus
                 .field
                   label Noudot
                   input(type='number', name='pickupP', placeholder='Noudot')
