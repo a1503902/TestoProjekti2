@@ -4,11 +4,11 @@ block content
         img#argLogo.ui.centered.image(src='/static/images/logo.jpg')
         h1.ui.dividing.header Jaot &amp; noudot
         .ui.three.item.menu
-            a#postnordBtn.item(onclick="showhide('postnord')") Postnord
+            a#postnordBtn.item Postnord
 
-            a.item(onclick="showhide('bring')") Bring
+            a.item Bring
 
-            a.item(onclick="showhide('innight')") Innight
+            a.item Innight
         .ui.form
             br
             .ui.three.column.grid
@@ -85,9 +85,5 @@ block content
                     button#sendBtn.ui.button(style='color: white; background-color: #66ccff;') L&auml;het&auml;
                 .column
                 .column
-    script(type='text/javascript').
-        function showhide(id) {
-            var e = document.getElementById(id);
-            e.style.display = (e.style.display == 'block') ? 'none' : 'block';
-        }
+
     script(src='/static/js/finalpage.js')
