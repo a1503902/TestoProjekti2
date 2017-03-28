@@ -44,40 +44,40 @@ block content
                 .field
                   label Jaot
                 .field
-                  input(type='number', name='distP', placeholder='Jaot')
+                  input(type='number', name='distP', placeholder='Jaot', min="0")
                 .field
                   label Noudot
-                  input(type='number', name='pickupP', placeholder='Noudot')
+                  input(type='number', name='pickupP', placeholder='Noudot', min="0")
                 .field
                   label Tuntemattomat
-                  input(type='number', name='unknownP', placeholder='Tuntemattomat')
+                  input(type='number', name='unknownP', placeholder='Tuntemattomat', min="0")
                 .field
                   label Jakamattomat
-                  input(type='number', name='ntP', placeholder='Jakamattomat Postnord')
+                  input(type='number', name='ntP', placeholder='Jakamattomat Postnord', min="0")
             .column
               .ui.block.header
                 h3 Bring
                 .field
                   label Jaot
-                  input(type='number', name='distB', placeholder='Jaot')
+                  input(type='number', name='distB', placeholder='Jaot', min="0")
                 .field
                   label Noudot
-                  input(type='number', name='pickupB', placeholder='Noudot')
+                  input(type='number', name='pickupB', placeholder='Noudot', min="0")
                 .field
                   label DHL pal
-                  input(type='number', name='dhlReturns', placeholder='DHL pal')
+                  input(type='number', name='dhlReturns', placeholder='DHL pal', min="0")
                 .field
                   label Jakamattomat
-                  input(type='number', name='ntB', placeholder='Jakamattomat Bring')
+                  input(type='number', name='ntB', placeholder='Jakamattomat Bring', min="0")
             .column
               .ui.block.header
                 h3 Innight
                 .field
                   label Paketit
-                  input(type='number', name='packages', placeholder='Pakettien määrä')
+                  input(type='number', name='packages', placeholder='Pakettien määrä', min="0")
                 .field
                   label Pys&auml;hdykset
-                  input(type='number', name='stops', placeholder='Pysähdykset')
+                  input(type='number', name='stops', placeholder='Pysähdykset', min="0")
           .ui.dividing.header
           .ui.three.column.grid
             .column
@@ -96,6 +96,7 @@ block content
               button#backBtn.ui.button Edellinen sivu
               button#endWorkday.ui.orange.button Lopeta työpäivä
             .column
+
             .column
     script(src='/static/js/startpage.js')
 block scripts
